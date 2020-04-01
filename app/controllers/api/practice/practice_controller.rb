@@ -1,8 +1,8 @@
 class Api::Practice::PracticeController < ApplicationController
   def index
-    id = Practice.first.id
-    title = Practice.first.title
-    description = Practice.first.description
+    id = ::Practice.first.id
+    title = ::Practice.first.title
+    description = ::Practice.first.description
     contents = child_values
 
     result_values = {
