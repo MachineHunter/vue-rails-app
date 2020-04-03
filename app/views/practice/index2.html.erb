@@ -1,0 +1,9 @@
+<%= javascript_pack_tag "practice3" %>
+<%= content_tag :div,
+  id: "practice3-div",
+  data: {
+    title: @title,
+    description: @description,
+    contents: @contents
+  }.to_json do %>
+<% end %>
