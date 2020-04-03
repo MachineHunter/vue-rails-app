@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="practice1">
   <button v-on:click="changeMsg">change message</button>
   <p>{{ message }}</p>
   <p>id: {{data.id}}</p>
