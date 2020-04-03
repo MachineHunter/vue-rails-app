@@ -2,61 +2,32 @@
   <div id="practice1">
   <button v-on:click="changeMsg">change message</button>
   <p>{{ message }}</p>
-  <p>id: {{data.id}}</p>
-  <h2>title: {{data.title}}</h2>
-  <p>description: {{data.description}}</p>
-  <p>contents:</p>
-  <table class="contents">
-    <tr>
-      <th>name</th>
-      <th>age</th>
-      <th>introduction</th>
-    </tr>
-    <tr v-for="content in data.contents" :key="content.name">
-      <td>{{content.name}}</td>
-      <td>{{content.age}}</td>
-      <td>{{content.introduction}}</td>
-    </tr>
-  </table>
+  <test-data1-container
+    :paramId="1"
+  />
   </div>
 </template>
 
 <script>
-import Axios from "axios"
+import TestData1Container from "./components/TestData1Container.vue"
 
 export default {
+  components: {
+    TestData1Container
+  },
   data: function () {
     return {
-      message: "Hello Vue!",
-      data: {}
+      message: "Hello Vue!"
     }
-  },
-  created: function() {
-    this.getData();
   },
   methods: {
     changeMsg: function () {
       this.message = 'Hi Rails!'
-    },
-    getData: function() {
-      Axios.get("/api/practice/practice/index")
-        .then(res => {
-          this.data = res.data;
-        })
     }
   }
 }
 </script>
 
 <style scoped>
-.contents {
-  border: solid 1px black;
-  border-collapse: collapse;
-  text-align: center;
-}
-.contents th,
-.contents td {
-  border: solid 1px black;
-  padding: 0.5rem;
-}
+
 </style>
