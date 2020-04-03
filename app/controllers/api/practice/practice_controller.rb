@@ -1,15 +1,16 @@
 class Api::Practice::PracticeController < ApplicationController
   def index
-    id = ::Practice.first.id
-    title = ::Practice.first.title
-    description = ::Practice.first.description
+    practice = ::Practice.find(params[:id])
+    id = practice.id
+    title = practice.title
+    description = practice.description
     contents = child_values
 
     result_values = {
-    id: id,
-    title: title,
-    description: description,
-    contents: contents
+      id: id,
+      title: title,
+      description: description,
+      contents: contents
     }
 
     render json: result_values
