@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :practice do
-      get 'practice/index/:id', to: "practice#index"
+      get 'practice/index/:id', to: 'practice#index'
+      get 'practice/index3', { :format => 'json' }
     end
   end
 

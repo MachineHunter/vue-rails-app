@@ -16,6 +16,10 @@ class Api::Practice::PracticeController < ApplicationController
     render json: result_values
   end
 
+  def index3
+    @practices = ::Practice.all
+  end
+
 
   private
 
