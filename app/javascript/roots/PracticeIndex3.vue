@@ -14,13 +14,22 @@
         <td>{{practice.contents}}</td>
       </tr>
     </table>
+    <button
+      type="button"
+      class="form-open-button"
+      @click="openForm"
+    >Registser New Data</button>
 
-    <div class="popup-cover">
+    <div class="popup-cover" v-show="isShownForm">
       <div class="popup-window">
         <form action="">
           <div class="form-header">
             <h3 class="form-title">Register New Data</h3>
-            <button type="button" class="form-close-button">close</button>
+            <button
+              type="button"
+              class="form-close-button"
+              @click="closeForm"
+            >close</button>
           </div>
           <div class="title">
             <label for="title">title:</label>
@@ -49,6 +58,7 @@ import Axios from "axios";
 export default {
   data: function() {
     return {
+      isShownForm :false,
       practices: []
     };
   },
@@ -60,6 +70,12 @@ export default {
       Axios.get("/api/practice/practice/index3").then(res => {
         this.practices = res.data.practices;
       });
+    },
+    openForm: function() {
+      this.isShownForm = true;
+    },
+    closeForm: function() {
+      this.isShownForm = false;
     }
   }
 };
@@ -75,6 +91,10 @@ export default {
 .practices-table td {
   border: solid 1px black;
   padding: 0.5rem;
+}
+
+.form-open-button {
+  margin: 0.5rem;
 }
 
 .popup-cover {
