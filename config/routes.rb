@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       get 'practice/index/:id', to: 'practice#index'
       get 'practice/index3', { :format => 'json' }
       post 'practice/create'
+      put 'practice/update'
     end
   end
 

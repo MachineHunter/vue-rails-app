@@ -29,6 +29,16 @@ class Api::Practice::PracticeController < ApplicationController
     end
   end
 
+  def update
+    practice = ::Practice.find(params[:id])
+    practice.update(practice_params)
+    if practice.save
+      render json: practice, status: :accepted
+    else
+      render json: { errors: practice.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
 
   private
 
