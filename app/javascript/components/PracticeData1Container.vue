@@ -50,7 +50,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .contents {
   border: solid 1px black;
   border-collapse: collapse;

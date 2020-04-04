@@ -39,7 +39,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .practices-table {
   border: solid 1px black;
   border-collapse: collapse;
