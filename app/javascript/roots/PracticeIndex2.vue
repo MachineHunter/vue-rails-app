@@ -1,5 +1,5 @@
 <template>
-  <div id="practice3">
+  <div id="practice-index2">
     <h2>title: {{title}}</h2>
     <p>description: {{description}}</p>
     <p>contents.outer_links:</p>

@@ -1,5 +1,5 @@
 <template>
-  <div id="test-data1-container">
+  <div id="practice-data1-container">
     <p>id: {{data.id}}</p>
     <h2>title: {{data.title}}</h2>
     <p>description: {{data.description}}</p>
