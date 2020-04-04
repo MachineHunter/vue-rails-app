@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       get 'practice/index3', { :format => 'json' }
       post 'practice/create'
       put 'practice/update'
+      delete 'practice/destroy'
     end
   end
 

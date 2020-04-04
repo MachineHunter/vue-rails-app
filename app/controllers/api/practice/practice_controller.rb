@@ -39,6 +39,18 @@ class Api::Practice::PracticeController < ApplicationController
     end
   end
 
+  def destroy
+    id_list = params[:id_list]
+    begin
+      id_list.each do |id|
+        ::Practice.destroy id.to_i
+      end
+      render json: { message: "destroy succeeded" }, status: :accepted
+    rescue
+      render json: { errors: "error during destroy" }, status: :unprocessable_entity
+    end
+  end
+
 
   private
 
