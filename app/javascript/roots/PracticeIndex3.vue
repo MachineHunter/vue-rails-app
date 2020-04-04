@@ -105,7 +105,7 @@ export default {
       });
     
       Axios.post("/api/practice/practice/create", params).then(res => {
-        this.practices.push(Object.create(this.newPractice));
+        this.practices.push(res.data);
         this.isShownForm = false;
         console.log("succeeded!", res);
       }).catch(error => {
