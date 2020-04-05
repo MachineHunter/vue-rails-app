@@ -6,25 +6,48 @@
         <th>title</th>
         <th>description</th>
         <th>contents</th>
+        <th></th>
       </tr>
       <tr v-for="practice in practices" :key="practice.id">
         <td>{{practice.id}}</td>
         <td>{{practice.title}}</td>
         <td>{{practice.description}}</td>
         <td>{{practice.contents}}</td>
+        <td class="cell-for-checkbox">
+          <label class="label-for-checkbox">
+            <input
+              type="checkbox"
+              class="checkbox"
+              :value="practice"
+              v-model="selectedPractices"
+            >
+          </label>
+        </td>
       </tr>
     </table>
     <button
       type="button"
       class="form-open-button"
-      @click="openForm"
+      @click="openRegisterForm"
     >Registser New Data</button>
+    <button
+      type="button"
+      class="form-open-button"
+      @click="openUpdateForm"
+    >Update Selected Data</button>
 
     <div class="popup-cover" v-show="isShownForm">
       <div class="popup-window">
-        <form @submit.prevent="registerNewData">
+        <form @submit.prevent="submitData">
           <div class="form-header">
-            <h3 class="form-title">Register New Data</h3>
+            <h3 class="form-title">
+              {{
+                formType === "register" ?
+                "Register New Data" :
+                formType === "update" ?
+                `Update Data${selectedPractices[0].id}` : ""
+              }}
+            </h3>
             <button
               type="button"
               class="form-close-button"
@@ -56,7 +79,7 @@
             >
           </div>
           <div class="form-footer">
-            <input type="submit" value="register">
+            <input type="submit" :value="formType">
           </div>
         </form>
       </div>
@@ -66,17 +89,25 @@
 
 <script>
 import Axios from "axios";
+const blankPractice = {
+  title: "",
+  description: "",
+  contents: ""
+}
+const cloneObj = obj => Object.assign({}, obj);
 
 export default {
   data: function() {
     return {
       isShownForm :false,
+      formType: "", //"register" or "update"
       practices: [],
       newPractice: {
         title: "",
         description: "",
         contents: ""
-      }
+      },
+      selectedPractices: []
     };
   },
   created: function() {
@@ -92,6 +123,13 @@ export default {
         this.practices = res.data.practices;
       });
     },
+    submitData: function() {
+      if(this.formType === "register") {
+        this.registerNewData();
+      }else if(this.formType === "update") {
+        this.updateData();
+      }
+    },
     registerNewData: function() {
       if(!this.newPractice.title && !this.newPractice.description && !this.newPractice.contents){
         this.isShownForm = false;
@@ -106,17 +144,51 @@ export default {
     
       Axios.post("/api/practice/practice/create", params).then(res => {
         this.practices.push(res.data);
-        this.isShownForm = false;
         console.log("succeeded!", res);
+        this.closeForm();
+        this.resetForm();
       }).catch(error => {
         console.log(error)
       });
     },
-    openForm: function() {
+    updateData: function() {
+      if(!this.newPractice.title && !this.newPractice.description && !this.newPractice.contents){
+        this.isShownForm = false;
+        return;
+      }
+
+      const params = new URLSearchParams();
+      Object.entries(this.newPractice).forEach(([param, value]) =>{
+        params.append(param, value);
+      });
+    
+      Axios.put("/api/practice/practice/update", params).then(res => {
+        this.practices[this.newPractice.id - 1] = res.data;
+        console.log("succeeded!", res);
+        this.closeForm();
+        this.resetForm();
+      }).catch(error => {
+        console.log(error)
+      });
+    },
+    openRegisterForm: function() {
+      this.formType = "register";
+      this.isShownForm = true;
+    },
+    openUpdateForm: function() {
+      if(this.selectedPractices.length !== 1) {
+        alert("Select just 1 row when updating.")
+        return;
+      }
+      this.formType = "update";
+      this.newPractice = cloneObj(this.selectedPractices[0]);
       this.isShownForm = true;
     },
     closeForm: function() {
       this.isShownForm = false;
+    },
+    resetForm: function() {
+      this.newPractice = cloneObj(blankPractice);
     }
   }
 };
@@ -132,6 +204,22 @@ export default {
 .practices-table td {
   border: solid 1px black;
   padding: 0.5rem;
+}
+.cell-for-checkbox {
+  position: relative;
+  width: 3ch;
+}
+.label-for-checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
 .form-open-button {
