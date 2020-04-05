@@ -170,6 +170,7 @@ export default {
       Axios.put("/api/practice/practice/update", params).then(res => {
         this.practices[this.newPractice.id - 1] = res.data;
         console.log("succeeded!", res);
+        this.resetCheckbox();
         this.closeForm();
         this.resetForm();
       }).catch(error => {
@@ -191,9 +192,15 @@ export default {
     },
     closeForm: function() {
       this.isShownForm = false;
+      if(this.formType === "update") {
+        this.newPractice = cloneObj(blankPractice);
+      }
     },
     resetForm: function() {
       this.newPractice = cloneObj(blankPractice);
+    },
+    resetCheckbox: function() {
+      this.selectedPractices = [];
     },
     deleteData: function() {
       if(this.selectedPractices.length === 0) return;
@@ -212,6 +219,7 @@ export default {
             this.practices = this.practices.filter(
               practice => !idsToBeDeleted.includes(practice.id)
             );
+            this.resetCheckbox();
             console.log("succeeded!", res);
           }).catch(error => {
             console.log(error)
