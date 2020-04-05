@@ -29,7 +29,7 @@
       type="button"
       class="form-open-button"
       @click="openRegisterForm"
-    >Registser New Data</button>
+    >Register New Data</button>
     <button
       type="button"
       class="form-open-button"
