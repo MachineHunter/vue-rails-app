@@ -1,0 +1,32 @@
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# メソッドの接頭辞にget_とかset_とかつけないルール
+# すでにつけっちゃってて面倒とかだとfalseにする
+Naming/AccessorMethodName:
+  Enabled: false
+
+# gemの並びを名前順にするもの
+# すでにバラバラで修正面倒だと変にいじるとこわいのでfalseにする
+Bundler/OrderedGems:
+  Enabled: false
+
+Naming/PredicateName:
+  Enabled: false
+
+# 複数行の場合はケツカンマを入れる(Arrayリテラル)
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
+  # EnforcedStyleForMultiline: comma
+
+# 複数行の場合はケツカンマを入れる(Hashリテラル)
+# => 気持ち悪いので無効化
+Style/TrailingCommaInHashLiteral:
+  # EnforcedStyleForMultiline: comma
+  Enabled: false
+
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'bin/**/*'
