@@ -62,9 +62,9 @@ RSpec.describe "Api::Practice::PracticeController", type: :request do
   describe "DELETE /api/practice/practice/destroy" do
     before do
       Practice.destroy_all
-      practice1 = create(:practice, id:1, title:"pra1", description:"desc1", contents:"con1")
-      practice2 = create(:practice, id:2, title:"pra2", description:"desc2", contents:"con2")
-      practice3 = create(:practice, id:3, title:"pra3", description:"desc3", contents:"con3")
+      practice1 = create(:practice, id: 1, title: "pra1", description: "desc1", contents: "con1")
+      practice2 = create(:practice, id: 2, title: "pra2", description: "desc2", contents: "con2")
+      practice3 = create(:practice, id: 3, title: "pra3", description: "desc3", contents: "con3")
       destroy_params[:id_list].push practice1.id
       destroy_params[:id_list].push practice2.id
     end
