@@ -50,7 +50,7 @@
                 formType === "register" ?
                 "Register New Data" :
                 formType === "update" ?
-                `Update Data${selectedPractices[0].id}` : ""
+                `Update Data${selectedPractices[0] ? selectedPractices[0].id : ""}` : ""
               }}
             </h3>
             <button
@@ -168,7 +168,9 @@ export default {
       });
     
       Axios.put("/api/practice/practice/update", params).then(res => {
-        this.practices[this.newPractice.id - 1] = res.data;
+        this.practices = this.practices.map(
+          practice => practice.id === res.data.id ? res.data: practice
+        );
         console.log("succeeded!", res);
         this.resetCheckbox();
         this.closeForm();
