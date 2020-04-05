@@ -45,26 +45,25 @@ class Api::Practice::PracticeController < ApplicationController
       id_list.each do |id|
         ::Practice.destroy id.to_i
       end
-      render json: { message: "destroy succeeded" }, status: :accepted
-    rescue
-      render json: { errors: "error during destroy" }, status: :unprocessable_entity
+      render json: { message: 'destroy succeeded' }, status: :accepted
+    rescue StandardError
+      render json: { errors: 'error during destroy' }, status: :unprocessable_entity
     end
   end
-
 
   private
 
   def child_values
     [
       {
-        name: "jack",
+        name: 'jack',
         age: 100,
-        introduction: "he is jack"
+        introduction: 'he is jack'
       },
       {
-        name: "bob",
+        name: 'bob',
         age: 100,
-        introduction: "he is bob"
+        introduction: 'he is bob'
       }
     ]
   end
@@ -72,6 +71,4 @@ class Api::Practice::PracticeController < ApplicationController
   def practice_params
     params.permit(:title, :description, :contents)
   end
-
 end
-
