@@ -35,6 +35,11 @@
       class="form-open-button"
       @click="openUpdateForm"
     >Update Selected Data</button>
+    <button
+      type="button"
+      class="delete-button"
+      @click="deleteData"
+    >Delete Selected Data</button>
 
     <div class="popup-cover" v-show="isShownForm">
       <div class="popup-window">
@@ -189,6 +194,29 @@ export default {
     },
     resetForm: function() {
       this.newPractice = cloneObj(blankPractice);
+    },
+    deleteData: function() {
+      if(this.selectedPractices.length === 0) return;
+      const idsToBeDeleted = this.selectedPractices.map(
+        practice => practice.id
+      );
+      const message = idsToBeDeleted
+        .sort((a,b) => a - b)
+        .map(id => `Data${id}`)
+        .join(", ")
+        + " will be deleted.";
+      if(confirm(message)) {
+        // 今度はURLSearchParams()だとダメ
+        Axios.delete("/api/practice/practice/destroy", {data: {id_list: idsToBeDeleted}})
+          .then(res => {
+            this.practices = this.practices.filter(
+              practice => !idsToBeDeleted.includes(practice.id)
+            );
+            console.log("succeeded!", res);
+          }).catch(error => {
+            console.log(error)
+          });
+      }
     }
   }
 };
