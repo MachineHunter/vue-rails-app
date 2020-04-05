@@ -54,24 +54,24 @@ class Api::Practice::PracticeController < ApplicationController
 
   private
 
-    def child_values
-      [
-        {
-          name: "jack",
-          age: 100,
-          introduction: "he is jack"
-        },
-        {
-          name: "bob",
-          age: 100,
-          introduction: "he is bob"
-        }
-      ]
-    end
+  def child_values
+    [
+      {
+        name: "jack",
+        age: 100,
+        introduction: "he is jack"
+      },
+      {
+        name: "bob",
+        age: 100,
+        introduction: "he is bob"
+      }
+    ]
+  end
 
-    def practice_params
-      params.permit(:title, :description, :contents)
-    end
+  def practice_params
+    params.permit(:title, :description, :contents)
+  end
 
 end
 
