@@ -16,11 +16,20 @@
             <td>{{outerLink.text}}</td>
         </tr>
     </table>
+    <img :src="require('images/test-img.jpg')" alt="test-img">
+    <img :src="testImg2" alt="test-img2">
   </div>
 </template>
 
 <script>
+import testImg2 from "images/test-img2.jpg";
+
 export default {
+  data: function() {
+    return {
+      testImg2
+    }
+  },
   props: {
     title: {
       type: String,
