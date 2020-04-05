@@ -1,5 +1,5 @@
 <template>
-  <div id="practice1">
+  <div id="practice-index">
   <button v-on:click="changeMsg">change message</button>
   <p>{{ message }}</p>
   <p>↓click to change param</p>
@@ -11,7 +11,7 @@
   >
     {{id}}
   </button>
-  <test-data1-container 
+  <practice-data1-container 
     v-for="id in ids"
     :key="`container-${id}`"
     :paramId="id"
@@ -21,11 +21,11 @@
 </template>
 
 <script>
-import TestData1Container from "./components/TestData1Container.vue"
+import PracticeData1Container from "../components/PracticeData1Container.vue"
 
 export default {
   components: {
-    TestData1Container
+    PracticeData1Container
   },
   data: function () {
     return {

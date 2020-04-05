@@ -8,6 +8,9 @@ class PracticeController < ApplicationController
     @contents = get_contents
   end
 
+  def index3
+  end
+
   private
 
   def get_contents

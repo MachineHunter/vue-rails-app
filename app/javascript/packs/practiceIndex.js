@@ -6,15 +6,15 @@
 // All it does is render <div>Hello Vue</div> at the bottom of the page.
 
 import Vue from 'vue'
-import Practice1 from '../Practice1.vue'
+import PracticeIndex from '../roots/PracticeIndex.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
-  const practice1 = new Vue({
-    render: h => h(Practice1)
+  const practiceIndex = new Vue({
+    render: h => h(PracticeIndex)
   }).$mount()
-  document.body.appendChild(practice1.$el)
+  document.body.appendChild(practiceIndex.$el)
 
-  console.log(practice1)
+  console.log(practiceIndex)
 })
 
 
