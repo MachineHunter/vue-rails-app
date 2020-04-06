@@ -69,6 +69,6 @@ class Api::Practice::PracticeController < ApplicationController
   end
 
   def practice_params
-    params.permit(:title, :description, :contents)
+    params.permit(:title, :description, :contents, :image)
   end
 end
