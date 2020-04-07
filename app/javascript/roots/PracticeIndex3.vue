@@ -83,6 +83,7 @@
               v-model="newPractice.contents"
             >
           </div>
+          <input type="file" @change="onFileChange()" ref="fileInput">
           <div class="form-footer">
             <input type="submit" :value="formType">
           </div>
@@ -112,7 +113,8 @@ export default {
         description: "",
         contents: ""
       },
-      selectedPractices: []
+      selectedPractices: [],
+      uploadedImage: ""
     };
   },
   created: function() {
@@ -127,6 +129,14 @@ export default {
       Axios.get("/api/practice/practice/index3").then(res => {
         this.practices = res.data.practices;
       });
+    },
+    onFileChange: function() {
+      let file = event.target.files[0] || event.dataTransfer.files
+      let reader = new FileReader()
+      reader.onload = () => {
+        this.uploadedImage = event.target.result
+      }
+      reader.readAsDataURL(file)
     },
     submitData: function() {
       if(this.formType === "register") {
@@ -146,6 +156,7 @@ export default {
       Object.entries(this.newPractice).forEach(([param, value]) =>{
         params.append(param, value);
       });
+      params.append("image", this.uploadedImage);
     
       Axios.post("/api/practice/practice/create", params).then(res => {
         this.practices.push(res.data);
@@ -200,6 +211,8 @@ export default {
     },
     resetForm: function() {
       this.newPractice = cloneObj(blankPractice);
+      this.uploadedImage = "";
+      this.$refs.flieInput.value = "";
     },
     resetCheckbox: function() {
       this.selectedPractices = [];
