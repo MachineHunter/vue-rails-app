@@ -18,6 +18,12 @@
     </table>
     <img :src="require('images/test-img.jpg')" alt="test-img">
     <img :src="testImg2" alt="test-img2">
+    <div class="img-holder test-img"></div>
+    <!-- ↑ 404 (Not Found) -->
+    <div
+      class="img-holder"
+      :style="{'background-image': `url(${testImg2})`}"
+    ></div>
   </div>
 </template>
 
@@ -56,5 +62,14 @@ export default {
 .container td {
     border: 1px black solid;
     padding: 0.5rem;
+}
+.img-holder {
+  width:100px;
+  height: 100px;
+  border: 1px solid black;
+}
+.test-img {
+  /* background-image: url("images/test-img.jpg");  */
+  /* ↑ Uncaught Error: Cannot find module './images/test-img.jpg' */
 }
 </style>
