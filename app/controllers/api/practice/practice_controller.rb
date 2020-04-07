@@ -23,6 +23,7 @@ class Api::Practice::PracticeController < ApplicationController
   def create
     practice = ::Practice.new(practice_params)
     if practice.save
+      practice.eyecatch = practice_params[:image]
       render json: practice, status: :created
     else
       render json: { errors: practice.errors.full_messages }, status: :unprocessable_entity
