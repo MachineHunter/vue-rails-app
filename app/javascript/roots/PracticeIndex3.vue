@@ -40,6 +40,12 @@
       class="delete-button"
       @click="deleteData"
     >Delete Selected Data</button>
+    <img
+      v-for="(image, i) in images"
+      :key="i"
+      :src="image"
+      :alt="`img${i}`"
+    >
 
     <div class="popup-cover" v-show="isShownForm">
       <div class="popup-window">
@@ -83,6 +89,8 @@
               v-model="newPractice.contents"
             >
           </div>
+          <input type="file" @change="onFileChange" ref="fileInput">
+          <img class="uploadedImage" :src="uploadedImage" alt="uploadedImage">
           <div class="form-footer">
             <input type="submit" :value="formType">
           </div>
@@ -112,11 +120,14 @@ export default {
         description: "",
         contents: ""
       },
-      selectedPractices: []
+      selectedPractices: [],
+      uploadedImage: "",
+      images: []
     };
   },
   created: function() {
     this.getPracticeModels();
+    this.getImages();
   },
   mounted: function() {
     const token = document.querySelector("meta[name=csrf-token]").getAttribute("content");
@@ -127,6 +138,29 @@ export default {
       Axios.get("/api/practice/practice/index3").then(res => {
         this.practices = res.data.practices;
       });
+    },
+    getImages: function(){
+      Axios.get("/api/practice/practice/image_show").then(res => {
+        try {
+          for(let image of res.data) {
+            import(`images/${image}`).then(result => {
+              this.images.push(result.default);
+            });
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      });
+    },
+    onFileChange: function() {
+      let file = event.target.files[0] || event.dataTransfer.files
+      let reader = new FileReader()
+      reader.onload = () => { //arrowでないと、thisがreaderになってしまう
+        this.uploadedImage = event.target.result;
+        // ここのeventはchangeでなくprogressEventで、event.targetはreader。
+        // それゆえ、onfileChangeのfunctionの引数にeventを入れるとこの中のeventが変わってしまう
+      }
+      reader.readAsDataURL(file)
     },
     submitData: function() {
       if(this.formType === "register") {
@@ -146,6 +180,7 @@ export default {
       Object.entries(this.newPractice).forEach(([param, value]) =>{
         params.append(param, value);
       });
+      params.append("image", this.uploadedImage);
     
       Axios.post("/api/practice/practice/create", params).then(res => {
         this.practices.push(res.data);
@@ -200,6 +235,8 @@ export default {
     },
     resetForm: function() {
       this.newPractice = cloneObj(blankPractice);
+      this.uploadedImage = "";
+      this.$refs.flieInput.value = "";
     },
     resetCheckbox: function() {
       this.selectedPractices = [];
@@ -299,5 +336,9 @@ export default {
   justify-content: center;
 
   margin-top: 0.5rem;
+}
+.uploadedImage {
+  max-width: 60vw;
+  max-height: 60vh;
 }
 </style>

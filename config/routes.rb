@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :practice do
       get 'practice/index/:id', to: 'practice#index'
       get 'practice/index3', { :format => 'json' }
+      get "practice/image_show"
       post 'practice/create'
       put 'practice/update'
       delete 'practice/destroy'

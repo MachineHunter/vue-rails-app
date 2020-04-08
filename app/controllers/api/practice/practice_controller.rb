@@ -20,9 +20,18 @@ class Api::Practice::PracticeController < ApplicationController
     @practices = ::Practice.all
   end
 
+  def image_show
+    @images = Dir.glob("#{Rails.root}/app/assets/images/*")
+    @images.map! do |image|
+      File.basename(image)
+    end
+    render json: @images, status: :ok
+  end
+
   def create
     practice = ::Practice.new(practice_params)
     if practice.save
+      practice.eyecatch = practice_params[:image]
       render json: practice, status: :created
     else
       render json: { errors: practice.errors.full_messages }, status: :unprocessable_entity
@@ -69,6 +78,6 @@ class Api::Practice::PracticeController < ApplicationController
   end
 
   def practice_params
-    params.permit(:title, :description, :contents)
+    params.permit(:title, :description, :contents, :image)
   end
 end
