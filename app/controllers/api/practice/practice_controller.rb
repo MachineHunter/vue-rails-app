@@ -20,6 +20,14 @@ class Api::Practice::PracticeController < ApplicationController
     @practices = ::Practice.all
   end
 
+  def image_show
+    @images = Dir.glob("#{Rails.root}/app/assets/images/*")
+    @images.map! do |image|
+      File.basename(image)
+    end
+    render json: @images, status: :ok
+  end
+
   def create
     practice = ::Practice.new(practice_params)
     if practice.save
