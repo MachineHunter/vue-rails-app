@@ -83,7 +83,8 @@
               v-model="newPractice.contents"
             >
           </div>
-          <input type="file" @change="onFileChange()" ref="fileInput">
+          <input type="file" @change="onFileChange" ref="fileInput">
+          <img class="uploadedImage" :src="uploadedImage" alt="uploadedImage">
           <div class="form-footer">
             <input type="submit" :value="formType">
           </div>
@@ -133,8 +134,10 @@ export default {
     onFileChange: function() {
       let file = event.target.files[0] || event.dataTransfer.files
       let reader = new FileReader()
-      reader.onload = () => {
-        this.uploadedImage = event.target.result
+      reader.onload = () => { //arrowでないと、thisがreaderになってしまう
+        this.uploadedImage = event.target.result;
+        // ここのeventはchangeでなくprogressEventで、event.targetはreader。
+        // それゆえ、onfileChangeのfunctionの引数にeventを入れるとこの中のeventが変わってしまう
       }
       reader.readAsDataURL(file)
     },
@@ -312,5 +315,9 @@ export default {
   justify-content: center;
 
   margin-top: 0.5rem;
+}
+.uploadedImage {
+  max-width: 60vw;
+  max-height: 60vh;
 }
 </style>
