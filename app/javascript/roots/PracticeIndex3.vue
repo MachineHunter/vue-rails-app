@@ -40,6 +40,12 @@
       class="delete-button"
       @click="deleteData"
     >Delete Selected Data</button>
+    <img
+      v-for="(image, i) in images"
+      :key="i"
+      :src="image"
+      :alt="`img${i}`"
+    >
 
     <div class="popup-cover" v-show="isShownForm">
       <div class="popup-window">
@@ -115,11 +121,13 @@ export default {
         contents: ""
       },
       selectedPractices: [],
-      uploadedImage: ""
+      uploadedImage: "",
+      images: []
     };
   },
   created: function() {
     this.getPracticeModels();
+    this.getImages();
   },
   mounted: function() {
     const token = document.querySelector("meta[name=csrf-token]").getAttribute("content");
@@ -129,6 +137,19 @@ export default {
     getPracticeModels: function() {
       Axios.get("/api/practice/practice/index3").then(res => {
         this.practices = res.data.practices;
+      });
+    },
+    getImages: function(){
+      Axios.get("/api/practice/practice/image_show").then(res => {
+        try {
+          for(let image of res.data) {
+            import(`images/${image}`).then(result => {
+              this.images.push(result.default);
+            });
+          }
+        } catch (error) {
+          console.log(error);
+        }
       });
     },
     onFileChange: function() {
