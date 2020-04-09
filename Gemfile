@@ -77,3 +77,7 @@ gem 'pry-doc'
 gem 'elasticsearch-model', github: 'elasticsearch/elasticsearch-rails', branch: '6.x'
 gem 'elasticsearch-rails', github: 'elasticsearch/elasticsearch-rails', branch: '6.x'
 
+# redis(sidekiq)
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'redis-namespace'
