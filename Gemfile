@@ -73,9 +73,9 @@ gem 'pry-rails'
 gem 'pry-byebug'
 gem 'pry-doc'
 
-# elasticsearch
-gem 'elasticsearch-model', github: 'elasticsearch/elasticsearch-rails', branch: '6.x'
-gem 'elasticsearch-rails', github: 'elasticsearch/elasticsearch-rails', branch: '6.x'
+## elasticsearch
+#gem 'elasticsearch-model', github: 'elasticsearch/elasticsearch-rails', branch: '6.x'
+#gem 'elasticsearch-rails', github: 'elasticsearch/elasticsearch-rails', branch: '6.x'
 
 # redis(sidekiq)
 gem 'sidekiq'
