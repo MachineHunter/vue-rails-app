@@ -9,6 +9,10 @@ Rails.application.routes.draw do
       put 'practice/update'
       delete 'practice/destroy'
     end
+
+    namespace :user_pages do
+      get 'index', { :format => 'json' }
+    end
   end
 
   get 'practice/index'
