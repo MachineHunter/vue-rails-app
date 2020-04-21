@@ -1,5 +1,3 @@
-json.users do |json|
-  json.array!(@users) do |user|
-    json.merge! user.attributes
-  end
+json.user do |json|
+	json.(@user, :name, :email)
 end
