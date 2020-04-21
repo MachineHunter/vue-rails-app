@@ -4,8 +4,9 @@ import UserPagesIndex from '../roots/UserPagesIndex.vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import "./custom.scss"
+// import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 document.addEventListener('DOMContentLoaded', () => {
   const userPagesIndex = new Vue({
