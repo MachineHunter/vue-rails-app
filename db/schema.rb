@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2020_04_21_081824) do
     t.integer "imagination", default: 0, null: false
     t.integer "humor", default: 0, null: false
     t.integer "enhancement", default: 0, null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
