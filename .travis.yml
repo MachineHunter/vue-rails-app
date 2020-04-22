@@ -4,7 +4,7 @@ services:
   - mysql
   - redis-server
 bundler_args: "--without development --jobs=3"
-cache: bundler
+#cache: bundler
 before_script:
   - cp config/database.travis.yml config/database.yml
   - bundle exec rake db:setup
