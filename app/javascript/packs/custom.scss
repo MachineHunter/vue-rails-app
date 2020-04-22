@@ -19,3 +19,10 @@ $danger:        #F26709;
     display: flex;
     align-items: center;
 }
+
+body,
+.root-component {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}

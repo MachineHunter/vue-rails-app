@@ -1,5 +1,5 @@
 <template>
-  <header class="common-header">
+  <header id="common-header">
     common header(後でnavbarとかに置き換える。
     リクエスト一覧ページとかランキングページとかに
     飛べるリンクをはる
@@ -14,7 +14,7 @@ export default {
 </script>
 
 <style>
-.common-header {
+#common-header {
   background-color: rgb(227, 255, 214);
   text-align: center;
   display: flex;
