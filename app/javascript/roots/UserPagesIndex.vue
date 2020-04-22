@@ -1,51 +1,12 @@
 <template>
   <div id="user-pages-index">
     <common-header></common-header>
-    <div id="user-profile" class="px-5">
-      <b-media>
-        <template v-slot:aside>
-          <b-img
-            blank
-            blank-color="#ccc"
-            width="200"
-            alt="user-icon"
-            fluid
-            thumbnail
-          />
-        </template>
-        <h3>{{user.name}}</h3>
-        <hr>
-        <h6>ステータス</h6>
-        <b-list-group>
-          <b-list-group-item
-            v-for="(statusPoint, statusType) in user.status"
-            :key="statusType"
-            class="d-flex justify-content-between align-items-center"
-          >
-          {{statusType}}
-          <b-badge variant="primary" pill>{{statusPoint}}</b-badge>
-          </b-list-group-item>
-        </b-list-group>
-
-      </b-media>
-      <div class="mt-3">
-        <header>
-          <h5 class="d-inline">人気のコマンド</h5>
-          <b-link class="align-top ml-2">もっと見る</b-link>
-        </header>
-        <b-card-group deck>
-          <b-card
-            v-for="i in 3"
-            :key="`command${i}`"
-            :title="`commoand${i}`"
-          >
-            <b-card-text>
-              description here description here description here
-            </b-card-text>
-          </b-card>
-        </b-card-group>
-      </div>
+    <div v-if="noUser" class="flex-column flex-x-center flex-y-center my-2">
+      <span class="text-center">プロフィールを確認するにはログインが必要です</span>
+      <b-link href="/users/sign_in">ログイン</b-link>
+      <b-link href="/users/sign_up">ユーザー登録</b-link>
     </div>
+    <user-profile v-else :user="user" class="px-3"></user-profile>
     <common-footer></common-footer>
   </div>
 </template>
@@ -54,11 +15,13 @@
 import Axios from "axios"
 import CommonHeader from "../components/CommonHeader"
 import CommonFooter from "../components/CommonFooter"
+import UserProfile from "../components/UserProfile"
 
 export default {
   components: {
     CommonHeader,
-    CommonFooter
+    CommonFooter,
+    UserProfile
   },
   data: function() {
     return {
@@ -67,6 +30,11 @@ export default {
   },
   created: function() {
     this.getUserData()
+  },
+  computed: {
+    noUser: function() {
+      return Object.keys(this.user).length === 0
+    }
   },
   methods: {
     getUserData: function() {

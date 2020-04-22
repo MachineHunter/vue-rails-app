@@ -9,3 +9,13 @@ $danger:        #F26709;
 
 @import '~bootstrap/scss/bootstrap.scss';
 @import '~bootstrap-vue/src/index.scss';
+
+.flex-x-center {
+    display: flex;
+    justify-content: center;
+}
+
+.flex-x-center {
+    display: flex;
+    align-items: center;
+}
