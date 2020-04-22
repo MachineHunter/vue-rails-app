@@ -4,5 +4,6 @@ FactoryBot.define do
     imagination { 1 }
     humor { 1 }
     enhancement { 1 }
+    association :user
   end
 end
