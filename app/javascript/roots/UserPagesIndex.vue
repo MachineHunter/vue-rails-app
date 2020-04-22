@@ -7,7 +7,7 @@
           <b-img
             blank
             blank-color="#ccc"
-            width="100%"
+            width="200"
             alt="user-icon"
             fluid
             thumbnail
@@ -28,8 +28,6 @@
         </b-list-group>
 
       </b-media>
-      <div class="my-2">
-      </div>
       <div class="mt-3">
         <header>
           <h5 class="d-inline">人気のコマンド</h5>
