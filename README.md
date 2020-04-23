@@ -1,5 +1,7 @@
 # コマンド投稿ゲームサイト
 
+[![Build Status](https://travis-ci.org/KazuMatsuHack9981/vue-rails-app.svg?branch=master)](https://travis-ci.org/KazuMatsuHack9981/vue-rails-app)
+
 
 ## 環境
 
