@@ -3,25 +3,42 @@
 <div class="main-center">
   <h2>Sign up</h2>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {novalidate: true}) do |f| %>
+    <%= render "users/shared/error_messages", resource: resource %>
 
-    <div class="field form-group">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+    <div class="field form-group needs-validation">
+      <%= f.label :name %>
+      <%= f.text_field :name, autofocus: true, class: "form-control", required: true, value: "" %>
+       <div class="invalid-feedback">
+        名前を入力してください
+      </div>
     </div>
 
-    <div class="field form-group">
+    <div class="field form-group needs-validation">
+      <%= f.label :email %>
+      <%= f.email_field :email, autocomplete: "email", class: "form-control", required: true %>
+      <div class="invalid-feedback">
+        無効な形式です
+      </div>
+    </div>
+
+    <div class="field form-group needs-validation">
       <%= f.label :password %>
       <% if @minimum_password_length %>
       <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+      <% end %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control", required: true %>
+      <div class="invalid-feedback">
+        パスワードを入力してください
+      </div>
     </div>
 
-    <div class="field form-group">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+    <div class="field form-group needs-validation">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", required: true %>
+      <div class="invalid-feedback">
+        パスワードを入力してください
+      </div>
     </div>
 
     <div class="actions d-flex justify-content-center my-4">
