@@ -4,12 +4,13 @@ services:
   - mysql
   - redis-server
 bundler_args: "--without development --jobs=3"
-#cache: bundler
+cache: bundler
 before_install:
   - git clone https://github.com/TravisToolbox/rubocop-travis.git
 install:
   - ./rubocop-travis/install.sh
 before_script:
+  - bundle install
   - cp config/database.travis.yml config/database.yml
   - bundle exec rake db:create
   - bundle exec rake db:migrate
