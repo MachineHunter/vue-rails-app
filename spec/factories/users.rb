@@ -5,7 +5,7 @@ FactoryBot.define do
     password { 'specspec' }
 
     after(:create) do |user|
-      status = create(:status, user: user)
+      create(:status, user: user)
     end
   end
 end
