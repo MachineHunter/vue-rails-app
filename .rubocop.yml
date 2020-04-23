@@ -30,3 +30,6 @@ AllCops:
     - 'db/**/*'
     - 'config/**/*'
     - 'bin/**/*'
+    - 'lib/**/*'
+    - 'tmp/**/*'
+    - 'node_modules/**/*'
