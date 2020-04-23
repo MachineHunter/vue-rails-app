@@ -1,5 +1,7 @@
-class Api::UserPagesController < ApplicationController
-  def index
-    @user = current_user
+module Api
+  class UserPagesController < ApplicationController
+    def index
+      @user = current_user
+    end
   end
 end

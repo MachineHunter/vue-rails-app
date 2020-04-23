@@ -15,5 +15,4 @@ RSpec.describe Status, type: :model do
       expect(status.user_id).not_to eq nil
     end
   end
-
 end

@@ -4,17 +4,16 @@ RSpec.describe User, type: :model do
   let!(:user) { create(:user) }
 
   describe 'データ整合性チェック' do
-
     context 'email形式' do
       it '@無し' do
-        user.email = "testgmail.com"
+        user.email = 'testgmail.com'
         expect(user.save).not_to be true
       end
 
       it '@の左右なし' do
-        user.email = "@gmail.com"
+        user.email = '@gmail.com'
         expect(user.save).not_to be true
-        user.email = "test@"
+        user.email = 'test@'
         expect(user.save).not_to be true
       end
     end
@@ -25,5 +24,4 @@ RSpec.describe User, type: :model do
       end
     end
   end
-
 end

@@ -68,6 +68,6 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   # login script
-  Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+  Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
   config.include Authentication, type: :request
 end
