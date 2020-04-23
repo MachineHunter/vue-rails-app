@@ -7,8 +7,16 @@
     <%= render "users/shared/error_messages", resource: resource %>
 
     <div class="field form-group needs-validation">
+      <%= f.label :name %>
+      <%= f.text_field :name, autofocus: true, class: "form-control", required: true, value: "" %>
+       <div class="invalid-feedback">
+        名前を入力してください
+      </div>
+    </div>
+
+    <div class="field form-group needs-validation">
       <%= f.label :email %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", required: true %>
+      <%= f.email_field :email, autocomplete: "email", class: "form-control", required: true %>
       <div class="invalid-feedback">
         無効な形式です
       </div>
