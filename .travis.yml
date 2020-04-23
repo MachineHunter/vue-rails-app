@@ -5,18 +5,12 @@ services:
   - redis-server
 bundler_args: "--without development --jobs=3"
 cache: bundler
-env: SKIP_INTERPRETER=true
-before_install:
-  - git clone https://github.com/TravisToolbox/rubocop-travis.git
-install:
-  - ./rubocop-travis/install.sh
 before_script:
-  - bundle install
   - cp config/database.travis.yml config/database.yml
-  - bundle exec rake db:create
-  - bundle exec rake db:migrate
+  - bundle exec rails db:create
+  - bundle exec rails db:migrate
 script:
-  - ./rubocop-travis/scan.sh
+  - bundle exec rubocop
   - bundle exec rspec spec -f p
 notifications:
   email: false
