@@ -22,7 +22,38 @@ Style/TrailingCommaInArrayLiteral:
 # 複数行の場合はケツカンマを入れる(Hashリテラル)
 # => 気持ち悪いので無効化
 Style/TrailingCommaInHashLiteral:
-  # EnforcedStyleForMultiline: comma
+  Enabled: false
+
+Metrics/LineLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 25 
+ 
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+
+# classの上にコメントつけなさいエラーを回避
+Documentation:
   Enabled: false
 
 AllCops:
@@ -30,3 +61,7 @@ AllCops:
     - 'db/**/*'
     - 'config/**/*'
     - 'bin/**/*'
+    - 'lib/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - 'node_modules/**/*'

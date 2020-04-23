@@ -9,3 +9,10 @@ before_script:
   - cp config/database.travis.yml config/database.yml
   - bundle exec rails db:create
   - bundle exec rails db:migrate
+script:
+  - bundle exec rubocop
+  - bundle exec rspec spec -f p
+notifications:
+  email: false
+  slack:
+    secure: jv39lRtWAgnQjPoN7J+1jlDE0spdRUTrj7AN+I2K7SvakHaOehb9RHz4j/PKLtYvPRXhtx+pVRPZLH10iUvGFWyQqV4JbOpFqV5q7zw0to9vbMy0EXX77014+qTDbw/6FjElf3/kwIAomRk/cow1zDcVb/JzOVKkCpaKqDu/Ainqulngh6VCAh/ZSsDDtobAfIokl0mPMRAPqNObWUqPOFMvWrn3bnCFA9Vb3Nc+LYwskvjhC4xHFYIxkYbIMVD3Pk3o7snMvsLItv1zBGTONl1160xazV5wGYeizDNxbu09Ai59OOBkqogAOyV2q9k3+I7ArTbe6BpwDu6iFcFKs0qpZh9XZjPyAolqV/CTT1hFZ+o2KLgp6mdTUIcoGFH5kPjcGdDp7BoE05i6DlkXvNlqldbvn+7FFsMh9gnQauGH4jGjQl7AEc4jHiprCoHUc/uMNYcpkZNVT9SqUKeakf+pBBqnhp/Uj2uHirRdQbW+6Y9bWF7kG3+Kp9zPLcsnVfHyE3C2fFH+kdUUNK0QluyTMI/p0kZ4sbTwVCrehmBJOLiUzJ60KwrZ3Zz1D+mIYGmohS2kecjsn3OgTCbD6OoO3siyAUsobk2lAPHU83nuEU6pSZoyPIJ/+D0il/8LU33mG9Ke1kPZWm7qkK9OM9WFGbOzLIf74PTEQpffUcc=
