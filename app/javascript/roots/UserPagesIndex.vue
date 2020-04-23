@@ -7,6 +7,7 @@
       <b-link href="/users/sign_up">ユーザー登録</b-link>
     </div>
     <user-profile v-else :user="user" class="px-3"></user-profile>
+    <a href="/users/edit">ユーザー情報編集（とりまここから）</a>
     <common-footer></common-footer>
   </div>
 </template>

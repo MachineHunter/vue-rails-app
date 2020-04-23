@@ -36,4 +36,5 @@
 .main-center {
   max-width: 1080px;
   margin: 1rem auto;
+  padding: 0 1rem;
 }
