@@ -5,6 +5,7 @@ services:
   - redis-server
 bundler_args: "--without development --jobs=3"
 cache: bundler
+env: SKIP_INTERPRETER=true
 before_install:
   - git clone https://github.com/TravisToolbox/rubocop-travis.git
 install:
