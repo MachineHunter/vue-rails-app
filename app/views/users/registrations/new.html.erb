@@ -4,10 +4,10 @@
   <h2>Sign up</h2>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {novalidate: true}) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
+    <%= render "users/shared/error_messages", resource: resource %>
 
     <div class="field form-group needs-validation">
-      <%= f.label :email %><br />
+      <%= f.label :email %>
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", required: true %>
       <div class="invalid-feedback">
         無効な形式です
@@ -18,7 +18,7 @@
       <%= f.label :password %>
       <% if @minimum_password_length %>
       <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
+      <% end %>
       <%= f.password_field :password, autocomplete: "new-password", class: "form-control", required: true %>
       <div class="invalid-feedback">
         パスワードを入力してください
@@ -26,7 +26,7 @@
     </div>
 
     <div class="field form-group needs-validation">
-      <%= f.label :password_confirmation %><br />
+      <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", required: true %>
       <div class="invalid-feedback">
         パスワードを入力してください
