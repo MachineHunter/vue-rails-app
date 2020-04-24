@@ -9,7 +9,6 @@ class User < ApplicationRecord
 
   validates :email, email: true
 
-
   def avatar=(image)
     return unless image.present?
 
