@@ -14,7 +14,8 @@ module Users
     def create
       @user = User.new(user_params)
       @user.build_status
-      sign_in(@user) if @user.save
+      @user.avatar = user_params[:image] if @user.save
+      sign_in(@user)
       redirect_to root_path
     end
 
@@ -24,9 +25,11 @@ module Users
     # end
 
     # PUT /resource
-    # def update
-    #   super
-    # end
+    def update
+      @user = User.find(params[:id])
+      @user.update(user_params)
+      redirect_to root_path if @user.save
+    end
 
     # DELETE /resource
     # def destroy
@@ -67,7 +70,7 @@ module Users
     private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password)
+      params.require(:user).permit(:name, :email, :password, :image)
     end
   end
 end
