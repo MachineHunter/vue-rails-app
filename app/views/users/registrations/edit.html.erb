@@ -1,7 +1,10 @@
 <%= render partial: "partials/common_header" %>
 
 <div class="main-center">
-  <h2>Edit <%= resource_name.to_s.humanize %></h2>
+  とりあえずログアウトはここに。headerをerbとvueで共通化したあとにどうにかする<br/>
+  <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+
+  <h2 class="mt-5">Edit <%= resource_name.to_s.humanize %></h2>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, novalidate: true }) do |f| %>
     <%= render "users/shared/error_messages", resource: resource %>
