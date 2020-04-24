@@ -6,14 +6,17 @@ module Users
     # before_action :configure_account_update_params, only: [:update]
 
     # GET /resource/sign_up
-    # def new
-    #   super
-    # end
+    def new
+      @user = User.new
+    end
 
     # POST /resource
-    # def create
-    #   super
-    # end
+    def create
+      @user = User.new(user_params)
+      @user.build_status
+      sign_in(@user) if @user.save
+      redirect_to root_path
+    end
 
     # GET /resource/edit
     # def edit
@@ -60,5 +63,12 @@ module Users
     # def after_inactive_sign_up_path_for(resource)
     #   super(resource)
     # end
+
+    private
+
+    def user_params
+      params.require(:user).permit(:name, :email, :password)
+    end
+
   end
 end
