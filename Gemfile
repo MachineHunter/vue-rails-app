@@ -81,3 +81,6 @@ gem 'pry-doc'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'redis-namespace'
+
+# devise
+gem 'devise'

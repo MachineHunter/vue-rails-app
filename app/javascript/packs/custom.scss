@@ -1,0 +1,28 @@
+$primary:       #4166C2;
+$secondary:     #4541A1;
+$success:       #B9F19C;
+$info:          #85D9B9;
+$warning:       #EAC131;
+$danger:        #F26709;
+// $light:         ;
+// $dark:          ;
+
+@import '~bootstrap/scss/bootstrap.scss';
+@import '~bootstrap-vue/src/index.scss';
+
+.flex-x-center {
+    display: flex;
+    justify-content: center;
+}
+
+.flex-x-center {
+    display: flex;
+    align-items: center;
+}
+
+body,
+.root-component {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
