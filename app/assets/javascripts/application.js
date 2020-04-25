@@ -21,14 +21,12 @@ const bsSubmitListenerForValidation = () => {
   if(form){
     // Loop over them and prevent submission
     form.addEventListener('submit', function(event) {
-      console.log("submitted");
       
       if (form.checkValidity() === false) {
         event.preventDefault();
         event.stopPropagation();
       }
       const elems = form.getElementsByClassName("needs-validation");
-      console.log(elems);
     
       Array.prototype.filter.call(elems, function(elem){
         elem.classList.add('was-validated');
