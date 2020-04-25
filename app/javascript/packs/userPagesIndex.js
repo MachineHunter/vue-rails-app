@@ -12,7 +12,9 @@ const vueMountListener = () => {
   }).$mount()
   // document.body.appendChild(userPagesIndex.$el)
   const vueHook = document.getElementById("vue-hook")
-  document.body.replaceChild(userPagesIndex.$el, vueHook)
+  if(vueHook){
+    document.body.replaceChild(userPagesIndex.$el, vueHook)
+  }
 
 }
 
