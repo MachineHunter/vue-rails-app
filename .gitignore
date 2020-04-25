@@ -36,3 +36,5 @@ yarn-debug.log*
 # sshkey ignore
 id_rsa
 id_rsa.pub
+
+/app/assets/images/avatars

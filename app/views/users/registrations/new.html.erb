@@ -13,6 +13,11 @@
         名前を入力してください
       </div>
     </div>
+    <div calss="field form-group">
+      <label for="icon-input">プロフィール画像</label><br/>
+      <input type="file" id="icon-input" accept="image/*">
+    </div>
+    <input type="hidden" name="user[image]" value="" id="icon-to-send">
 
     <div class="field form-group needs-validation">
       <%= f.label :email %>
