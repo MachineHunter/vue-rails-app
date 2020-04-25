@@ -6,9 +6,15 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 import "./custom.scss"
 
-document.addEventListener('DOMContentLoaded', () => {
+const vueMountListener = () => {
   const userPagesIndex = new Vue({
     render: h => h(UserPagesIndex)
   }).$mount()
-  document.body.appendChild(userPagesIndex.$el)
-})
+  // document.body.appendChild(userPagesIndex.$el)
+  const vueHook = document.getElementById("vue-hook")
+  document.body.replaceChild(userPagesIndex.$el, vueHook)
+
+}
+
+document.addEventListener('DOMContentLoaded', vueMountListener)
+document.addEventListener('turbolinks:load', vueMountListener)
