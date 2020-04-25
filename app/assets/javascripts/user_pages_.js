@@ -12,7 +12,9 @@ const onFileChange = (e) => {
 
 const onLoadListener = () => {
   const fileInput = document.getElementById("icon-input")
-  fileInput.addEventListener("change", onFileChange, false)
+  if(fileInput){
+    fileInput.addEventListener("change", onFileChange, false)
+  }
 }
 
 window.addEventListener('load', onLoadListener, false)
