@@ -26,9 +26,9 @@ module Users
 
     # PUT /resource
     def update
-      @user = User.find(params[:id])
+      @user = current_user
       @user.update(user_params)
-      redirect_to root_path if @user.save
+      redirect_to root_path
     end
 
     # DELETE /resource
