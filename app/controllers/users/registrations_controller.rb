@@ -27,6 +27,7 @@ module Users
     # PUT /resource
     def update
       @user = current_user
+      File.delete("#{Rails.root}/app/assets/images/avatars/" + @user.avatar.filename.to_s)
       @user.avatar = user_params[:image]
       @user.update(user_params)
       redirect_to root_path
