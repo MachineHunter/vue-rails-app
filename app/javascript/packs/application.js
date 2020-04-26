@@ -14,4 +14,37 @@ import "./custom.scss"
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+import Vue from 'vue'
+import CommonHeader from '../components/CommonHeader.vue'
+import CommonFooter from '../components/CommonFooter.vue'
+
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
+
+const vueHeaderMountListener = () => {
+  const commonHeader = new Vue({
+    render: h => h(CommonHeader)
+  }).$mount()
+  const vueHeaderHook = document.getElementById("vue-header-hook")
+  if(vueHeaderHook){
+    document.body.replaceChild(commonHeader.$el, vueHeaderHook)
+  }
+}
+
+const vueFooterMountListener = () => {
+  const commonFooter = new Vue({
+    render: h => h(CommonFooter)
+  }).$mount()
+  const vueFooterHook = document.getElementById("vue-footer-hook")
+  if(vueFooterHook){
+    document.body.replaceChild(commonFooter.$el, vueFooterHook)
+  }
+}
+
+document.addEventListener('DOMContentLoaded', vueHeaderMountListener)
+document.addEventListener('turbolinks:load', vueHeaderMountListener)
+
+document.addEventListener('DOMContentLoaded', vueFooterMountListener)
+document.addEventListener('turbolinks:load', vueFooterMountListener)
 

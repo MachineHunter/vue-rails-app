@@ -1,4 +1,4 @@
-<%= render partial: "partials/common_header" %>
+<div id="vue-header-hook"></div>
 
 <div class="main-center">
   とりあえずログアウトはここに。headerをerbとvueで共通化したあとにどうにかする<br/>
@@ -60,6 +60,6 @@
   <%= link_to "Back", :back %>
 </div>
 
-<%= render partial: "partials/common_footer" %>
+<div id="vue-footer-hook"></div>
 
 <%= javascript_packs_with_chunks_tag 'application' %>
