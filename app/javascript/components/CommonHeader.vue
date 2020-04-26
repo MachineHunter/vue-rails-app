@@ -8,7 +8,7 @@
           <b-nav-item>TOP</b-nav-item>
           <b-nav-item>リクエスト広場</b-nav-item>
           <b-nav-item>ランキング</b-nav-item>
-          <b-nav-item-dropdown text="アカウント">
+          <b-nav-item-dropdown text="アカウント" :disabled="!signed_in">
             <b-dropdown-item href="/user_pages/index">プロフィール</b-dropdown-item>
             <b-dropdown-item href="/users/edit">設定</b-dropdown-item>
             <b-dropdown-item
@@ -27,7 +27,12 @@
 
 <script>
 export default {
-
+  props: {
+    signed_in: {
+      type: Boolean,
+      default: false
+    }
+  }
 }
 </script>
 
