@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "axios": "^0.19.2",
+    "hard-source-webpack-plugin": "^0.13.1",
     "webpack-dev-server": "^3.10.3"
   }
 }
