@@ -1,8 +1,4 @@
 module FeatureDevise
-  def host
-    # Capybara.app_host's value
-    'http://www.example.com'
-  end
 
   def sign_in_without_factory(email, password)
     visit new_user_session_path
@@ -24,7 +20,7 @@ module FeatureDevise
     fill_in 'user[email]', with: email
     fill_in 'user[password]', with: password
     fill_in 'user[password_confirmation]', with: confirmation
-    attach_file 'dummy', avatar
+    attach_file('icon-input', avatar, make_visible: true)
     click_button 'Sign up'
   end
 

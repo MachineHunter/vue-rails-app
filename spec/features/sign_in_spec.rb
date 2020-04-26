@@ -7,7 +7,7 @@ RSpec.feature 'Sign In', type: :feature do
 
   scenario 'normal sign in' do
     sign_in_with_factory(user)
-    expect(current_url).to eq host + root_path
+    expect(current_path).to eq root_path
   end
 
   scenario 'informat email' do
