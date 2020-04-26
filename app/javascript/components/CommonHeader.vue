@@ -9,8 +9,15 @@
           <b-nav-item>リクエスト広場</b-nav-item>
           <b-nav-item>ランキング</b-nav-item>
           <b-nav-item-dropdown text="アカウント">
-            <b-dropdown-item>プロフィール</b-dropdown-item>
-            <b-dropdown-item>設定</b-dropdown-item>
+            <b-dropdown-item href="/user_pages/index">プロフィール</b-dropdown-item>
+            <b-dropdown-item href="/users/edit">設定</b-dropdown-item>
+            <b-dropdown-item
+              href="/users/sign_out"
+              rel="nofollow"
+              data-method="delete"
+            >
+              ログアウト
+            </b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
