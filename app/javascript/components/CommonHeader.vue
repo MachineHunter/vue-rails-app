@@ -1,9 +1,20 @@
 <template>
   <header id="common-header">
-    common header(後でnavbarとかに置き換える。
-    リクエスト一覧ページとかランキングページとかに
-    飛べるリンクをはる
-    )
+    <b-navbar type="dark" variant="primary" toggleable="md">
+      <b-navbar-brand href="#">コマンド投稿ゲーム(仮)</b-navbar-brand>
+      <b-navbar-toggle target="nav-items"></b-navbar-toggle>
+      <b-collapse is-nav id="nav-items">
+        <b-navbar-nav>
+          <b-nav-item>TOP</b-nav-item>
+          <b-nav-item>リクエスト広場</b-nav-item>
+          <b-nav-item>ランキング</b-nav-item>
+          <b-nav-item-dropdown text="アカウント">
+            <b-dropdown-item>プロフィール</b-dropdown-item>
+            <b-dropdown-item>設定</b-dropdown-item>
+          </b-nav-item-dropdown>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
   </header>
 </template>
 
@@ -14,12 +25,5 @@ export default {
 </script>
 
 <style>
-#common-header {
-  background-color: rgb(227, 255, 214);
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 5rem;
-}
+
 </style>
