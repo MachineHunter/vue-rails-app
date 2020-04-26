@@ -4,11 +4,9 @@ RSpec.describe Status, type: :model do
   let(:status) { create(:status) }
 
   describe 'データ整合性チェック' do
-    it '正か' do
-      expect(status.imagination).to be >= 0
-      expect(status.humor).to be >= 0
-      expect(status.automation).to be >= 0
-      expect(status.enhancement).to be >= 0
+    it '負の場合はじく' do
+      status.enhancement = -10
+      expect(status.save).not_to eq true
     end
 
     it 'ユーザーと結び付いているか' do
