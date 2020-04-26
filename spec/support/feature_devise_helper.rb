@@ -1,5 +1,4 @@
 module FeatureDevise
-
   def sign_in_without_factory(email, password)
     visit new_user_session_path
     fill_in 'user[email]', with: email
