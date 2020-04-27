@@ -3,4 +3,5 @@ json.user do |json|
   json.set! :status do |stats|
     stats.call(@user.status, :automation, :imagination, :humor, :enhancement)
   end
+	json.set! :avatar, @user.avatar.filename
 end
