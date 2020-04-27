@@ -3,7 +3,7 @@
 <div class="main-center">
   <h2>Sign up</h2>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {novalidate: true}) do |f| %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {novalidate: true, enctype: "multipart/form-data"}) do |f| %>
     <%= render "users/shared/error_messages", resource: resource %>
 
     <div class="field form-group needs-validation">
