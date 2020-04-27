@@ -9,6 +9,5 @@ module Api
       filetype = current_user.avatar.filetype
       send_data image, type: filetype, disposition: 'inline'
     end
-
   end
 end
