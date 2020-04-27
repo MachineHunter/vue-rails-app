@@ -26,8 +26,9 @@ const vueHeaderMountListener = () => {
   const vueHeaderHook = document.getElementById("vue-header-hook")
   if(vueHeaderHook){
     const signedIn = vueHeaderHook.dataset.signedin === "true"
+    const activeTab = vueHeaderHook.dataset.activetab
     const commonHeader = new Vue({
-      render: h => h(CommonHeader, {props:{signedIn}})
+      render: h => h(CommonHeader, {props:{signedIn, activeTab}})
     }).$mount()
     document.body.replaceChild(commonHeader.$el, vueHeaderHook)
   }

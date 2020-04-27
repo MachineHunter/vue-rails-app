@@ -1,6 +1,6 @@
 <template>
   <div id="user-pages-index" class="root-component">
-    <common-header :signed-in="!noUser"></common-header>
+    <common-header :signed-in="!noUser" activeTab="account"></common-header>
     <div v-if="noUser" class="flex-column flex-x-center flex-y-center my-2">
       <span class="text-center">プロフィールを確認するにはログインが必要です</span>
       <b-link href="/users/sign_in">ログイン</b-link>

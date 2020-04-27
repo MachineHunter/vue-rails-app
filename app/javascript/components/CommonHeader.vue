@@ -5,12 +5,29 @@
       <b-navbar-toggle target="nav-items"></b-navbar-toggle>
       <b-collapse is-nav id="nav-items">
         <b-navbar-nav>
-          <b-nav-item>TOP</b-nav-item>
-          <b-nav-item>リクエスト広場</b-nav-item>
-          <b-nav-item>ランキング</b-nav-item>
+          <b-nav-item
+            :active="activeTab === 'top'"
+          >
+            TOP
+          </b-nav-item>
+          <b-nav-item
+            :active="activeTab === 'requestPlaza'"
+          >
+            リクエスト広場
+          </b-nav-item>
+          <b-nav-item
+            :active="activeTab === 'ranking'"
+          >
+            ランキング
+          </b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
-          <b-nav-item-dropdown text="アカウント" :disabled="!signedIn" right>
+          <b-nav-item-dropdown
+            text="アカウント"
+            :disabled="!signedIn"
+            right
+            :class="{'text-white-important-parent': activeTab === 'account' && signedIn}"
+          >
             <b-dropdown-item href="/user_pages/index">プロフィール</b-dropdown-item>
             <b-dropdown-item href="/users/edit">設定</b-dropdown-item>
             <b-dropdown-item
@@ -34,11 +51,19 @@ export default {
     signedIn: {
       type: Boolean,
       default: false
+    },
+    activeTab: {
+      type: String,
+      validator: function(value) {
+        return ["top", "requestPlaza", "ranking", "account", undefined].includes(value)
+      }
     }
   }
 }
 </script>
 
 <style>
-
+.text-white-important-parent span {
+  color: rgb(255, 255, 255, 1) !important;
+}
 </style>
