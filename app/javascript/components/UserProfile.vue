@@ -3,8 +3,9 @@
       <b-media>
         <template v-slot:aside>
           <b-img
-            blank
+            :blank="!icon"
             blank-color="#ccc"
+            :src="icon"
             width="200"
             alt="user-icon"
             fluid
@@ -53,6 +54,23 @@ export default {
             type: Object,
             required: true
         }
+    },
+    data: function() {
+      return {
+        icon: null
+      }
+    },
+    created: function() {
+      this.getIcon()
+    },
+    methods: {
+      getIcon: function(){
+        import(`images/avatars/${this.user.avatar}`).then(result => {
+          this.icon = result.default
+        }).catch(err => {
+          console.log(err)
+        });
+      },
     }
 }
 </script>
