@@ -16,10 +16,10 @@ module Users
       @user.build_status
       @user.build_avatar
 
-      # 拡張子！
-      @user.avatar.filename = "#{@user.id}#{params[:user][:avatar].original_filename}"
-      @user.avatar.filetype = params[:user][:avatar].content_type
-      @user.avatar.image = params[:user][:avatar].tempfile.read
+      @avatar = params[:user][:avatar]
+      @user.avatar.filename = @avatar.original_filename
+      @user.avatar.filetype = @avatar.content_type
+      @user.avatar.image = @avatar.tempfile.read
 
       sign_in(@user) if @user.save
       redirect_to root_path
@@ -31,9 +31,15 @@ module Users
     # end
 
     # PUT /resource
-    # def update
-    #   super
-    # end
+    def update
+      @user = current_user
+      @avatar = params[:user][:avatar]
+      @user.avatar.filename = @avatar.original_filename
+      @user.avatar.filetype = @avatar.content_type
+      @user.avatar.image = @avatar.tempfile.read
+      @user.update(user_params)
+      redirect_to root_path
+    end
 
     # DELETE /resource
     # def destroy
