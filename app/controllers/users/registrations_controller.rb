@@ -16,10 +16,8 @@ module Users
       @user.build_status
       @user.build_avatar
 
-      # コントローラーにロジックを書きたくない。後のissueでリファクタする。
       # 拡張子！
-      type = params[:user][:avatar].content_type.split('/').last
-      @user.avatar.filename = "#{@user.id}#{params[:user][:avatar].original_filename}.#{type}"
+      @user.avatar.filename = "#{@user.id}#{params[:user][:avatar].original_filename}"
       @user.avatar.image = params[:user][:avatar].tempfile.read
 
       sign_in(@user) if @user.save
