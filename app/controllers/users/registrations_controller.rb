@@ -15,7 +15,13 @@ module Users
       @user = User.new(user_params)
       @user.build_status
       @user.build_avatar
-      @user.avatar = user_params[:avatar]
+
+      # コントローラーにロジックを書きたくない。後のissueでリファクタする。
+      # 拡張子！
+      type = params[:user][:avatar].content_type.split('/').last
+      @user.avatar.filename = "#{@user.id}#{params[:user][:avatar].original_filename}.#{type}"
+      @user.avatar.image = params[:user][:avatar].tempfile.read
+
       sign_in(@user) if @user.save
       redirect_to root_path
     end
@@ -69,7 +75,7 @@ module Users
     private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :avatar)
+      params.require(:user).permit(:name, :password, :email)
     end
   end
 end
