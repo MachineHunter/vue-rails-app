@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2020_04_27_103103) do
   create_table "avatars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "filename", null: false
     t.binary "image", limit: 16777215, null: false
+    t.text "type", null: false
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
