@@ -18,7 +18,7 @@ module Users
 
       # 拡張子！
       @user.avatar.filename = "#{@user.id}#{params[:user][:avatar].original_filename}"
-      @user.avatar.type = params[:user][:avatar].content_type
+      @user.avatar.filetype = params[:user][:avatar].content_type
       @user.avatar.image = params[:user][:avatar].tempfile.read
 
       sign_in(@user) if @user.save
