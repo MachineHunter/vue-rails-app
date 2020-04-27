@@ -70,20 +70,20 @@ RSpec.configure do |config|
   # login script
   Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
   config.include Authentication, type: :request
-  config.include FeatureDevise, type: :feature
+  # config.include FeatureDevise, type: :feature
 end
 
-Capybara.register_driver :selenium_chrome_headless do |app|
-  chrome_options = ::Selenium::WebDriver::Chrome::Options.new
-  chrome_options.args << '--headless'
-  chrome_options.args << '--no-sandbox'
-  chrome_options.args << '--disable-gpu'
+# Capybara.register_driver :selenium_chrome_headless do |app|
+# chrome_options = ::Selenium::WebDriver::Chrome::Options.new
+# chrome_options.args << '--headless'
+# chrome_options.args << '--no-sandbox'
+# chrome_options.args << '--disable-gpu'
 
-  driver = Capybara::Selenium::Driver.new(app, browser: :chrome, options: chrome_options)
-  driver.browser.manage.window.size = Selenium::WebDriver::Dimension.new(2000, 3000)
-  driver
-end
+# driver = Capybara::Selenium::Driver.new(app, browser: :chrome, options: chrome_options)
+# driver.browser.manage.window.size = Selenium::WebDriver::Dimension.new(2000, 3000)
+# driver
+# end
 
-Capybara.javascript_driver = :headless_chrome
-Capybara.default_max_wait_time = 5
-Capybara.server = :puma, { Silent: true }
+# Capybara.javascript_driver = :headless_chrome
+# Capybara.default_max_wait_time = 5
+# Capybara.server = :puma, { Silent: true }
