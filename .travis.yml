@@ -9,10 +9,6 @@ before_script:
   - cp config/database.travis.yml config/database.yml
   - bundle exec rails db:create
   - bundle exec rails db:migrate
-  - nvm install v12.16.2
-  - rm -rf bin/webpack* && rm -rf config/webpack*
-  - bundle exec rails webpacker:install
-  - bundle exec rails webpacker:compile
 script:
   - bundle exec rubocop
   - bundle exec rspec spec -f p
