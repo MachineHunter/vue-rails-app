@@ -23,21 +23,22 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 const vueHeaderMountListener = () => {
-  const commonHeader = new Vue({
-    render: h => h(CommonHeader)
-  }).$mount()
   const vueHeaderHook = document.getElementById("vue-header-hook")
   if(vueHeaderHook){
+    const signedIn = vueHeaderHook.dataset.signedin === "true"
+    const commonHeader = new Vue({
+      render: h => h(CommonHeader, {props:{signedIn}})
+    }).$mount()
     document.body.replaceChild(commonHeader.$el, vueHeaderHook)
   }
 }
 
 const vueFooterMountListener = () => {
-  const commonFooter = new Vue({
-    render: h => h(CommonFooter)
-  }).$mount()
   const vueFooterHook = document.getElementById("vue-footer-hook")
   if(vueFooterHook){
+    const commonFooter = new Vue({
+      render: h => h(CommonFooter)
+    }).$mount()
     document.body.replaceChild(commonFooter.$el, vueFooterHook)
   }
 }

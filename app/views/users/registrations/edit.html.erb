@@ -1,7 +1,7 @@
-<div id="vue-header-hook"></div>
+<div id="vue-header-hook" data-signedin="true"></div>
 
 <div class="main-center">
-  <h2 class="mt-5">Edit <%= resource_name.to_s.humanize %></h2>
+  <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, novalidate: true }) do |f| %>
     <%= render "users/shared/error_messages", resource: resource %>
