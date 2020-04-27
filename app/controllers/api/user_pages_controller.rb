@@ -6,8 +6,8 @@ module Api
 
     def avatar
       image = current_user.avatar.image
-      type = current_user.avatar.type
-      #send_data image, type: "image"
+      filetype = current_user.avatar.filetype
+      send_data image, type: filetype, disposition: 'inline'
     end
 
   end
