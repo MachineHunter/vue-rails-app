@@ -15,22 +15,25 @@
 //= require turbolinks
 //= require_tree .
 
-window.addEventListener('load', function() {
+const bsSubmitListenerForValidation = () => {
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   const form = document.getElementsByTagName('form')[0];
-  // Loop over them and prevent submission
-  form.addEventListener('submit', function(event) {
-    console.log("submitted");
+  if(form){
+    // Loop over them and prevent submission
+    form.addEventListener('submit', function(event) {
+      
+      if (form.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      const elems = form.getElementsByClassName("needs-validation");
     
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    const elems = form.getElementsByClassName("needs-validation");
-    console.log(elems);
+      Array.prototype.filter.call(elems, function(elem){
+        elem.classList.add('was-validated');
+      });
+    }, false);
+  }
+}
 
-    Array.prototype.filter.call(elems, function(elem){
-      elem.classList.add('was-validated');
-    });
-  }, false);
-}, false);
+window.addEventListener('load', bsSubmitListenerForValidation, false);
+window.addEventListener('turbolinks:load', bsSubmitListenerForValidation, false);

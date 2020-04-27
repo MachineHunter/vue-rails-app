@@ -1,6 +1,8 @@
 <template>
-  <footer id="common-footer">
-    common footer(後で置き換える)
+  <footer id="common-footer" class="mt-auto">
+    <div id="footer-content" class="border-top bg-light mt-2 flex-x-center flex-y-center">
+      footerって何置けばいいんだろ
+    </div>
   </footer>
 </template>
 
@@ -11,14 +13,7 @@ export default {
 </script>
 
 <style>
-#common-footer {
-  background-color: rgb(227, 255, 214);
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#footer-content {
   height: 3rem;
-
-  margin-top: auto;
 }
 </style>

@@ -1,13 +1,12 @@
 <template>
   <div id="user-pages-index" class="root-component">
-    <common-header></common-header>
+    <common-header :signed-in="!noUser" activeTab="account"></common-header>
     <div v-if="noUser" class="flex-column flex-x-center flex-y-center my-2">
       <span class="text-center">プロフィールを確認するにはログインが必要です</span>
       <b-link href="/users/sign_in">ログイン</b-link>
       <b-link href="/users/sign_up">ユーザー登録</b-link>
     </div>
     <user-profile v-else :user="user" class="px-3"></user-profile>
-    <a href="/users/edit">ユーザー情報編集（とりまここから。ログアウトもここから。headerをerbとvueで共通化したあとにどうにかする）</a>
     <common-footer></common-footer>
   </div>
 </template>

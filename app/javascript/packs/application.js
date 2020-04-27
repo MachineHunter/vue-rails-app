@@ -14,5 +14,39 @@ import "./custom.scss"
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+import Vue from 'vue'
+import CommonHeader from '../components/CommonHeader.vue'
+import CommonFooter from '../components/CommonFooter.vue'
 
-console.log('Hello World from Webpacker')
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
+
+const vueHeaderMountListener = () => {
+  const vueHeaderHook = document.getElementById("vue-header-hook")
+  if(vueHeaderHook){
+    const signedIn = vueHeaderHook.dataset.signedin === "true"
+    const activeTab = vueHeaderHook.dataset.activetab
+    const commonHeader = new Vue({
+      render: h => h(CommonHeader, {props:{signedIn, activeTab}})
+    }).$mount()
+    document.body.replaceChild(commonHeader.$el, vueHeaderHook)
+  }
+}
+
+const vueFooterMountListener = () => {
+  const vueFooterHook = document.getElementById("vue-footer-hook")
+  if(vueFooterHook){
+    const commonFooter = new Vue({
+      render: h => h(CommonFooter)
+    }).$mount()
+    document.body.replaceChild(commonFooter.$el, vueFooterHook)
+  }
+}
+
+document.addEventListener('DOMContentLoaded', vueHeaderMountListener)
+document.addEventListener('turbolinks:load', vueHeaderMountListener)
+
+document.addEventListener('DOMContentLoaded', vueFooterMountListener)
+document.addEventListener('turbolinks:load', vueFooterMountListener)
+
