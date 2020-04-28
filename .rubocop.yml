@@ -51,6 +51,9 @@ Style/HashTransformKeys:
 Style/HashTransformValues:
   Enabled: true
 
+Style/AsciiComments:
+  Enabled: false
+
 
 # classの上にコメントつけなさいエラーを回避
 Documentation:

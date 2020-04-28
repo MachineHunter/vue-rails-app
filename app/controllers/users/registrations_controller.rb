@@ -14,6 +14,13 @@ module Users
     def create
       @user = User.new(user_params)
       @user.build_status
+      @user.build_avatar
+
+      @avatar = params[:user][:image]
+      @user.avatar.filename = @avatar.original_filename
+      @user.avatar.filetype = @avatar.content_type
+      @user.avatar.image = @avatar.tempfile.read
+
       sign_in(@user) if @user.save
       redirect_to root_path
     end
@@ -24,9 +31,16 @@ module Users
     # end
 
     # PUT /resource
-    # def update
-    #   super
-    # end
+    def update
+      @user = current_user
+      @user.name = params[:user][:name]
+      @user.password = params[:password]
+      @avatar = params[:user][:image]
+      @user.avatar.filename = @avatar.original_filename
+      @user.avatar.filetype = @avatar.content_type
+      @user.avatar.image = @avatar.tempfile.read
+      redirect_to root_path if @user.save && @user.avatar.save
+    end
 
     # DELETE /resource
     # def destroy
@@ -67,7 +81,7 @@ module Users
     private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password)
+      params.require(:user).permit(:name, :password, :email, :password_confirmation, :current_password, :image)
     end
   end
 end

@@ -3,12 +3,20 @@
 <div class="main-center">
   <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, novalidate: true }) do |f| %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, novalidate: true, enctype: "multipart/form-data" }) do |f| %>
     <%= render "users/shared/error_messages", resource: resource %>
 
     <div class="field form-group needs-validation">
       <%= f.label :name %>
       <%= f.text_field :name, autofocus: true, class: "form-control" %>
+    </div>
+
+    <div class="field form-group">
+      <label for="icon-input">プロフィール画像</label>
+      <div class="custom-file">
+        <input type="file" id="icon-input" name="user[image]" accept="image/*" class="custom-file-input">
+        <label for="icon-input" class="custom-file-label" id="field-for-icon-input">画像を選択してください</label>
+      </div>
     </div>
 
     <div class="field form-group needs-validation">
