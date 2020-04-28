@@ -62,7 +62,6 @@
   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#accountDeleteModal">
     アカウントを消去する
   </button>
-
 </div>
 
 <div id="vue-footer-hook"></div>
@@ -85,7 +84,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form method="post" action="/users">
+        <form method="post" action="/users" name="formfordelete">
           <input type="hidden" name="_method" value="delete">
           <div class="field form-group needs-validation">
             <label for="password-for-delete-account">パスワード</label>
@@ -101,14 +100,12 @@
             </div>
           </div>
           <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
-
-          <input type="submit">
         </form>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
-        <button type="button" class="btn btn-danger">消去する</button>
+        <button type="button" class="btn btn-danger" id="button-for-delete">消去する</button>
       </div>
     </div>
   </div>
@@ -116,3 +113,4 @@
 
 
 <%= javascript_packs_with_chunks_tag 'application' %>
+<%= javascript_packs_with_chunks_tag 'usersEdit' %>
