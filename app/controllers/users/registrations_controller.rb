@@ -43,9 +43,10 @@ module Users
     end
 
     # DELETE /resource
-    # def destroy
-    #   super
-    # end
+    def destroy
+      result = resource.destroy_with_password(destroy_params[:current_password])
+      sign_out(current_user) if result
+    end
 
     # GET /resource/cancel
     # Forces the session data which is usually expired after sign
@@ -83,5 +84,10 @@ module Users
     def user_params
       params.require(:user).permit(:name, :password, :email, :password_confirmation, :current_password, :image)
     end
+
+    def destroy_params
+      params.require(:user).permit(:current_password)
+    end
+
   end
 end
