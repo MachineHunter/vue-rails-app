@@ -3,9 +3,9 @@
       <b-media>
         <template v-slot:aside>
           <b-img
-            :blank="!icon"
+            :blank="!avatar"
             blank-color="#ccc"
-            :src="icon"
+            :src="avatar"
             width="200"
             alt="user-icon"
             fluid
@@ -48,6 +48,8 @@
 </template>
 
 <script>
+import Axios from "axios"
+
 export default {
     props: {
         user: {
@@ -57,20 +59,22 @@ export default {
     },
     data: function() {
       return {
-        icon: null
+        avatar: null
       }
     },
     created: function() {
-      this.getIcon()
+      this.getAvatar()
     },
     methods: {
-      getIcon: function(){
-        import(`images/avatars/${this.user.avatar}`).then(result => {
-          this.icon = result.default
+      //Axiosを使わず<img src="/api/user_pages/avatar">でも可だが、
+      //その場合読み込めたかった際の処理がうまくいかなかった
+      getAvatar: function(){
+        Axios.get("/api/user_pages/avatar", {responseType: "blob"}).then(res => {
+          this.avatar = window.URL.createObjectURL(res.data)
         }).catch(err => {
           console.log(err)
         });
-      },
+      }
     }
 }
 </script>
