@@ -45,7 +45,10 @@ module Users
     # DELETE /resource
     def destroy
       result = resource.destroy_with_password(destroy_params[:current_password])
-      sign_out(current_user) if result
+      if result
+        sign_out(current_user)
+        redirect_to root_path
+      end
     end
 
     # GET /resource/cancel
