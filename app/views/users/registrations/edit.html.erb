@@ -59,12 +59,60 @@
   <% end %>
 
   <h3 class="mt-4">Cancel my account</h3>
+  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#accountDeleteModal">
+    アカウントを消去する
+  </button>
 
-  <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger" %></p>
-
-  <%= link_to "Back", :back %>
 </div>
 
 <div id="vue-footer-hook"></div>
+
+
+<div
+  class="modal fade"
+  id="accountDeleteModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="accountDeleteModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="accountDeleteModalLabel">アカウント消去</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/users">
+          <input type="hidden" name="_method" value="delete">
+          <div class="field form-group needs-validation">
+            <label for="password-for-delete-account">パスワード</label>
+            <input
+              type="password"
+              name="user[current_password]"
+              required
+              id="password-for-delete-account"
+              class="form-control"
+            >
+            <div class="invalid-feedback">
+              パスワードを入力してください
+            </div>
+          </div>
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
+
+          <input type="submit">
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+        <button type="button" class="btn btn-danger">消去する</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <%= javascript_packs_with_chunks_tag 'application' %>
