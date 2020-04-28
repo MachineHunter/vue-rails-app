@@ -6,6 +6,7 @@ FactoryBot.define do
 
     after(:create) do |user|
       create(:status, user: user)
+      create(:avatar, user: user)
     end
   end
 end
