@@ -75,27 +75,29 @@
   aria-labelledby="accountDeleteModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content bg-danger text-white">
       <div class="modal-header">
         <h5 class="modal-title" id="accountDeleteModalLabel">アカウント消去</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true" class="text-white">&times;</span>
         </button>
       </div>
       <div class="modal-body">
+        <p>本当にアカウントを消去しますか？消去する場合は、パスワードを入力してください。</p>
+        <p>※この操作は取り消せません</p>
         <form method="post" action="/users" name="formfordelete" novalidate>
           <input type="hidden" name="_method" value="delete">
           <div class="field form-group needs-validation">
-            <label for="password-for-delete-account">パスワード</label>
+            <label for="password-for-delete">パスワード</label>
             <input
               type="password"
               name="user[current_password]"
               required
-              id="password-for-delete-account"
+              id="password-for-delete"
               class="form-control"
             >
-            <div class="invalid-feedback">
+            <div class="invalid-feedback text-white">
               パスワードを入力してください
             </div>
           </div>
@@ -104,8 +106,8 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
-        <button type="button" class="btn btn-danger" id="button-for-delete">消去する</button>
+        <button type="button" class="btn btn-light" data-dismiss="modal">戻る</button>
+        <button type="button" class="btn btn-outline-warning" id="button-for-delete">消去する</button>
       </div>
     </div>
   </div>
