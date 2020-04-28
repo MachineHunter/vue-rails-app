@@ -16,7 +16,7 @@ module Users
       @user.build_status
       @user.build_avatar
 
-      @avatar = params[:user][:avatar]
+      @avatar = params[:user][:image]
       @user.avatar.filename = @avatar.original_filename
       @user.avatar.filetype = @avatar.content_type
       @user.avatar.image = @avatar.tempfile.read
@@ -32,13 +32,15 @@ module Users
 
     # PUT /resource
     def update
+      # 力技故いつかリファクタしたい
       @user = current_user
-      @avatar = params[:user][:avatar]
+      @user.name = params[:user][:name]
+      @user.password = params[:password]
+      @avatar = params[:user][:image]
       @user.avatar.filename = @avatar.original_filename
       @user.avatar.filetype = @avatar.content_type
       @user.avatar.image = @avatar.tempfile.read
-      @user.update(user_params)
-      redirect_to root_path
+      redirect_to root_path if @user.save && @user.avatar.save
     end
 
     # DELETE /resource
@@ -62,6 +64,7 @@ module Users
     #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
     # end
 
+
     # If you have extra params to permit, append them to the sanitizer.
     # def configure_account_update_params
     #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
@@ -80,7 +83,7 @@ module Users
     private
 
     def user_params
-      params.require(:user).permit(:name, :password, :email)
+      params.require(:user).permit(:name, :password, :email, :password_confirmation, :current_password, :image)
     end
   end
 end

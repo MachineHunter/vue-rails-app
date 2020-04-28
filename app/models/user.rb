@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_one :status, dependent: :destroy
   has_one :avatar, dependent: :destroy
+  attr_accessor :current_password
+  attr_accessor :image
 
   validates :email, email: true
 end
