@@ -32,7 +32,6 @@ module Users
 
     # PUT /resource
     def update
-      # 力技故いつかリファクタしたい
       @user = current_user
       @user.name = params[:user][:name]
       @user.password = params[:password]
@@ -64,7 +63,6 @@ module Users
     #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
     # end
 
-
     # If you have extra params to permit, append them to the sanitizer.
     # def configure_account_update_params
     #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
@@ -85,5 +83,6 @@ module Users
     def user_params
       params.require(:user).permit(:name, :password, :email, :password_confirmation, :current_password, :image)
     end
+
   end
 end
