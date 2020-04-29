@@ -16,5 +16,4 @@ RSpec.describe 'UserPages', type: :request do
       expect(result[:user][:name]).to eq('specuser')
     end
   end
-
 end
