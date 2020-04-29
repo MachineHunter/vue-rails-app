@@ -17,12 +17,4 @@ RSpec.describe 'UserPages', type: :request do
       expect(result[:user][:name]).to eq('specuser')
     end
   end
-
-  describe 'GET /api/user_pages/avatar' do
-    it 'check if response has correct image' do
-      send_avatar_request
-      expect(response).to have_http_status(200)
-      expect(response.body.size).to eq 511
-    end
-  end
 end
