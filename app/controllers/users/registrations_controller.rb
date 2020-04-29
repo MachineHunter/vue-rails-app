@@ -21,7 +21,8 @@ module Users
       @user.avatar.filetype = @avatar.content_type
       @user.avatar.image = @avatar.tempfile.read
 
-      sign_in(@user) if @user.save
+      response_bad_request unless @user.save
+      sign_in(@user)
       redirect_to root_path
     end
 
@@ -31,21 +32,18 @@ module Users
     # end
 
     # PUT /resource
-    def update
-      @user = current_user
-      @user.name = params[:user][:name]
-      @user.password = params[:password]
-      @avatar = params[:user][:image]
-      @user.avatar.filename = @avatar.original_filename
-      @user.avatar.filetype = @avatar.content_type
-      @user.avatar.image = @avatar.tempfile.read
-      redirect_to root_path if @user.save && @user.avatar.save
-    end
-
-    # DELETE /resource
-    # def destroy
+    # def update
     #   super
     # end
+
+    # DELETE /resource
+    def destroy
+      result = resource.destroy_with_password(destroy_params[:current_password])
+      response_bad_request unless result
+
+      sign_out(current_user)
+      redirect_to root_path
+    end
 
     # GET /resource/cancel
     # Forces the session data which is usually expired after sign
@@ -82,6 +80,10 @@ module Users
 
     def user_params
       params.require(:user).permit(:name, :password, :email, :password_confirmation, :current_password, :image)
+    end
+
+    def destroy_params
+      params.require(:user).permit(:current_password)
     end
   end
 end

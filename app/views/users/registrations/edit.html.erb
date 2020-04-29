@@ -3,20 +3,28 @@
 <div class="main-center">
   <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
+  <form action="/api/avatar/update" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
+    <div class="field form-group">
+      <label for="icon-input">プロフィール画像</label>
+      <div class="custom-file">
+        <input type="file" id="icon-input" name="avatar" accept="image/*" class="custom-file-input">
+        <label for="icon-input" class="custom-file-label" id="field-for-icon-input">画像を選択してください</label>
+      </div>
+    </div>
+    <div class="actions d-flex justify-content-center">
+      <input type="submit" value="画像を更新する" class="btn btn-outline-primary">
+    </div>
+  </form>
+
+  <hr>
+
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, novalidate: true, enctype: "multipart/form-data" }) do |f| %>
     <%= render "users/shared/error_messages", resource: resource %>
 
     <div class="field form-group needs-validation">
       <%= f.label :name %>
       <%= f.text_field :name, autofocus: true, class: "form-control" %>
-    </div>
-
-    <div class="field form-group">
-      <label for="icon-input">プロフィール画像</label>
-      <div class="custom-file">
-        <input type="file" id="icon-input" name="user[image]" accept="image/*" class="custom-file-input">
-        <label for="icon-input" class="custom-file-label" id="field-for-icon-input">画像を選択してください</label>
-      </div>
     </div>
 
     <div class="field form-group needs-validation">
@@ -59,12 +67,60 @@
   <% end %>
 
   <h3 class="mt-4">Cancel my account</h3>
-
-  <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger" %></p>
-
-  <%= link_to "Back", :back %>
+  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#accountDeleteModal">
+    アカウントを消去する
+  </button>
 </div>
 
 <div id="vue-footer-hook"></div>
 
+
+<div
+  class="modal fade"
+  id="accountDeleteModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="accountDeleteModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content bg-danger text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="accountDeleteModalLabel">アカウント消去</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="text-white">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>本当にアカウントを消去しますか？消去する場合は、パスワードを入力してください。</p>
+        <p>※この操作は取り消せません</p>
+        <form method="post" action="/users" name="formfordelete" novalidate>
+          <input type="hidden" name="_method" value="delete">
+          <div class="field form-group needs-validation">
+            <label for="password-for-delete">パスワード</label>
+            <input
+              type="password"
+              name="user[current_password]"
+              required
+              id="password-for-delete"
+              class="form-control"
+            >
+            <div class="invalid-feedback text-white">
+              パスワードを入力してください
+            </div>
+          </div>
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">戻る</button>
+        <button type="button" class="btn btn-outline-warning" id="button-for-delete">消去する</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <%= javascript_packs_with_chunks_tag 'application' %>
+<%= javascript_packs_with_chunks_tag 'usersEdit' %>
