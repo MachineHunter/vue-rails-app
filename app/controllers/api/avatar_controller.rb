@@ -9,7 +9,7 @@ module Api
     def update
       image = params[:avatar]
       @avatar = current_user.avatar
-      @avatar.filename = image.filename
+      @avatar.filename = image.original_filename
       @avatar.filetype = image.content_type
       @avatar.image    = image.tempfile.read
       if @avatar.save
