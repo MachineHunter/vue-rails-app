@@ -9,15 +9,14 @@ module Api
     def update
       image = params[:avatar]
       @avatar = current_user.avatar
-      @avatar.filename = avatar.filename
-      @avatar.filetype = avatar.content_type
-      @avatar.image    = avatar.tempfile.read
+      @avatar.filename = image.filename
+      @avatar.filetype = image.content_type
+      @avatar.image    = image.tempfile.read
       if @avatar.save
-        redirect_to root_path 
+        redirect_to root_path
       else
         response_bad_request
       end
     end
-
   end
 end

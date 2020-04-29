@@ -15,7 +15,11 @@ Rails.application.routes.draw do
 
     namespace :user_pages do
       get 'index', { :format => 'json' }
-      get 'avatar', { :format => 'json' }
+    end
+
+    namespace :avatar do
+      get 'index', { :format => 'json' }
+      post 'update', { :format => 'json' }
     end
   end
 
