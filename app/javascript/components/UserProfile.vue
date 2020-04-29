@@ -69,7 +69,7 @@ export default {
       //Axiosを使わず<img src="/api/user_pages/avatar">でも可だが、
       //その場合読み込めたかった際の処理がうまくいかなかった
       getAvatar: function(){
-        Axios.get("/api/user_pages/avatar", {responseType: "blob"}).then(res => {
+        Axios.get("/api/avatar/index", {responseType: "blob"}).then(res => {
           this.avatar = window.URL.createObjectURL(res.data)
         }).catch(err => {
           console.log(err)
