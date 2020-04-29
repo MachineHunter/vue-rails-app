@@ -21,7 +21,8 @@ module Users
       @user.avatar.filetype = @avatar.content_type
       @user.avatar.image = @avatar.tempfile.read
 
-      sign_in(@user) if @user.save
+      response_bad_request unless @user.save
+      sign_in(@user)
       redirect_to root_path
     end
 
@@ -40,12 +41,13 @@ module Users
       @user.avatar.filetype = @avatar.content_type
       @user.avatar.image = @avatar.tempfile.read
       redirect_to root_path if @user.save && @user.avatar.save
+      response_bad_request
     end
 
     # DELETE /resource
     def destroy
       result = resource.destroy_with_password(destroy_params[:current_password])
-      return unless result
+      response_bad_request unless result
 
       sign_out(current_user)
       redirect_to root_path
