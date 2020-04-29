@@ -37,9 +37,11 @@ module Users
       @user.name = params[:user][:name]
       @user.password = params[:password]
       @avatar = params[:user][:image]
-      @user.avatar.filename = @avatar.original_filename
-      @user.avatar.filetype = @avatar.content_type
-      @user.avatar.image = @avatar.tempfile.read
+      unless @avatar.nil?
+        @user.avatar.filename = @avatar.original_filename
+        @user.avatar.filetype = @avatar.content_type
+        @user.avatar.image = @avatar.tempfile.read
+      end
       redirect_to root_path if @user.save && @user.avatar.save
       response_bad_request
     end
