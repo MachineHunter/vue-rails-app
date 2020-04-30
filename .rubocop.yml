@@ -54,6 +54,12 @@ Style/HashTransformValues:
 Style/AsciiComments:
   Enabled: false
 
+Metrics/CyclomaticComplexity:
+  Max: 8
+
+Metrics/PerceivedComplexity:
+  Max: 8
+
 
 # classの上にコメントつけなさいエラーを回避
 Documentation:

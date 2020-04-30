@@ -5,14 +5,6 @@ RSpec.describe 'Avatar', type: :request do
 
   let!(:avatar) { create(:avatar) }
   let(:user) { avatar.user }
-  let(:send_index_request) { get api_avatar_index_path }
-  let(:send_update_request) { post api_avatar_update_path, params: params, headers: { 'Content-Type': 'multipart/form-data' } }
-  let(:result) { JSON.parse(response.body, { symbolize_names: true }) }
-  let(:params) do
-    {
-      "avatar": fixture_file_upload("#{Rails.root}/spec/factories/images/eagle.jpg", 'image/jpeg')
-    }
-  end
 
   before do
     login user
@@ -20,17 +12,40 @@ RSpec.describe 'Avatar', type: :request do
 
   describe 'GET /api/avatar/index' do
     it 'check if response has correct image' do
-      send_index_request
+      get api_avatar_index_path
       expect(response).to have_http_status(200)
       expect(response.body).to eq avatar.image
     end
   end
 
   describe 'POST /api/avatar/update' do
-    it 'with correct params' do
-      send_update_request
+    it 'complete data' do
+      params = {
+        "avatar": fixture_file_upload("#{Rails.root}/spec/factories/images/white.jpeg", 'image/jpeg')
+      }
+      post api_avatar_update_path, params: params, headers: { 'Content-Type': 'multipart/form-data' }
       expect(response).to have_http_status(302)
-      expect(user.avatar.filename).to eq params[:avatar].original_filename
+      expect(user.avatar.filename).to eq 'white.jpeg'
+      expect(user.avatar.image).not_to eq nil
+    end
+
+    it 'wrong prefix' do
+      params = {
+        "avatar": fixture_file_upload("#{Rails.root}/spec/factories/images/flower.jpg", 'image/jpeg')
+      }
+      post api_avatar_update_path, params: params, headers: { 'Content-Type': 'multipart/form-data' }
+      expect(response).to have_http_status(302)
+      expect(user.avatar.filename).to eq 'flower.jpeg'
+      expect(user.avatar.image).not_to eq nil
+    end
+
+    it 'broken data' do
+      params = {
+        "avatar": fixture_file_upload("#{Rails.root}/spec/factories/images/not-image.jpg", 'image/jpg')
+      }
+      post api_avatar_update_path, params: params, headers: { 'Content-Type': 'multipart/form-data' }
+      expect(response).to have_http_status(400)
+      expect(JSON.parse(response.body, { symbolize_names: true })[:message]).to eq('Bad Request')
     end
   end
 end
