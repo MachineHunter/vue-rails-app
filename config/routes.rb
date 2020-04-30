@@ -21,6 +21,10 @@ Rails.application.routes.draw do
       get 'index', { :format => 'json' }
       post 'update', { :format => 'json' }
     end
+
+    namespace :command do
+      get 'index', { :format => 'json' }
+    end
   end
 
   get 'practice/index'
