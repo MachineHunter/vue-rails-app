@@ -23,6 +23,9 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
+import TurbolinksAdapter from 'vue-turbolinks'
+Vue.use(TurbolinksAdapter)
+
 const vueHeaderMountListener = () => {
   const vueHeaderHook = document.getElementById("vue-header-hook")
   if(vueHeaderHook){
@@ -45,9 +48,6 @@ const vueFooterMountListener = () => {
   }
 }
 
-document.addEventListener('DOMContentLoaded', vueHeaderMountListener)
 document.addEventListener('turbolinks:load', vueHeaderMountListener)
-
-document.addEventListener('DOMContentLoaded', vueFooterMountListener)
 document.addEventListener('turbolinks:load', vueFooterMountListener)
 

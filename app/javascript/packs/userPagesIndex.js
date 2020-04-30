@@ -6,6 +6,9 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 import "./custom.scss"
 
+import TurbolinksAdapter from 'vue-turbolinks'
+Vue.use(TurbolinksAdapter)
+
 const vueMountListener = () => {
   const userPagesIndex = new Vue({
     render: h => h(UserPagesIndex)
@@ -18,5 +21,4 @@ const vueMountListener = () => {
 
 }
 
-document.addEventListener('DOMContentLoaded', vueMountListener)
 document.addEventListener('turbolinks:load', vueMountListener)
