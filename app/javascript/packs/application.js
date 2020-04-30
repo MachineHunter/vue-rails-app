@@ -51,3 +51,27 @@ const vueFooterMountListener = () => {
 document.addEventListener('turbolinks:load', vueHeaderMountListener)
 document.addEventListener('turbolinks:load', vueFooterMountListener)
 
+
+
+const bsSubmitListenerForValidation = () => {
+  const forms = document.getElementsByTagName('form');
+  
+  if(forms){
+    Array.prototype.filter.call(forms, function(form){
+      form.addEventListener('submit', function(event) {
+        
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        const elems = form.getElementsByClassName("needs-validation");
+      
+        Array.prototype.filter.call(elems, function(elem){
+          elem.classList.add('was-validated');
+        });
+      }, false);
+    });
+  }
+}
+
+window.addEventListener('turbolinks:load', bsSubmitListenerForValidation, false);
