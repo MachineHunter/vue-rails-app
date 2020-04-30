@@ -30,7 +30,7 @@ RSpec.describe 'Avatar', type: :request do
     it 'with correct params' do
       send_update_request
       expect(response).to have_http_status(302)
-      expect(user.avatar.filename).to eq "flower.jpeg"
+      expect(user.avatar.filename).to eq 'flower.jpeg'
       expect(user.avatar.image).not_to eq nil
     end
   end

@@ -10,7 +10,7 @@ module Api
       image = params[:avatar]
       return if image.nil?
 
-      response_bad_request and return unless check_format(image)
+      response_bad_request && return unless check_format(image)
 
       @avatar = current_user.avatar
       @avatar.filename = image.original_filename
@@ -27,14 +27,14 @@ module Api
     private
 
     def check_format(image)
-      name = image.original_filename.split(".").first
-      prefix = image.original_filename.split(".").last
-      type = image.content_type.split("/").last
+      name = image.original_filename.split('.').first
+      prefix = image.original_filename.split('.').last
+      type = image.content_type.split('/').last
 
-      # correct format if prefix isn't right
-      image.original_filename = "#{name}.#{type}"
+      # correct filename if prefix isn't right
+      image.original_filename = "#{name}.#{type}" if prefix != type
 
-      return not_broken(image.tempfile)
+      not_broken(image.tempfile)
     end
 
     def not_broken(file)
@@ -42,20 +42,19 @@ module Api
         header = file.read(8)
         file.seek(-12, IO::SEEK_END)
         footer = file.read(12)
-      rescue
+        file.seek(0, IO::SEEK_SET)
+      rescue StandardError
+        file.seek(0, IO::SEEK_SET)
         return false
       end
 
-      if header[0,2].unpack('H*') == %w(ffd8) && footer[-2, 2].unpack('H*') == %w(ffd9) # jpg
-        return true
-      elsif header[0,3].unpack('A*') == %w(GIF) && footer[-1, 1].unpack('H*') == %w(3b) # gif
-        return true
-      elsif header[0,8].unpack('H*') == %w(89504e470d0a1a0a) && footer[-12,12].unpack('H*') == %w(0000000049454e44ae426082) # png
-        return true
-      else
-        return false
-      end
+      is_jpg = header[0, 2].unpack('H*') == %w[ffd8] && footer[-2, 2].unpack('H*') == %w[ffd9]
+      is_gif = header[0, 3].unpack('A*') == %w[GIF] && footer[-1, 1].unpack('H*') == %w[3b]
+      is_png = header[0, 8].unpack('H*') == %w[89504e470d0a1a0a] && footer[-12, 12].unpack('H*') == %w[0000000049454e44ae426082]
+
+      return true if is_jpg || is_gif || is_png
+
+      false
     end
-
   end
 end
