@@ -16,10 +16,10 @@ module Users
       @user.build_status
       @user.build_avatar
 
-      @avatar = params[:user][:image]
-      @user.avatar.filename = @avatar.original_filename
-      @user.avatar.filetype = @avatar.content_type
-      @user.avatar.image = @avatar.tempfile.read
+      # ここFactoryを導入してリファクタしたい
+      @user.avatar.filename = 'default-avatar.png-'
+      @user.avatar.filetype = 'image/png'
+      @user.avatar.image = File.read("#{Rails.root}/app/assets/images/avatars/default-avatar.png")
 
       response_bad_request && return unless @user.save
 
