@@ -3,13 +3,16 @@
 <div class="main-center">
   <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-  <form action="/api/avatar/update" method="post" enctype="multipart/form-data">
+  <form action="/api/avatar/update" method="post" enctype="multipart/form-data" name="formforavatar" novalidate>
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
-    <div class="field form-group">
+    <div class="field form-group needs-validation">
       <label for="icon-input">プロフィール画像</label>
       <div class="custom-file">
-        <input type="file" id="icon-input" name="avatar" accept="image/*" class="custom-file-input">
+        <input type="file" id="icon-input" name="avatar" accept="image/*" class="custom-file-input" required>
         <label for="icon-input" class="custom-file-label" id="field-for-icon-input">画像を選択してください</label>
+        <div class="invalid-feedback">
+          画像を選択してください
+        </div>
       </div>
     </div>
     <div class="actions d-flex justify-content-center">
@@ -94,7 +97,7 @@
       <div class="modal-body">
         <p>本当にアカウントを消去しますか？消去する場合は、パスワードを入力してください。</p>
         <p>※この操作は取り消せません</p>
-        <form method="post" action="/users" name="formfordelete" novalidate>
+        <form method="post" action="/users" name="formfordelete" novalidate id="form-for-delete">
           <input type="hidden" name="_method" value="delete">
           <div class="field form-group needs-validation">
             <label for="password-for-delete">パスワード</label>
@@ -115,7 +118,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-light" data-dismiss="modal">戻る</button>
-        <button type="button" class="btn btn-outline-warning" id="button-for-delete">消去する</button>
+        <button type="submit" class="btn btn-outline-warning" form="form-for-delete">消去する</button>
       </div>
     </div>
   </div>
