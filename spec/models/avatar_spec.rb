@@ -5,8 +5,8 @@ RSpec.describe Avatar, type: :model do
 
   describe 'データ整合性チェック' do
     it '正しくfactoryで作られてるか' do
-      binding.pry
       expect(avatar.filename).to eq 'white.jpeg'
+      expect(avatar.image.size).to eq 511
     end
 
     it 'ユーザーと結び付いているか' do
