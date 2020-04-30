@@ -6,7 +6,7 @@
       <b-link href="/users/sign_in">ログイン</b-link>
       <b-link href="/users/sign_up">ユーザー登録</b-link>
     </div>
-    <user-profile v-if="userExists" :user="user" class="px-3"></user-profile>
+    <user-profile v-if="userExists" :user="user"></user-profile>
     <common-footer></common-footer>
   </div>
 </template>
@@ -55,9 +55,5 @@ export default {
 }
 </script>
 
-<style>
-#user-profile {
-  max-width: 1080px;
-  margin: 1rem auto;
-}
+<style scoped>
 </style>
