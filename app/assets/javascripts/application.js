@@ -36,7 +36,6 @@ const bsSubmitListenerForValidation = () => {
   }
 }
 
-window.addEventListener('load', bsSubmitListenerForValidation, false);
 window.addEventListener('turbolinks:load', bsSubmitListenerForValidation, false);
 
 const fileChangeListener = () => {
@@ -51,5 +50,4 @@ const fileChangeListener = () => {
   }
 }
 
-window.addEventListener('load', fileChangeListener, false);
 window.addEventListener('turbolinks:load', fileChangeListener, false);
