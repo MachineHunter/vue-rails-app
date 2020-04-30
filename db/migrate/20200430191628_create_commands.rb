@@ -1,7 +1,7 @@
 class CreateCommands < ActiveRecord::Migration[5.2]
   def change
     create_table :commands do |t|
-      t.text :title
+      t.text :title, null: false
       t.text :description
       t.integer :user_id
       t.integer :genre_id
