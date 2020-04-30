@@ -1,5 +1,5 @@
 <template>
-  <div id="user-profile">
+  <div id="user-profile" class="main-center">
       <b-media>
         <template v-slot:aside>
           <b-img

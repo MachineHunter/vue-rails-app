@@ -6,7 +6,7 @@
       <b-link href="/users/sign_in">ログイン</b-link>
       <b-link href="/users/sign_up">ユーザー登録</b-link>
     </div>
-    <user-profile v-else :user="user" class="px-3"></user-profile>
+    <user-profile v-if="userExists" :user="user"></user-profile>
     <common-footer></common-footer>
   </div>
 </template>
@@ -25,7 +25,8 @@ export default {
   },
   data: function() {
     return {
-      user: {}
+      user: {},
+      finishedRequestingUser: false
     }
   },
   created: function() {
@@ -33,7 +34,10 @@ export default {
   },
   computed: {
     noUser: function() {
-      return Object.keys(this.user).length === 0
+      return Object.keys(this.user).length === 0 && this.finishedRequestingUser
+    },
+    userExists: function() {
+      return Object.keys(this.user).length > 0 && this.finishedRequestingUser
     }
   },
   methods: {
@@ -43,15 +47,13 @@ export default {
       }).catch(err => {
         console.log(err);
         
+      }).finally(() => {
+        this.finishedRequestingUser = true
       });
     }
   }
 }
 </script>
 
-<style>
-#user-profile {
-  max-width: 1080px;
-  margin: 1rem auto;
-}
+<style scoped>
 </style>
