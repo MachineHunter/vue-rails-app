@@ -1,0 +1,2 @@
+class CommandType < ApplicationRecord
+end
