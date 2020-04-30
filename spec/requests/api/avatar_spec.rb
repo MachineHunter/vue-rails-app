@@ -10,7 +10,7 @@ RSpec.describe 'Avatar', type: :request do
   let(:result) { JSON.parse(response.body, { symbolize_names: true }) }
   let(:params) do
     {
-      "avatar": fixture_file_upload("#{Rails.root}/spec/factories/images/flower.jpg", 'image/jpg')
+      "avatar": fixture_file_upload("#{Rails.root}/spec/factories/images/flower.jpg", 'image/jpeg')
     }
   end
 
@@ -30,7 +30,7 @@ RSpec.describe 'Avatar', type: :request do
     it 'with correct params' do
       send_update_request
       expect(response).to have_http_status(302)
-      expect(user.avatar.filename).to eq params[:avatar].original_filename
+      expect(user.avatar.filename).to eq "flower.jpeg"
       expect(user.avatar.image).not_to eq nil
     end
   end
