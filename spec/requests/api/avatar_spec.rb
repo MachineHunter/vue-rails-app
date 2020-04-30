@@ -45,7 +45,7 @@ RSpec.describe 'Avatar', type: :request do
       }
       post api_avatar_update_path, params: params, headers: { 'Content-Type': 'multipart/form-data' }
       expect(response).to have_http_status(400)
-      expect(JSON.parse(response.body, { symbolize_names: true })[:message]).to eq("Bad Request")
+      expect(JSON.parse(response.body, { symbolize_names: true })[:message]).to eq('Bad Request')
     end
   end
 end
