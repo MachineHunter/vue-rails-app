@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2020_04_30_191628) do
 
   create_table "command_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "name"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
