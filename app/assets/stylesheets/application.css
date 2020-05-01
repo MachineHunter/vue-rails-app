@@ -21,6 +21,13 @@
   visibility: hidden;
 }
 
+.main-center-100 {
+  width: min(1080px, 100%);
+  margin: 1rem auto;
+  padding: 0 1rem;
+  visibility: hidden;
+}
+
 .wait-loading {
   visibility: hidden;
 }

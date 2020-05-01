@@ -1,17 +1,18 @@
 <template>
-  <div id="user-commands" class="main-center">
+  <div id="user-commands" class="main-center-100">
     <h2>コマンド一覧</h2>
     
     <b-overlay :show="commands.length === 0" rounded="sm">
-      <div class="overflow-auto">
-        <b-table
-          id="commands-table"
-          :items="commands"
-          :fields="fields"
-          :per-page="perPage"
-          :current-page="currentPage"
-          small
-        />
+      <div>
+        <div>
+          <command
+            v-for="command in commandsToDisplay"
+            :key="command.id"
+            :command="command"
+            class="my-1"
+          />
+        </div>
+
         <b-pagination
           v-model="currentPage"
           :total-rows="rows"
@@ -29,7 +30,12 @@
 </template>
 
 <script>
+import Command from "./Command"
+
 export default {
+  components: {
+    Command
+  },
   props: {
     commands: {
       type: Array,
@@ -46,6 +52,10 @@ export default {
   computed: {
     rows() {
       return this.commands.length
+    },
+    commandsToDisplay() {
+      const start = (this.currentPage - 1) * this.perPage
+      return [...this.commands].splice(start, this.perPage)
     }
   }
 }
