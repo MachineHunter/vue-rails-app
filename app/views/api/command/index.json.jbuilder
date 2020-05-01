@@ -1,5 +1,3 @@
-json.command do |json|
-  json.array!(@commands) do |command|
-    command.array! command.attributes
-  end
+json.command @commands do |command|
+	json.merge! command.attributes
 end
