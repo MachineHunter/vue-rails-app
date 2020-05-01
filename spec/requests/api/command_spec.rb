@@ -14,8 +14,7 @@ RSpec.describe 'Command', type: :request do
     it 'check if response has correct image' do
       send_index_request
       expect(response).to have_http_status(200)
-      expect(result[:command][0][:title]).to eq "test_command"
+      expect(result[:command][0][:title]).to eq 'test_command'
     end
   end
-
 end
