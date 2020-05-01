@@ -4,6 +4,16 @@
     
     <b-overlay :show="commands.length === 0" rounded="sm">
       <div>
+        <b-pagination
+          v-model="currentPage"
+          :total-rows="rows"
+          :per-page="perPage"
+          aria-controls="commands-table"
+          align="center"
+          first-number
+          last-number
+        />
+
         <div>
           <command
             v-for="command in commandsToDisplay"
@@ -18,6 +28,10 @@
           :total-rows="rows"
           :per-page="perPage"
           aria-controls="commands-table"
+          align="center"
+          first-number
+          last-number
+          class="mt-3"
         />
       </div>
       <template v-slot:overlay>
