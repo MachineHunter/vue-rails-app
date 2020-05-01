@@ -8,6 +8,5 @@ FactoryBot.define do
       create(:status, user: user)
       create(:avatar, user: user)
     end
-
   end
 end
