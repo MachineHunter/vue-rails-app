@@ -1,12 +1,12 @@
 <template>
   <div id="command-pages-index" class="root-component">
-    <common-header :signed-in="!noCommands" activeTab="account"></common-header>
-    <div v-if="noCommands" class="flex-column flex-x-center flex-y-center my-2">
+    <common-header :signed-in="signedIn" activeTab="account"></common-header>
+    <div v-if="notSignedIn" class="flex-column flex-x-center flex-y-center my-2">
       <span class="text-center">自分のコマンドを確認するにはログインが必要です</span>
       <b-link href="/users/sign_in">ログイン</b-link>
       <b-link href="/users/sign_up">ユーザー登録</b-link>
     </div>
-    <user-commands v-if="commandsExist" :commands="commands"></user-commands>
+    <user-commands v-if="signedIn" :commands="commands"></user-commands>
     <common-footer></common-footer>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
   },
   data: function() {
     return {
-      commands: [],
+      commands: null,
       finishedRequestingCommands: false
     }
   },
@@ -33,11 +33,11 @@ export default {
     this.getCommands()
   },
   computed: {
-    noCommands: function() {
-      return this.commands.length === 0 && this.finishedRequestingCommands
+    notSignedIn: function() {
+      return this.commands === null && this.finishedRequestingCommands
     },
-    commandsExist: function() {
-      return this.commands.length > 0 && this.finishedRequestingCommands
+    signedIn: function() {
+      return this.commands !== null && this.finishedRequestingCommands
     }
   },
   methods: {

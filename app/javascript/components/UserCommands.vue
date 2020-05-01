@@ -2,22 +2,29 @@
   <div id="user-commands" class="main-center">
     <h2>コマンド一覧</h2>
     
-    <div class="overflow-auto">
-      <b-table
-        id="commands-table"
-        :items="commands"
-        :fields="fields"
-        :per-page="perPage"
-        :current-page="currentPage"
-        small
-      />
-      <b-pagination
-        v-model="currentPage"
-        :total-rows="rows"
-        :per-page="perPage"
-        aria-controls="commands-table"
-      />
-    </div>
+    <b-overlay :show="commands.length === 0" rounded="sm">
+      <div class="overflow-auto">
+        <b-table
+          id="commands-table"
+          :items="commands"
+          :fields="fields"
+          :per-page="perPage"
+          :current-page="currentPage"
+          small
+        />
+        <b-pagination
+          v-model="currentPage"
+          :total-rows="rows"
+          :per-page="perPage"
+          aria-controls="commands-table"
+        />
+      </div>
+      <template v-slot:overlay>
+        <div class="text-center">
+          投稿したコマンドはまだありません
+        </div>
+      </template>
+    </b-overlay>
   </div>
 </template>
 
