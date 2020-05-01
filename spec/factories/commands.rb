@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :command do
-    title { 'MyText' }
-    description { 'MyText' }
-    user_id { 1 }
-    genre_id { 1 }
-    command_type_id { 1 }
+    title { 'test_command' }
+    description { 'this is a test command' }
+    association :user
+    association :genre
+    association :command_type
   end
 end

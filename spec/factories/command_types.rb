@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :command_type do
-    name { 'MyText' }
+    name { '面白系' }
   end
 end
