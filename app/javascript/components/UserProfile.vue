@@ -30,7 +30,7 @@
       <div class="mt-3">
         <header class="mb-1">
           <h5 class="d-inline">人気のコマンド</h5>
-          <b-link class="align-top ml-2">もっと見る</b-link>
+          <b-link href="/command_pages/index" class="align-top ml-2">もっと見る</b-link>
         </header>
         <b-card-group deck>
           <b-card
