@@ -6,6 +6,7 @@ services:
 bundler_args: "--without development --jobs=3"
 cache: bundler
 before_script:
+  - nvm install v12.16.2
   - yarn install
   - bin/webpack
   - cp config/database.travis.yml config/database.yml
