@@ -33,6 +33,7 @@ module FeatureDevise
   end
 
   def avatar_update(avatar)
-    attach_file 'dummy', avatar
+    attach_file 'avatar', avatar
+    click_button '画像を更新する'
   end
 end

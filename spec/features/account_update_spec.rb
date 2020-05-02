@@ -5,11 +5,11 @@ RSpec.feature 'Account Update', type: :feature do
 
   before do
     Capybara.current_driver = :selenium_chrome_headless
+    sign_in_with_factory user
   end
 
   scenario 'normal update' do
-    binding.pry
-    account_update('test', '', 'newpass', 'newpass', 'specspec')
+    account_update('太郎', 'test@gmail.com', 'newpass', 'newpass', 'specspec')
     binding.pry
     #expect(current_path).to eq root_path
   end
