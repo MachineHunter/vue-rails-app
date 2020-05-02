@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       post 'practice/create'
       put 'practice/update'
       delete 'practice/destroy'
+      post 'practice/folder_create'
     end
 
     namespace :user_pages do
