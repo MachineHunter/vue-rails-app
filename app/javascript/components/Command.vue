@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <b-card>
+    <b-card class="command-card" @click="$bvModal.show(`command${command.id}-detail`)">
       <b-media no-body>
         <b-media-aside>
           <b-img blank blank-color="#ccc" width="64" alt="placeholder"></b-img>
@@ -19,10 +18,8 @@
           </p>
         </b-media-body>
       </b-media>
-
+      <b-modal :id="`command${command.id}-detail`">Hello From My Modal!</b-modal>
     </b-card>
-
-  </div>
 </template>
 
 <script>
@@ -37,6 +34,12 @@ export default {
 </script>
 
 <style scoped>
+.command-card {
+  cursor: pointer;
+}
+.command-card:hover {
+  background-color: #f0f0f0;
+}
 .command-body {
   width: calc(100% - 64px);
 }
