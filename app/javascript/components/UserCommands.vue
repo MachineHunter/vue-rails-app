@@ -58,7 +58,6 @@ export default {
   },
   data: function() {
     return {
-      fields: ["title", "description", "user_id", "genre_id", "command_type_id"],
       currentPage: 1,
       perPage: 5
     }
