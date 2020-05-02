@@ -21,6 +21,10 @@ Rails.application.routes.draw do
       get 'index', { :format => 'json' }
       post 'update', { :format => 'json' }
     end
+
+    namespace :command do
+      get 'index', { :format => 'json' }
+    end
   end
 
   get 'practice/index'
@@ -28,6 +32,7 @@ Rails.application.routes.draw do
   get 'practice/index3'
 
   get 'user_pages/index' 
+  get 'command_pages/index'
 
   root to: "user_pages#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
