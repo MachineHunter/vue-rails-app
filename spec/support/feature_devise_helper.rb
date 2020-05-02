@@ -24,10 +24,10 @@ module FeatureDevise
 
   def account_update(name, email, new_password, new_confirmation, old_password)
     visit edit_user_registration_path
-    fill_in 'user[name]', with: name
-    fill_in 'user[email]', with: email
-    fill_in 'user[password]', with: new_password
-    fill_in 'user[password_confirmation]', with: new_confirmation
+    fill_in 'user[name]', with: name unless name == ''
+    fill_in 'user[email]', with: email unless email == ''
+    fill_in 'user[password]', with: new_password unless new_password == ''
+    fill_in 'user[password_confirmation]', with: new_confirmation unless new_confirmation == ''
     fill_in 'user[current_password]', with: old_password
     click_button 'Update'
   end
