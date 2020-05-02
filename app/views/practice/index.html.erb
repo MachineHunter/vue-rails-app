@@ -1,1 +1,16 @@
-<%= javascript_pack_tag 'practiceIndex' %>
+<form
+  action="/api/practice/practice/folder_create"
+  method="post"
+  enctype="multipart/form-data"
+>
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
+  <input
+    type="file"
+    id="dir"
+    name="dir[]"
+    multiple
+    webkitdirectory
+  />
+  <input type="submit">
+
+</form>
