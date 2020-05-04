@@ -1,5 +1,4 @@
 class CommandPagesController < ApplicationController
-
   def index; end
 
   def show
@@ -8,7 +7,6 @@ class CommandPagesController < ApplicationController
     @filetree = json_file_tree(@unzippeddata)
     render json: @filetree
   end
-
 
   private
 
@@ -25,37 +23,35 @@ class CommandPagesController < ApplicationController
       end
     end
 
-    return [files, datas]
+    [files, datas]
   end
 
-  def json_file_tree(files)
-    layerlist = file.map { |filePath| filePath.split('/') }
-    structuredFiles = []
+  def json_file_tree(_files)
+    layerlist = file.map { |file_path| file_path.split('/') }
+    structured_files = []
     layerlist.each do |layers|
-      insertFile(layers, structuredFiles)
+      insert_file(layers, structured_files)
     end
 
-    return structuredFiles[0].to_json
+    structured_files[0].to_json
   end
 
+  def insert_file(layers_to_insert, current_directory)
+    return if layers_to_insert.empty?
 
-  def insertFile(layersToInsert, currentDirectory)
-    return if layersToInsert.length===0
+    head = layers_to_insert.first
+    tail = layers_to_insert.slice(1, layers_to_insert.length)
 
-    head = layersToInsert.first
-    tail = layersToInsert.slice(1, layersToInsert.length)
-
-    target = currentDirectory.find { |el| el[:name]===head }
+    target = current_directory.find { |el| el[:name] == head }
     unless target
       target = {
         name: head,
-        isfile: tail.length === 0 ? true : false,
+        isfile: tail.empty?,
         children: []
       }
-      currentDirectory.push(target)
+      current_directory.push(target)
     end
 
-    insertFile(tail, target[:children])
+    insert_file(tail, target[:children])
   end
-
 end
