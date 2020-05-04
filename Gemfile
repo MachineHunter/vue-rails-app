@@ -84,3 +84,4 @@ gem 'redis-namespace'
 
 # devise
 gem 'devise'
+gem 'zipruby'
