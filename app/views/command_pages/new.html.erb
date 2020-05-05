@@ -1,0 +1,17 @@
+<form action="/api/command" method="post" enctype="multipart/form-data">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
+  <label>title</label>
+  <input name="title"><br/>
+  <label>description</label>
+  <input name="description"><br/>
+  <label>genre_id</label>
+  <input name="genre_id" type="number"><br/>
+  <label>command_type_id</label>
+  <input name="command_type_id" type="number"><br/>
+  <label>filename</label>
+  <input name="filename"><br/>
+  <label>zipdata</label>
+  <input name="zipdata" type="file" accept="application/zip"><br/>
+  <input type="submit">
+
+</form>
