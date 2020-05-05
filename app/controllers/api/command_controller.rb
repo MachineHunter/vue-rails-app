@@ -4,6 +4,11 @@ module Api
       @commands = current_user.command.all
     end
 
+    def new
+      @genres = Genre.all
+      @command_types = CommandType.all
+    end
+
     def create
       params[:zipdata] = params[:zipdata].tempfile.read
       @command = Command.new(command_params)

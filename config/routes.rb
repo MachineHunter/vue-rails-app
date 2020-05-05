@@ -22,7 +22,7 @@ Rails.application.routes.draw do
       post 'update'
     end
 
-    resources :command, only: [:index, :create]
+    resources :command, only: [:index, :new, :create]
   end
 
   get 'practice/index'
@@ -31,7 +31,7 @@ Rails.application.routes.draw do
 
   get 'user_pages/index' 
   get 'command_pages/index'
-  resources :command_pages, only: [:index, :show]
+  resources :command_pages, only: [:index, :new, :show]
 
   root to: "user_pages#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

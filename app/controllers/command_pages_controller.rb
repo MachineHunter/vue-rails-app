@@ -3,6 +3,8 @@ require 'zipruby'
 class CommandPagesController < ApplicationController
   def index; end
 
+  def new; end
+
   def show
     @zipdata = Command.find(params[:id]).command_file.zipdata.read
     @unzippeddata = unzip_file(@zipdata)
