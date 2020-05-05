@@ -1,5 +1,3 @@
-require 'zipruby'
-
 class CommandPagesController < ApplicationController
   def index; end
 
