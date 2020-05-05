@@ -8,7 +8,8 @@ module Api
 
     def show
       @command = Command.find(params[:id])
-      @zipdata = Command.find(params[:id]).command_file.zipdata
+      @command_file = @command.command_file
+      @zipdata = @command_file.zipdata
       @unzippeddata = unzip_file(@zipdata)
       @filetree = json_file_tree(@unzippeddata.first)
       @filedatas = json_file_data(@unzippeddata)
