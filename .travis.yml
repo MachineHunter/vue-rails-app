@@ -13,7 +13,6 @@ before_script:
   - yarn install
   - bin/webpack
   - cp config/database.travis.yml config/database.yml
-  - gem uninstall rubyzip
   - bundle exec rails db:create
   - bundle exec rails db:migrate
 script:
