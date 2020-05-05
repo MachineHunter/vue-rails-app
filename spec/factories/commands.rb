@@ -5,5 +5,9 @@ FactoryBot.define do
     association :user
     association :genre
     association :command_type
+
+    after(:create) do |command|
+      create(:command_file, command: command)
+    end
   end
 end
