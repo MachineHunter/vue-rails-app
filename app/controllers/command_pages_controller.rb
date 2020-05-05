@@ -4,7 +4,7 @@ class CommandPagesController < ApplicationController
   def index; end
 
   def show
-    @zipdata = Command.find(params[:id]).command_file
+    @zipdata = Command.find(params[:id]).command_file.zipdata.read
     @unzippeddata = unzip_file(@zipdata)
     @filetree = json_file_tree(@unzippeddata)
     render json: @filetree
