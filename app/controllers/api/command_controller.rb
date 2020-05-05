@@ -10,14 +10,14 @@ module Api
       @command.command_file = CommandFile.new(command_file_params)
 
       if @command.command_file.save && @command.save
-        redirect_to command_pages_index_path 
+        redirect_to command_pages_index_path
       else
         response_bad_request
       end
     end
 
     private
-    
+
     def command_params
       params.permit(:title, :description, :genre_id, :command_type_id)
     end
