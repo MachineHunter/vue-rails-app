@@ -11,6 +11,7 @@ module Api
       @zipdata = Command.find(params[:id]).command_file.zipdata
       @unzippeddata = unzip_file(@zipdata)
       @filetree = json_file_tree(@unzippeddata.first)
+      @filedatas = json_file_data(@unzippeddata)
     end
 
     def new
@@ -82,6 +83,12 @@ module Api
       end
 
       insert_file(tail, target[:children])
+    end
+
+    def json_file_data(unzippeddata)
+      files, datas = unzippeddata
+      files.map! { |file| file.split('/').last }
+      Hash[*[files, datas].transpose.flatten]
     end
   end
 end
