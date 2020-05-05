@@ -11,7 +11,7 @@ RSpec.describe 'Avatar', type: :request do
   end
 
   describe 'index' do
-    it 'check if response has correct image' do
+    it do
       get api_avatar_index_path
       expect(response).to have_http_status(200)
       expect(response.body).to eq avatar.image

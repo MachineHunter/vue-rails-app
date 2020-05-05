@@ -10,7 +10,7 @@ RSpec.describe 'UserPages', type: :request do
   end
 
   describe 'index' do
-    it 'check if response has correct json' do
+    it do
       send_index_request
       expect(response).to have_http_status(200)
       expect(result[:user][:name]).to eq('specuser')
