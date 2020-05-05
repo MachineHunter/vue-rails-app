@@ -20,8 +20,12 @@ module Api
       params[:zipdata] = params[:zipdata].tempfile.read
       @command = Command.new(command_params)
       @command.user_id = current_user.id
+      @command.build_command_file
 
-      if @command.save!
+      @command.command_file.filename = params[:filename]
+      @command.command_file.zipdata = params[:zipdata]
+
+      if @command.save! && @command.command_file.save
         redirect_to command_pages_index_path
       else
         response_bad_request
