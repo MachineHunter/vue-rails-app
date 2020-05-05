@@ -15,12 +15,11 @@ class CommandPagesController < ApplicationController
   def unzip_file(zipdata)
     files = []
     datas = []
-    Zip::Archive.open_buffer(zipdata) do |ar|
-      ar.num_files.times do |i|
-        path = ar.get_name(i)
-        unless path[-1] == '/'
-          files.push(path)
-          datas.push(ar.fopen(path).read)
+    Zip::File.open_buffer(zipdata) do |ar|
+      ar.each do |entry|
+        unless entry.name[-1] == '/'
+          files.push(entry.name)
+          datas.push(entry.get_input_stream.read)
         end
       end
     end
