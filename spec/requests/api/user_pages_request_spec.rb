@@ -9,7 +9,7 @@ RSpec.describe 'UserPages', type: :request do
     login user
   end
 
-  describe 'GET /api/user_pages/index' do
+  describe 'index' do
     it 'check if response has correct json' do
       send_index_request
       expect(response).to have_http_status(200)

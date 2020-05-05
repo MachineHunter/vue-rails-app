@@ -4,17 +4,37 @@ RSpec.describe 'Command', type: :request do
   let!(:command) { create(:command) }
   let(:user) { command.user }
   let(:send_index_request) { get api_command_index_path }
+  let(:send_new_request) { get new_api_command_path }
+  let(:send_show_request) { get api_command_path }
   let(:result) { JSON.parse(response.body, { symbolize_names: true }) }
 
   before do
     login user
   end
 
-  describe 'GET /api/command/index' do
+  describe 'index' do
     it 'check if response has correct image' do
       send_index_request
       expect(response).to have_http_status(200)
       expect(result[:command][0][:title]).to eq 'test_command'
     end
   end
+
+  describe 'new' do
+    it 'check if response has correct image' do
+      send_new_request
+      expect(response).to have_http_status(200)
+      expect(result[:genres][0][:name]).to eq Genre.first.name
+      expect(result[:command_types][0][:name]).to eq CommandType.first.name
+    end
+  end
+
+  # describe 'show' do
+  # it 'check if response has correct image' do
+  # send_new_request
+  # expect(response).to have_http_status(200)
+  # expect(result[:genres][0][:name]).to eq Genre.first.name
+  # expect(result[:command_types][0][:name]).to eq CommandType.first.name
+  # end
+  # end
 end

@@ -10,7 +10,7 @@ RSpec.describe 'Avatar', type: :request do
     login user
   end
 
-  describe 'GET /api/avatar/index' do
+  describe 'index' do
     it 'check if response has correct image' do
       get api_avatar_index_path
       expect(response).to have_http_status(200)
@@ -18,7 +18,7 @@ RSpec.describe 'Avatar', type: :request do
     end
   end
 
-  describe 'POST /api/avatar/update' do
+  describe 'update' do
     it 'complete data' do
       params = {
         "avatar": fixture_file_upload("#{Rails.root}/spec/factories/images/white.jpeg", 'image/jpeg')
