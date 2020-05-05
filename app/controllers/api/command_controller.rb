@@ -19,9 +19,9 @@ module Api
     def create
       params[:zipdata] = params[:zipdata].tempfile.read
       @command = Command.new(command_params)
-      @command.command_file = CommandFile.new(command_file_params)
+      @command.user_id = current_user.id
 
-      if @command.command_file.save && @command.save
+      if @command.save!
         redirect_to command_pages_index_path
       else
         response_bad_request
@@ -31,11 +31,7 @@ module Api
     private
 
     def command_params
-      params.permit(:title, :description, :genre_id, :command_type_id)
-    end
-
-    def command_file_params
-      params.permit(:filename, :zipdata)
+      params.permit(:title, :description, :genre_id, :command_type_id, :command_file_attributes)
     end
 
     def unzip_file(zipdata)
