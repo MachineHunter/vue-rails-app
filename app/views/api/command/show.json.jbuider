@@ -1,4 +1,0 @@
-json.set! :filetree, @filetree
-json.command @command do |cmd|
-  json.merge! cmd.attributes
-end

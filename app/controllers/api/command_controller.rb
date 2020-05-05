@@ -1,14 +1,16 @@
 module Api
   class CommandController < ApplicationController
+    require 'zip'
+
     def index
       @commands = current_user.command.all
     end
 
     def show
       @command = Command.find(params[:id])
-      @zipdata = Command.find(params[:id]).command_file.zipdata.read
+      @zipdata = Command.find(params[:id]).command_file.zipdata
       @unzippeddata = unzip_file(@zipdata)
-      @filetree = json_file_tree(@unzippeddata)
+      @filetree = json_file_tree(@unzippeddata.first)
     end
 
     def new
@@ -41,7 +43,7 @@ module Api
     def unzip_file(zipdata)
       files = []
       datas = []
-      Zip::File.open_buffer(zipdata) do |ar|
+      ::Zip::File.open_buffer(zipdata) do |ar|
         ar.each do |entry|
           unless entry.name[-1] == '/'
             files.push(entry.name)
@@ -53,14 +55,14 @@ module Api
       [files, datas]
     end
 
-    def json_file_tree(_files)
-      layerlist = file.map { |file_path| file_path.split('/') }
+    def json_file_tree(files)
+      layerlist = files.map { |file_path| file_path.split('/') }
       structured_files = []
       layerlist.each do |layers|
         insert_file(layers, structured_files)
       end
 
-      structured_files[0].to_json
+      structured_files[0]
     end
 
     def insert_file(layers_to_insert, current_directory)

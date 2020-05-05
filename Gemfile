@@ -84,3 +84,5 @@ gem 'sinatra', require: false
 gem 'redis-namespace'
 
 gem 'devise'
+gem 'rubyzip', '>= 1.0.0'
+gem 'zip-zip'
