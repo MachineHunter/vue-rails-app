@@ -1,4 +1,5 @@
 <form action="/api/command" method="post" enctype="multipart/form-data">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
   <label>title</label>
   <input name="title"><br/>
   <label>description</label>
