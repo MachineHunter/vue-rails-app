@@ -1,5 +1,5 @@
 <template>
-  <b-card class="command">
+  <b-card class="command" @click="moveToDetail">
     <b-media no-body>
       <b-media-aside>
         <b-img blank blank-color="#ccc" width="64" alt="placeholder"></b-img>
@@ -27,6 +27,11 @@ export default {
     command: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    moveToDetail() {
+      document.location.href=`/command_pages/${this.command.id}`
     }
   }
 }

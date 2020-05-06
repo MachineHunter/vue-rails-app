@@ -1,6 +1,7 @@
 <template>
   <div id="user-commands" class="main-center-100">
     <h2>コマンド一覧</h2>
+    <b-link href="/command_pages/new">新規コマンド投稿</b-link>
     
     <b-overlay :show="commands.length === 0" rounded="sm">
       <div>
