@@ -6,7 +6,8 @@
 
     <br/>
     <h5>{{fileName}}</h5>
-    <p>{{fileTree}}</p>
+    <command-file-tree :children="[fileTree]"/>
+    <!-- <p>{{fileTree}}</p> -->
     <p>{{fileContents}}</p>
 
     <br/>
@@ -17,8 +18,12 @@
 
 <script>
 import Axios from "axios"
+import CommandFileTree from "./CommandFileTree"
 
 export default {
+  components: {
+    CommandFileTree
+  },
   props: {
     commandId: {
       type: Number,
