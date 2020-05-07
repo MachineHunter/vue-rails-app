@@ -22,12 +22,17 @@
         </b-collapse>
         <b-modal
           v-else
+          centered
+          hide-backdrop
+          content-class="shadow"
+          size="xl"
           :id="`detail-${child.name}`"
           :title="child.name"
         >
-          <pre><code>
-            {{fileContents[child.name]}}  
-          </code></pre>
+          <pre><code>{{fileContents[child.name]}}</code></pre>
+          <template v-slot:modal-footer="{close}">
+            <b-button @click="close()">閉じる</b-button>
+          </template>
         </b-modal>
       </li>
     </ul>
@@ -73,5 +78,6 @@ li:hover {
 }
 pre {
   background-color: #eee;
+  padding: 1rem;
 }
 </style>
