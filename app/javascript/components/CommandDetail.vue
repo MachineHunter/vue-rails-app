@@ -1,15 +1,12 @@
 <template>
-  <div id="command-detail" class="main-center">
+  <div id="command-detail" class="main-center-100">
     <h2>{{command.title}}</h2>
     <b-badge>genre{{command.genre_id}}</b-badge>
     <b-badge>type{{command.command_type_id}}</b-badge>
 
-    <br/>
     <h5>{{fileName}}</h5>
-    <command-file-tree :children="[fileTree]" :fileContents="fileContents"/>
-    <p>{{fileContents}}</p>
+    <command-explorer :fileTree="fileTree" :fileContents="fileContents"/>
 
-    <br/>
     <p>description</p>
     <p>{{command.description}}</p>
   </div>
@@ -17,11 +14,11 @@
 
 <script>
 import Axios from "axios"
-import CommandFileTree from "./CommandFileTree"
+import CommandExplorer from "./CommandExplorer"
 
 export default {
   components: {
-    CommandFileTree
+    CommandExplorer
   },
   props: {
     commandId: {
