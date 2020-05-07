@@ -6,8 +6,7 @@
 
     <br/>
     <h5>{{fileName}}</h5>
-    <command-file-tree :children="[fileTree]"/>
-    <!-- <p>{{fileTree}}</p> -->
+    <command-file-tree :children="[fileTree]" :fileContents="fileContents"/>
     <p>{{fileContents}}</p>
 
     <br/>

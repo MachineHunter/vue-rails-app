@@ -4,12 +4,31 @@
       <li
         v-for="child in children"
         :key="child.name"
+        @click="$bvModal.show(`detail-${child.name}`)"
       >
-        {{child.name}}
-        <command-file-tree
+        <p
+          class="mb-0"
+          @click="$root.$emit('bv::toggle::collapse', `children-${child.name}`)"
+        >{{child.name}}</p>
+        
+        <b-collapse
           v-if="!child.isfile"
-          :children="child.children"
-        />
+          :id="`children-${child.name}`"
+        >
+          <command-file-tree
+            :children="child.children"
+            :fileContents="fileContents"
+          />
+        </b-collapse>
+        <b-modal
+          v-else
+          :id="`detail-${child.name}`"
+          :title="child.name"
+        >
+          <pre><code>
+            {{fileContents[child.name]}}  
+          </code></pre>
+        </b-modal>
       </li>
     </ul>
   </div>
@@ -27,11 +46,32 @@ export default {
     children: {
       type: Array,
       required: true
+    },
+    fileContents: {
+      type: Object,
+      required: true
     }
   }
 }
 </script>
 
 <style scoped>
-
+ul {
+  padding-left: 0;
+}
+ul ul {
+  padding-left: 1rem;
+}
+li {
+  list-style: none;
+  border: 1px black solid;
+  margin: 4px;
+  background-color: #fff;
+}
+li:hover {
+  background-color: #eee;
+}
+pre {
+  background-color: #eee;
+}
 </style>
