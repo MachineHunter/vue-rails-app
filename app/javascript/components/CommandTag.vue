@@ -4,6 +4,7 @@
 
 <script>
 import Axios from "axios"
+import tagDataManager from "../util/tagDataManager"
 
 export default {
   props: {
@@ -41,14 +42,19 @@ export default {
   },
   methods: {
     getTagData() {
-        Axios.get("/api/command/new").then(res => {
-        this.genres = res.data.genres
-        this.commandTypes = res.data.command_types
-        console.log("axios called");
-        
-      }).catch(err => {
-        console.log(err);
+      tagDataManager.loadtagData(this.tagType[0]+this.tagId)
+      document.body.addEventListener("tagdataready", () => {
+        this.genres = tagDataManager.tagData.genres
+        this.commandTypes = tagDataManager.tagData.commandTypes
       })
+    //     Axios.get("/api/command/new").then(res => {
+    //     this.genres = res.data.genres
+    //     this.commandTypes = res.data.command_types
+    //     console.log("axios called");
+        
+    //   }).catch(err => {
+    //     console.log(err);
+    //   })
     },
   }
 }
