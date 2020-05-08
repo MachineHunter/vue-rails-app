@@ -2,8 +2,8 @@
   <div id="command-detail" class="main-center-100">
     <h2>{{command.title}}</h2>
     <div class="mb-4">
-      <b-badge class="mr-1">genre{{command.genre_id}}</b-badge>
-      <b-badge>type{{command.command_type_id}}</b-badge>
+      <command-tag tagType="genre" :tagId="2"/>
+      <command-tag tagType="commandType" :tagId="2"/>
     </div>
 
     <command-explorer
@@ -22,10 +22,12 @@
 <script>
 import Axios from "axios"
 import CommandExplorer from "./CommandExplorer"
+import CommandTag from "./CommandTag"
 
 export default {
   components: {
-    CommandExplorer
+    CommandExplorer,
+    CommandTag
   },
   props: {
     commandId: {
