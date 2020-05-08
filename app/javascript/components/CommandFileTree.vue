@@ -6,9 +6,13 @@
         :key="child.name"
       >
         <p
-          class="mb-0"
+          class="file-name mb-0 pl-1"
           @click="onClickFile(child)"
-        >{{child.name}}</p>
+        >
+          <b-icon-file-text v-if="child.isfile" />
+          <b-icon-folder v-else />
+          {{child.name}}
+        </p>
         
         <b-collapse
           v-if="!child.isfile"
@@ -74,11 +78,19 @@ ul ul {
 li {
   list-style: none;
   margin: 0;
+  padding: 4px;
 }
 li li {
   margin: 4px;
+  padding: 0;
 }
-li:hover {
+.file-name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  cursor: pointer;
+}
+.file-name:hover {
   background-color: #eee;
 }
 </style>

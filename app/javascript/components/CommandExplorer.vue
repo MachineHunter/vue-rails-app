@@ -1,18 +1,20 @@
 <template>
   <div id="command-explorer">
     <header>
-      <button @click="hidden = !hidden">三</button>
+      <button class="button-for-sidebar" @click="hidden = !hidden">
+        <b-icon-list/>
+      </button>
       explorer
     </header>
     <div class="command-explorer">
-      <div :class="{'sidebar': true, 'hide': hidden}">
+      <div :class="{'sidebar': true, 'hide': hidden}" id="sidebar">
         <command-file-tree
           :children="[fileTree]"
-          @clickFile="filename=$event; hideSidebarWhenNarrow()"
+          @clickFile="clickFile($event)"
         />
 
       </div>
-      <div :class="{'dummy-sidebar': true, 'hide': hidden}">
+      <div :class="{'dummy-sidebar': true, 'hide': hidden}" id="dummy-sidebar">
         <command-file-tree
           :children="[fileTree]"
         />
@@ -46,12 +48,23 @@ export default {
   data: function() {
     return {
       hidden: false,
-      filename: ""
+      filename: "",
+      mediaQueryList: null
     }
   },
+  created: function() {
+    this.mediaQueryList = window.matchMedia("(max-width: 500px)")
+    this.mediaQueryList.addListener(this.onBreakPointChange)
+  },
   methods: {
-    hideSidebarWhenNarrow() {
-      if(window.matchMedia("(max-width: 500px)").matches) {
+    clickFile(event) {
+      this.filename = event
+      if(this.mediaQueryList.matches) {
+        this.hidden = true
+      }
+    },
+    onBreakPointChange(mql) {
+      if(mql.matches) {
         this.hidden = true
       }
     }
@@ -61,10 +74,26 @@ export default {
 
 <style scoped>
 #command-explorer {
-  border: 1px solid #666;
+  border: 1.5px solid #aaa;
+  border-radius: 4px;
+  overflow: hidden;
 }
 header {
-  border-bottom: 1px solid #666;
+  border-bottom: 1px solid #aaa;
+  background-color: #f6f6f6;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.button-for-sidebar {
+  background-color: transparent;
+  border: 1px solid #999;
+  border-radius: 4px;
+  margin: 4px;
+}
+.button-for-sidebar:hover {
+  background-color: rgba(80, 80, 80, 0.192);
 }
 .command-explorer {
   overflow: hidden;
@@ -73,32 +102,39 @@ header {
 }
 .sidebar,
 .dummy-sidebar{
+  /* max-width: 50%; */
   width: 200px;
   transition: all 0.5s;
-
-  background-color: #fefefe;
 }
 .sidebar {
   position: absolute;
   height: 100vh;
+
+  background-color: #ccc;
+  box-shadow: 0 0 4px 4px rgba(49, 49, 49, 0.3);
 }
 .dummy-sidebar {
   visibility: hidden;
+  flex-shrink: 0;
 }
 @media(max-width: 500px) {
+  .sidebar {
+    max-width: 100%;
+  }
   .dummy-sidebar {
-    width: 0;
+    max-width: 0;
   }
 }
 .sidebar.hide {
-  transform: translateX(-100%);
+  transform: translateX(calc(-100% - 8px));
 }
 .dummy-sidebar.hide {
-  width: 0px;
+  width: 0;
 }
 .file-content {
   flex-grow: 1;
   padding: 0.5rem;
+  overflow-x: scroll;
 }
 pre {
   background-color: #eee;
