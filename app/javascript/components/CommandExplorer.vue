@@ -36,6 +36,10 @@ export default {
     CommandFileTree
   },
   props: {
+    fileName: {
+      type: String,
+      required: true
+    },
     fileTree: {
       type: Object,
       required: true

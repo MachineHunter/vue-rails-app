@@ -52,7 +52,6 @@ export default {
   props: {
     children: {
       type: Array,
-      required: true
     }
   },
   methods: {
