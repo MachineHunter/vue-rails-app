@@ -4,7 +4,7 @@
       <button class="button-for-sidebar" @click="hidden = !hidden">
         <b-icon-list/>
       </button>
-      explorer
+      {{fileName}}
     </header>
     <div class="command-explorer">
       <div :class="{'sidebar': true, 'hide': hidden}" id="sidebar">

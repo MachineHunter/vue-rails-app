@@ -1,14 +1,21 @@
 <template>
   <div id="command-detail" class="main-center-100">
     <h2>{{command.title}}</h2>
-    <b-badge>genre{{command.genre_id}}</b-badge>
-    <b-badge>type{{command.command_type_id}}</b-badge>
+    <div class="mb-4">
+      <b-badge class="mr-1">genre{{command.genre_id}}</b-badge>
+      <b-badge>type{{command.command_type_id}}</b-badge>
+    </div>
 
-    <h5>{{fileName}}</h5>
-    <command-explorer :fileTree="fileTree" :fileContents="fileContents"/>
+    <command-explorer
+      :fileName="fileName"
+      :fileTree="fileTree"
+      :fileContents="fileContents"
+      class="mb-3"
+    />
 
-    <p>description</p>
-    <p>{{command.description}}</p>
+    <b-card title="description">
+      <p>{{command.description}}</p>
+    </b-card>
   </div>
 </template>
 
