@@ -4,7 +4,7 @@
       <button class="button-for-sidebar" @click="hidden = !hidden">
         <b-icon-list/>
       </button>
-      {{fileName}}
+      Scripts
     </header>
     <div class="command-explorer">
       <div :class="{'sidebar': true, 'hide': hidden}" id="sidebar">
@@ -36,10 +36,6 @@ export default {
     CommandFileTree
   },
   props: {
-    fileName: {
-      type: String,
-      required: true
-    },
     fileTree: {
       type: Object,
       required: true

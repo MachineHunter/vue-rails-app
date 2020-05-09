@@ -54,16 +54,6 @@
             </b-form-invalid-feedback>
           </b-form-radio-group>
         </b-form-group>
-        
-        <b-form-group label="ファイル名">
-          <b-form-input
-            v-model="command.filename"
-            required
-          />
-          <b-form-invalid-feedback>
-            ファイル名を入力してください
-          </b-form-invalid-feedback>
-        </b-form-group>
                 
         <b-form-group label="Zipファイル">
           <b-form-file
@@ -104,7 +94,7 @@ export default {
         description: "",
         genre_id: null,
         command_type_id: null,
-        filename: "",
+        filename: "dummy-filename",
         zipdata: null
       },
       genres: [],

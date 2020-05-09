@@ -7,7 +7,6 @@
     </div>
 
     <command-explorer
-      :fileName="fileName"
       :fileTree="fileTree"
       :fileContents="fileContents"
       class="mb-3"
@@ -36,7 +35,6 @@ export default {
   data: function() {
     return {
       command: {},
-      fileName: "",
       fileTree: {},
       fileContents: {}
     }
@@ -48,7 +46,6 @@ export default {
     getCommandData: function() {
       Axios.get(`/api/command/${this.commandId}`).then(res => {
         this.command = res.data.command
-        this.fileName = res.data.filename
         this.fileTree = res.data.filetree
         this.fileContents = res.data.filedatas
       }).catch(err => {
