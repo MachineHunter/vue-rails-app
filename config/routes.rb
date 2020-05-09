@@ -22,7 +22,7 @@ Rails.application.routes.draw do
       post 'update'
     end
 
-    resources :command, only: [:index, :show, :new, :create, :destroy]
+    resources :command
   end
 
   get 'practice/index'
