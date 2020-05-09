@@ -8,8 +8,8 @@
         <div class="d-flex justify-content-between align-items-center mb-1">
           <h5 class="command-title mb-0 py-1">{{command.title}}</h5>
           <div class="d-flex justify-content-end align-items-center badges-sm-direction">
-            <b-badge class="px-2 py-1 ml-2 h-auto badge-sm-mb">linux</b-badge>
-            <b-badge class="px-2 py-1 ml-2 h-auto">自動化系</b-badge>
+            <command-tag tagType="genre" :tagId="command.genre_id" class=" badge-sm-mb"/>
+            <command-tag tagType="commandType" :tagId="command.command_type_id"/>
           </div>
         </div>
         <hr class="my-1">
@@ -22,7 +22,13 @@
 </template>
 
 <script>
+import CommandTag from "./CommandTag"
+
 export default {
+  components: {
+    CommandTag
+
+  },
   props: {
     command: {
       type: Object,
