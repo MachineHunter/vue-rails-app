@@ -17,7 +17,7 @@ export default {
     },
     tagId: {
       type: Number,
-      required: true
+      // required: true //axiosでロードされる前はundefinedのため
     }
   },
   data: function() {
