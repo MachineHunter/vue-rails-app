@@ -12,6 +12,7 @@
         <b-form-group label="タイトル">
           <b-form-input
             v-model="command.title"
+            id="title"
             required
           />
           <b-form-invalid-feedback>
@@ -22,6 +23,7 @@
         <b-form-group label="説明">
           <b-form-textarea
             v-model="command.description"
+            id="description"
             required
             rows="3"
             max-rows="6"
@@ -34,6 +36,7 @@
         <b-form-group label="ジャンル">
           <b-form-radio-group
             v-model="command.genre_id"
+            id="genre_id"
             :options="genreOptions"
             required
           >
@@ -46,6 +49,7 @@
         <b-form-group label="タイプ">
           <b-form-radio-group
             v-model="command.command_type_id"
+            id="command_type_id"
             :options="commandTypeOptions"
             required
           >
@@ -58,6 +62,7 @@
         <b-form-group label="Zipファイル">
           <b-form-file
             v-model="command.zipdata"
+            id="zipdata"
             accept="application/zip"
             required
             placeholder="ファイルを選択してください"
@@ -69,7 +74,13 @@
         </b-form-group>
 
         <div class="flex-x-center">
-          <b-button type="submit" variant="outline-primary">投稿</b-button>
+          <b-button
+            type="submit"
+            variant="outline-primary"
+            id="submit-command"
+          >
+            投稿
+          </b-button>
         </div>
       </b-form>
     </div>
