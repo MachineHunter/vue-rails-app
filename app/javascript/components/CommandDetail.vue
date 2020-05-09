@@ -2,8 +2,8 @@
   <div id="command-detail" class="main-center-100">
     <h2>{{command.title}}</h2>
     <div class="mb-4">
-      <command-tag tagType="genre" :tagId="2"/>
-      <command-tag tagType="commandType" :tagId="2"/>
+      <command-tag tagType="genre" :tagId="command.genre_id"/>
+      <command-tag tagType="commandType" :tagId="command.command_type_id"/>
     </div>
 
     <command-explorer
