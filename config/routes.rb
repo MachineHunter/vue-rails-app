@@ -31,7 +31,9 @@ Rails.application.routes.draw do
 
   get 'user_pages/index' 
   get 'command_pages/index'
-  resources :command_pages, only: [:index, :new, :show]
+  resources :command_pages, only: [:index, :new, :show] do
+    get 'download/:id', to: 'command_pages#download', on: :collection
+  end
 
   root to: "user_pages#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
