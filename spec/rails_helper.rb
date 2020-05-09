@@ -71,6 +71,7 @@ RSpec.configure do |config|
   Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
   config.include Authentication, type: :request
   config.include FeatureDevise, type: :feature
+  config.include WaitAjax, type: :feature
 end
 
 Capybara.register_driver :selenium_chrome_headless do |app|
