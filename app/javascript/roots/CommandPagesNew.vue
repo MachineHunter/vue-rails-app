@@ -156,6 +156,8 @@ export default {
     },
     submitCommand() {
       this.validated = true
+      const form = document.getElementsByTagName("form")[0]
+      if(form.checkValidity() === false) return;
 
       const params = new FormData()
       Object.entries(this.command).forEach(([param, value]) =>{
