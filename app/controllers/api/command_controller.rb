@@ -36,6 +36,15 @@ module Api
       end
     end
 
+    def destroy
+      @command = Command.find(params[:id])
+      if @command.destroy
+        redirect_to command_pages_index_path
+      else
+        response_bad_request
+      end
+    end
+
     private
 
     def command_params
