@@ -105,7 +105,6 @@ export default {
         description: "",
         genre_id: null,
         command_type_id: null,
-        filename: "dummy-filename",
         zipdata: null
       },
       genres: [],
@@ -135,6 +134,9 @@ export default {
       return function(value) {
         return self.validated ? !!value : null
       }
+    },
+    zipFileName: function() {
+      return this.command.zipdata.name
     }
   },
   created: function() {
@@ -163,6 +165,7 @@ export default {
       Object.entries(this.command).forEach(([param, value]) =>{
         params.append(param, value);
       });
+      params.append("filename", this.zipFileName)
       Axios.post("/api/command", params).then(res =>{
         window.location.href = res.request.responseURL
       }).catch(err => {
