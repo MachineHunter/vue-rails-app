@@ -6,7 +6,11 @@
         <command-tag tagType="genre" :tagId="command.genre_id"/>
         <command-tag tagType="commandType" :tagId="command.command_type_id"/>
       </div>
-      <command-dropdown :commandId="commandId" :outlined="true"/>
+      <command-dropdown
+        :commandId="commandId"
+        :inDetail="true"
+        @open-update-form="$bvModal.show('modal-for-update')"
+      />
     </div>
 
     <command-explorer
@@ -18,6 +22,18 @@
     <b-card title="description">
       <p>{{command.description}}</p>
     </b-card>
+
+    <b-modal
+      id="modal-for-update"
+      title="コマンドの編集"
+      centered
+      hide-backdrop
+      content-class="shadow"
+      hide-footer
+      size="xl"
+    >
+      <command-update-form :prevCommand="command"/>
+    </b-modal>
   </div>
 </template>
 
@@ -26,12 +42,14 @@ import Axios from "axios"
 import CommandExplorer from "./CommandExplorer"
 import CommandTag from "./CommandTag"
 import CommandDropdown from "./CommandDropdown"
+import CommandUpdateForm from "./CommandUpdateForm"
 
 export default {
   components: {
     CommandExplorer,
     CommandTag,
-    CommandDropdown
+    CommandDropdown,
+    CommandUpdateForm
   },
   props: {
     commandId: {

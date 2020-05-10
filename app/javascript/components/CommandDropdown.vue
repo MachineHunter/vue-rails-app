@@ -1,11 +1,11 @@
 <template>
   <b-dropdown
     size="sm"
-    :variant="outlined ? 'outline-dark' : 'link'"
+    :variant="inDetail ? 'outline-dark' : 'link'"
     no-caret
     right
     v-b-hover="onHover"
-    :toggle-class="hoverd && !outlined ? 'bg-light' : ''"
+    :toggle-class="hoverd && !inDetail ? 'bg-light' : ''"
   >
     <template v-slot:button-content>
       <b-icon-three-dots-vertical/>
@@ -13,6 +13,12 @@
     <b-dropdown-item :href="`/command_pages/download/${this.commandId}`">
       ダウンロード(zip)
     </b-dropdown-item>
+    <b-dropdown-item-button
+      v-if="inDetail"
+      @click="$emit('open-update-form')"
+    >
+      このコマンドを編集する
+    </b-dropdown-item-button>
     <b-dropdown-item-button
       variant="danger"
       @click.stop="$bvModal.show(`modal-for-delete-${commandId}`)"
@@ -42,7 +48,7 @@ export default {
       type: Number,
       required: true
     },
-    outlined: {
+    inDetail: {
       type: Boolean,
       required: true
     }
