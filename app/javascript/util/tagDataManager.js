@@ -9,7 +9,7 @@ const event = new CustomEvent("tagdataready")
 
 let called = false
 
-async function loadtagData(i) {
+async function loadtagData() {
   if(!called){
     called = true;
     Axios.get("/api/command/new").then(res => {

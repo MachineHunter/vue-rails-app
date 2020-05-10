@@ -31,7 +31,10 @@ export default {
   },
   computed: {
     tagName: function() {
-      if(this.genres.length === 0 || this.commandTypes.length === 0) return null
+      if(this.genres.length === 0
+         || this.commandTypes.length === 0
+         || this.tagId === undefined
+      ) return null
 
       if(this.tagType === "genre") {
         return this.genres[this.tagId - 1].name
@@ -46,7 +49,7 @@ export default {
         this.genres = tagDataManager.tagData.genres
         this.commandTypes = tagDataManager.tagData.commandTypes
       })
-      tagDataManager.loadtagData(this.tagType[0]+this.tagId)
+      tagDataManager.loadtagData()
     },
   }
 }
