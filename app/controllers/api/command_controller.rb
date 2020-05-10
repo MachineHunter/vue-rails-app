@@ -13,6 +13,7 @@ module Api
       @unzippeddata = unzip_file(@zipdata)
       @filetree = json_file_tree(@unzippeddata.first)
       @filedatas = json_file_data(@unzippeddata)
+      @index_url = command_pages_index_path
     end
 
     def new
@@ -48,9 +49,7 @@ module Api
 
     def destroy
       @command = Command.find(params[:id])
-      if @command.destroy
-        redirect_to command_pages_index_path
-      else
+      unless @command.destroy
         response_bad_request
       end
     end
