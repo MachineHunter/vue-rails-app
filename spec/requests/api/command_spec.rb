@@ -7,7 +7,13 @@ RSpec.describe 'Command', type: :request do
   let(:send_new_request) { get new_api_command_path }
   let(:send_show_request) { get api_command_path command.id }
   let(:send_destroy_request) { delete api_command_path command.id }
+  let(:send_update_request) { put api_command_path command.id, params: put_params }
   let(:result) { JSON.parse(response.body, { symbolize_names: true }) }
+  let(:put_params) do
+    {
+      title: 'after_update'
+    }
+  end
 
   before do
     login user
@@ -38,6 +44,15 @@ RSpec.describe 'Command', type: :request do
       expect(result[:filetree][:name]).to eq 'test'
       expect(result[:command][:title]).to eq 'test_command'
       expect(result[:filedatas].nil?).to eq false
+    end
+  end
+
+  describe 'update' do
+    it do
+      expect do
+        send_update_request
+        command.reload
+      end.to change { command.title }.to('after_update')
     end
   end
 
