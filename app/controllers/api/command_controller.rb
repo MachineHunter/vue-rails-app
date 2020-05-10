@@ -40,11 +40,7 @@ module Api
     def update
       @command = Command.find(params[:id])
       @command.update(command_update_params)
-      if @command.save
-        redirect_to command_pages_index_path
-      else
-        response_bad_request
-      end
+      response_bad_request unless @command.save
     end
 
     def destroy
