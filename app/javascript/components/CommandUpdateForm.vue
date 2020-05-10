@@ -165,7 +165,7 @@ export default {
       });
       // params.append("filename", this.zipFileName)
       Axios.put(`/api/command/${this.prevCommand.id}`, params).then(res =>{
-        // window.location.href = res.request.responseURL
+        document.location.reload()
       }).catch(err => {
         console.log(err)
       })
