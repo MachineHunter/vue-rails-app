@@ -51,6 +51,10 @@ export default {
     inDetail: {
       type: Boolean,
       required: true
+    },
+    indexUrl: {
+      type: String,
+      required: true
     }
   },
   data: function() {
@@ -68,7 +72,11 @@ export default {
     },
     deleteCommand() {
       Axios.delete(`/api/command/${this.commandId}`).then(res =>{
-        window.location.href = res.request.responseURL
+        window.location.href = this.indexUrl
+        setTimeout(()=>{}, 10000)
+        // ここで待たないとmodalが閉じて
+        // GET /api/command/[今消したコマンドのid]
+        // が呼ばれてしまう
       }).catch(err => {
         console.log(err)
       })

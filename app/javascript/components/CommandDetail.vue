@@ -9,6 +9,7 @@
       <command-dropdown
         :commandId="commandId"
         :inDetail="true"
+        :indexUrl="indexUrl"
         @open-update-form="$bvModal.show('modal-for-update')"
       />
     </div>
@@ -61,7 +62,8 @@ export default {
     return {
       command: {},
       fileTree: {},
-      fileContents: {}
+      fileContents: {},
+      indexUrl: ""
     }
   },
   created: function() {
@@ -73,6 +75,7 @@ export default {
         this.command = res.data.command
         this.fileTree = res.data.filetree
         this.fileContents = res.data.filedatas
+        this.indexUrl = res.data.index_url
       }).catch(err => {
         console.log(err);
       })
