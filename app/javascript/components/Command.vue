@@ -7,10 +7,14 @@
       <b-media-body class="command-body pl-3">
         <div class="d-flex justify-content-between align-items-center mb-1">
           <h5 class="command-title mb-0 py-1">{{command.title}}</h5>
-          <div class="d-flex justify-content-end align-items-center badges-sm-direction">
-            <command-tag tagType="genre" :tagId="command.genre_id" class=" badge-sm-mb"/>
-            <command-tag tagType="commandType" :tagId="command.command_type_id"/>
+          <div class="d-flex">
+            <div class="d-flex justify-content-end align-items-center badges-sm-direction">
+              <command-tag tagType="genre" :tagId="command.genre_id" class=" badge-sm-mb"/>
+              <command-tag tagType="commandType" :tagId="command.command_type_id"/>
+            </div>
+            <command-dropdown :commandId="command.id" :outlined="false"/>
           </div>
+
         </div>
         <hr class="my-1">
         <p class="mb-0 command-description">
@@ -23,11 +27,12 @@
 
 <script>
 import CommandTag from "./CommandTag"
+import CommandDropdown from "./CommandDropdown"
 
 export default {
   components: {
-    CommandTag
-
+    CommandTag,
+    CommandDropdown
   },
   props: {
     command: {

@@ -1,9 +1,12 @@
 <template>
   <div id="command-detail" class="main-center-100">
     <h2>{{command.title}}</h2>
-    <div class="mb-4">
-      <command-tag tagType="genre" :tagId="command.genre_id"/>
-      <command-tag tagType="commandType" :tagId="command.command_type_id"/>
+    <div class="d-flex justify-content-between flex-y-center mb-2">
+      <div>
+        <command-tag tagType="genre" :tagId="command.genre_id"/>
+        <command-tag tagType="commandType" :tagId="command.command_type_id"/>
+      </div>
+      <command-dropdown :commandId="commandId" :outlined="true"/>
     </div>
 
     <command-explorer
@@ -22,11 +25,13 @@
 import Axios from "axios"
 import CommandExplorer from "./CommandExplorer"
 import CommandTag from "./CommandTag"
+import CommandDropdown from "./CommandDropdown"
 
 export default {
   components: {
     CommandExplorer,
-    CommandTag
+    CommandTag,
+    CommandDropdown
   },
   props: {
     commandId: {
