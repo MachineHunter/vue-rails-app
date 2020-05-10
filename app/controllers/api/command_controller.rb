@@ -49,9 +49,7 @@ module Api
 
     def destroy
       @command = Command.find(params[:id])
-      unless @command.destroy
-        response_bad_request
-      end
+      response_bad_request unless @command.destroy
     end
 
     private
