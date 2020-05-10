@@ -13,10 +13,17 @@
     </b-dropdown-item>
     <b-dropdown-item-button
       variant="danger"
-      @click="deleteCommand"
+      v-b-modal.modal-1
     >
       このコマンドを消去する
     </b-dropdown-item-button>
+    <b-modal id="modal-1" title="このコマンドを消去する" content-class="bg-danger text-white">
+      <p class="my-4">本当に消去しますか？この操作は取り消せません</p>
+      <template v-slot:modal-footer="{close}">
+        <b-button @click="close()" variant="light">戻る</b-button>
+        <b-button @click="deleteCommand" variant="outline-warning">消去する</b-button>
+      </template>
+    </b-modal>
   </b-dropdown>
 </template>
 
