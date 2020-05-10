@@ -54,7 +54,7 @@ export default {
     },
     indexUrl: {
       type: String,
-      required: true
+      default: null
     }
   },
   data: function() {
@@ -67,12 +67,13 @@ export default {
     Axios.defaults.headers["X-CSRF-TOKEN"] = token
   },
   methods: {
-    downloadCommand() {
-      window.location.href = `/command_pages/download/${this.commandId}`
-    },
     deleteCommand() {
       Axios.delete(`/api/command/${this.commandId}`).then(res =>{
-        window.location.href = this.indexUrl
+        if(this.indexUrl === null) {
+          document.location.reload()
+        } else {
+          window.location.href = this.indexUrl
+        }
         setTimeout(()=>{}, 10000)
         // ここで待たないとmodalが閉じて
         // GET /api/command/[今消したコマンドのid]
