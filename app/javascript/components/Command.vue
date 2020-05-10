@@ -12,7 +12,7 @@
               <command-tag tagType="genre" :tagId="command.genre_id" class=" badge-sm-mb"/>
               <command-tag tagType="commandType" :tagId="command.command_type_id"/>
             </div>
-            <command-dropdown :commandId="command.id" :outlined="false"/>
+            <command-dropdown :commandId="command.id" :outlined="false" class="ml-1"/>
           </div>
 
         </div>

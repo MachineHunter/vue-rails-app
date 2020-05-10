@@ -4,6 +4,8 @@
     :variant="outlined ? 'outline-dark' : 'link'"
     no-caret
     right
+    v-b-hover="onHover"
+    :toggle-class="hoverd && !outlined ? 'bg-light' : ''"
   >
     <template v-slot:button-content>
       <b-icon-three-dots-vertical/>
@@ -13,11 +15,15 @@
     </b-dropdown-item>
     <b-dropdown-item-button
       variant="danger"
-      v-b-modal.modal-1
+      @click.stop="$bvModal.show(`modal-for-delete-${commandId}`)"
     >
       このコマンドを消去する
     </b-dropdown-item-button>
-    <b-modal id="modal-1" title="このコマンドを消去する" content-class="bg-danger text-white">
+    <b-modal
+      :id="`modal-for-delete-${commandId}`"
+      title="このコマンドを消去する"
+      content-class="bg-danger text-white"
+    >
       <p class="my-4">本当に消去しますか？この操作は取り消せません</p>
       <template v-slot:modal-footer="{close}">
         <b-button @click="close()" variant="light">戻る</b-button>
@@ -41,6 +47,11 @@ export default {
       required: true
     }
   },
+  data: function() {
+    return {
+      hoverd: false
+    }
+  },
   mounted: function() {
     const token = document.querySelector("meta[name=csrf-token]").getAttribute("content")
     Axios.defaults.headers["X-CSRF-TOKEN"] = token
@@ -55,6 +66,9 @@ export default {
       }).catch(err => {
         console.log(err)
       })
+    },
+    onHover(isHovered) {
+      this.hoverd = isHovered
     }
   }
 }
