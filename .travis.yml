@@ -4,7 +4,7 @@ services:
   - mysql
   - redis-server
 bundler_args: "--without development --jobs=3"
-cache: bundler
+#cache: bundler
 require: sudo
 before_script:
   - curl -o chrome81.deb http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_81.0.4044.129-1_amd64.deb

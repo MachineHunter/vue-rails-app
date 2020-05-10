@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     getCommands: function() {
-      Axios.get("/api/command/index").then(res => {
+      Axios.get("/api/command").then(res => {
         const longCommand = {
           id: -1,
           title: "long title ".repeat(10),

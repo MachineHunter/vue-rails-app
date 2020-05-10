@@ -1,5 +1,5 @@
 <template>
-  <b-card class="command">
+  <b-card class="command" @click="moveToDetail">
     <b-media no-body>
       <b-media-aside>
         <b-img blank blank-color="#ccc" width="64" alt="placeholder"></b-img>
@@ -7,10 +7,14 @@
       <b-media-body class="command-body pl-3">
         <div class="d-flex justify-content-between align-items-center mb-1">
           <h5 class="command-title mb-0 py-1">{{command.title}}</h5>
-          <div class="d-flex justify-content-end align-items-center badges-sm-direction">
-            <b-badge class="px-2 py-1 ml-2 h-auto badge-sm-mb">linux</b-badge>
-            <b-badge class="px-2 py-1 ml-2 h-auto">自動化系</b-badge>
+          <div class="d-flex">
+            <div class="d-flex justify-content-end align-items-center badges-sm-direction">
+              <command-tag tagType="genre" :tagId="command.genre_id" class=" badge-sm-mb"/>
+              <command-tag tagType="commandType" :tagId="command.command_type_id"/>
+            </div>
+            <command-dropdown :commandId="command.id" :inDetail="false" class="ml-1"/>
           </div>
+
         </div>
         <hr class="my-1">
         <p class="mb-0 command-description">
@@ -22,11 +26,23 @@
 </template>
 
 <script>
+import CommandTag from "./CommandTag"
+import CommandDropdown from "./CommandDropdown"
+
 export default {
+  components: {
+    CommandTag,
+    CommandDropdown
+  },
   props: {
     command: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    moveToDetail() {
+      document.location.href=`/command_pages/${this.command.id}`
     }
   }
 }
