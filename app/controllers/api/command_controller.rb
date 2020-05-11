@@ -3,7 +3,8 @@ module Api
     require 'zip'
 
     def index
-      @commands = current_user.command.all
+      @user = User.find(params[:id])
+      @commands = @user.command.all
     end
 
     def show
