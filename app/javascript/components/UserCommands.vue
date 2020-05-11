@@ -4,8 +4,17 @@
       <label>user id<input type="number" v-model.number="userId"></label>
       <button type="button" @click="getCommands">change id</button>
     </div>
-    <h2>コマンド一覧</h2>
-    <b-link href="/command_pages/new">新規コマンド投稿</b-link>
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h2>コマンド一覧</h2>
+      <b-button
+        href="/command_pages/new"
+        variant="primary"
+        pill
+        class="mr-2 font-weight-bolder"
+      >
+        新規コマンド投稿
+      </b-button>
+    </div>
     
     <b-overlay :show="noCommands" rounded="sm">
       <div>
