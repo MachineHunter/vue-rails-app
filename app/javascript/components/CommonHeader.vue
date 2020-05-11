@@ -29,6 +29,7 @@
             :class="{'text-white-important-parent': activeTab === 'account' && signedIn}"
           >
             <b-dropdown-item href="/user_pages/index">プロフィール</b-dropdown-item>
+            <b-dropdown-item href="/command_pages/index">コマンド一覧</b-dropdown-item>
             <b-dropdown-item href="/users/edit">設定</b-dropdown-item>
             <b-dropdown-item
               href="/users/sign_out"
