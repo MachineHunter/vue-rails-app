@@ -1,7 +1,8 @@
 module Api
   class UserPagesController < ApplicationController
     def index
-      @user = current_user
+      @user = User.find(params[:id])
+      @status = @user.status
     end
   end
 end

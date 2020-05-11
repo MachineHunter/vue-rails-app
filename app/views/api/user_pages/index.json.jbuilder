@@ -1,6 +1,6 @@
 json.user do |json|
-  json.call(@user, :name, :email)
+  json.call(@user, :id, :name)
   json.set! :status do |stats|
-    stats.call(@user.status, :automation, :imagination, :humor, :enhancement)
+    stats.call(@status, :automation, :imagination, :humor, :enhancement)
   end
 end
