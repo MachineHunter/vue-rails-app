@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Command', type: :request do
   let!(:command) { create(:command) }
+  let!(:command2) { create(:command) }
   let(:user) { command.user }
-  let(:user2) { command.user }
+  let(:user2) { command2.user }
   let(:send_new_request) { get new_api_command_path }
   let(:send_show_request) { get api_command_path command.id }
   let(:send_destroy_request) { delete api_command_path command.id }
