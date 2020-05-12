@@ -34,6 +34,9 @@ export default {
     signedIn: function() {
       return this.currentUserId !== -1
     }
+  },
+  created: function() {
+    document.cookie = "keep_page=true"
   }
 }
 </script>

@@ -80,6 +80,18 @@ export default {
       perPage: 5
     }
   },
+  created: function() {
+    const cookiesString = document.cookie
+    const cookies = cookiesString.split(";").reduce((acc, cookie) => {
+      const [key, value] = cookie.split("=")
+      return {...acc, [key.trim()]: value.trim()}
+    }, {})
+    
+    if(cookies["keep_page"] && cookies["current_page"]) {
+      this.currentPage = Number(cookies["current_page"])
+    }
+    document.cookie = "keep_page=;max-age=0"
+  },
   computed: {
     noCommands() {
       if(!this.commands) return false
@@ -111,6 +123,11 @@ export default {
       }).catch(err => {
         console.log(err);
       })
+    }
+  },
+  watch: {
+    currentPage: function(newValue, oldValue) {
+      document.cookie = `current_page=${newValue}`
     }
   }
 }
