@@ -1,7 +1,7 @@
 module Api
   class UserPagesController < ApplicationController
     def index
-      @user = if params[:id].zero?
+      @user = if params[:id].to_i.zero?
                 current_user
               else
                 User.find(params[:id])
