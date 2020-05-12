@@ -45,7 +45,7 @@ module Api
     end
 
     def destroy
-      @command = Command.find(params[:id])
+      @command = current_user.command.find(params[:id])
       response_bad_request unless @command.destroy
     end
 
