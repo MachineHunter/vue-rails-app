@@ -1,6 +1,10 @@
 <template>
   <div id="user-pages-index" class="root-component">
     <common-header :signed-in="!noUser" activeTab="account"></common-header>
+    <div>
+      <label>user id<input type="number" v-model.number="userId"></label>
+      <button type="button" @click="getUserData">change id</button>
+    </div>
     <div v-if="noUser" class="flex-column flex-x-center flex-y-center my-2">
       <span class="text-center">プロフィールを確認するにはログインが必要です</span>
       <b-link href="/users/sign_in">ログイン</b-link>
@@ -26,7 +30,8 @@ export default {
   data: function() {
     return {
       user: {},
-      finishedRequestingUser: false
+      finishedRequestingUser: false,
+      userId: 1
     }
   },
   created: function() {
@@ -42,7 +47,7 @@ export default {
   },
   methods: {
     getUserData: function() {
-      Axios.get("/api/user_pages/index").then(res => {
+      Axios.get(`/api/user_pages/index/${this.userId}`).then(res => {
         this.user = res.data.user;
       }).catch(err => {
         console.log(err);

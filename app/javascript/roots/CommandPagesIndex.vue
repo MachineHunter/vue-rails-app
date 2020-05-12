@@ -1,6 +1,10 @@
 <template>
   <div id="command-pages-index" class="root-component">
     <common-header :signed-in="signedIn" activeTab="account"></common-header>
+    <div>
+      <label>user id<input type="number" v-model.number="userId"></label>
+      <button type="button" @click="getCommands">change id</button>
+    </div>
     <div v-if="notSignedIn" class="flex-column flex-x-center flex-y-center my-2">
       <span class="text-center">自分のコマンドを確認するにはログインが必要です</span>
       <b-link href="/users/sign_in">ログイン</b-link>
@@ -26,7 +30,8 @@ export default {
   data: function() {
     return {
       commands: null,
-      finishedRequestingCommands: false
+      finishedRequestingCommands: false,
+      userId: 1
     }
   },
   created: function() {
@@ -42,7 +47,7 @@ export default {
   },
   methods: {
     getCommands: function() {
-      Axios.get("/api/command").then(res => {
+      Axios.get(`/api/command/index/${this.userId}`).then(res => {
         const longCommand = {
           id: -1,
           title: "long title ".repeat(10),
