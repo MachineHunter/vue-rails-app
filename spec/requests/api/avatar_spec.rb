@@ -4,17 +4,25 @@ RSpec.describe 'Avatar', type: :request do
   include ActionDispatch::TestProcess
 
   let!(:avatar) { create(:avatar) }
+  let!(:avatar2) { create(:avatar, :other) }
   let(:user) { avatar.user }
+  let(:user2) { avatar2.user }
 
   before do
     login user
   end
 
   describe 'index' do
-    it do
-      get api_avatar_index_path
+    it 'own avatar' do
+      get api_avatar_index_path 0
       expect(response).to have_http_status(200)
       expect(response.body).to eq avatar.image
+    end
+
+    it 'other user avatar' do
+      get api_avatar_index_path user2.id
+      expect(response).to have_http_status(200)
+      expect(response.body).to eq avatar2.image
     end
   end
 
@@ -25,7 +33,7 @@ RSpec.describe 'Avatar', type: :request do
       }
       post api_avatar_update_path, params: params, headers: { 'Content-Type': 'multipart/form-data' }
       expect(response).to have_http_status(302)
-      expect(user.avatar.filename).to eq 'white.jpeg'
+      expect(user.avatar.filename).to eq avatar.filename
       expect(user.avatar.image).not_to eq nil
     end
 
