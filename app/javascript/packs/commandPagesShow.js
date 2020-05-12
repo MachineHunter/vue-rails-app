@@ -12,9 +12,10 @@ Vue.use(TurbolinksAdapter)
 const vueMountListener = () => {
   const vueHook = document.getElementById("vue-hook")
   if(vueHook){
-    const commandId = Number(vueHook.dataset.commandid)
+    const commandId = Number(vueHook.dataset.command_id)
+    const currentUserId = Number(vueHook.dataset.current_user_id)
     const commandPagesShow = new Vue({
-      render: h => h(CommandPagesShow, {props: {commandId}})
+      render: h => h(CommandPagesShow, {props: {commandId, currentUserId}})
     }).$mount()
     document.body.replaceChild(commandPagesShow.$el, vueHook)
   }

@@ -14,18 +14,20 @@
       ダウンロード(zip)
     </b-dropdown-item>
     <b-dropdown-item-button
-      v-if="inDetail"
+      v-if="inDetail && isMine"
       @click="$emit('open-update-form')"
     >
       このコマンドを編集する
     </b-dropdown-item-button>
     <b-dropdown-item-button
+      v-if="isMine"
       variant="danger"
       @click.stop="$bvModal.show(`modal-for-delete-${commandId}`)"
     >
       このコマンドを消去する
     </b-dropdown-item-button>
     <b-modal
+      v-if="isMine"
       :id="`modal-for-delete-${commandId}`"
       title="このコマンドを消去する"
       content-class="bg-danger text-white"
@@ -51,6 +53,10 @@ export default {
     inDetail: {
       type: Boolean,
       required: true
+    },
+    isMine: {
+      type: Boolean,
+      default: false
     },
     indexUrl: {
       type: String,

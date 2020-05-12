@@ -1,3 +1,7 @@
-<div id="vue-hook" data-commandid="<%= params[:id] %>"></div>
+<div
+  id="vue-hook"
+  data-command_id="<%= params[:id] %>"
+  data-current_user_id="<%= current_user ? current_user.id : -1 %>"
+></div>
 
 <%= javascript_packs_with_chunks_tag 'commandPagesShow' %>
