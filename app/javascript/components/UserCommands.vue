@@ -3,7 +3,7 @@
     <h2>コマンド一覧</h2>
     <b-link href="/command_pages/new">新規コマンド投稿</b-link>
     
-    <b-overlay :show="commands.length === 0" rounded="sm">
+    <b-overlay :show="noCommands" rounded="sm">
       <div>
         <b-pagination
           v-model="currentPage"
@@ -20,6 +20,7 @@
             v-for="command in commandsToDisplay"
             :key="command.id"
             :command="command"
+            :currentUserId="currentUserId"
             class="my-1"
           />
         </div>
@@ -53,7 +54,10 @@ export default {
   },
   props: {
     commands: {
-      type: Array,
+      type: Array
+    },
+    currentUserId: {
+      type: Number,
       required: true
     }
   },
@@ -64,10 +68,16 @@ export default {
     }
   },
   computed: {
+    noCommands() {
+      if(!this.commands) return false
+      return this.commands.length === 0
+    },
     rows() {
+      if(!this.commands) return 0
       return this.commands.length
     },
     commandsToDisplay() {
+      if(!this.commands) return []
       const start = (this.currentPage - 1) * this.perPage
       return [...this.commands].splice(start, this.perPage)
     }
