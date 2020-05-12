@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Command', type: :request do
   let!(:command) { create(:command) }
   let(:user) { command.user }
-  let(:send_index_request) { get api_command_index_path }
+  let(:user2) { command.user }
   let(:send_new_request) { get new_api_command_path }
   let(:send_show_request) { get api_command_path command.id }
   let(:send_destroy_request) { delete api_command_path command.id }
@@ -20,8 +20,14 @@ RSpec.describe 'Command', type: :request do
   end
 
   describe 'index' do
-    it do
-      send_index_request
+    it 'own profile' do
+      get api_command_index_path user.id
+      expect(response).to have_http_status(200)
+      expect(result[:command][0][:title]).to eq 'test_command'
+    end
+
+    it 'other user profile' do
+      get api_command_index_path user2.id
       expect(response).to have_http_status(200)
       expect(result[:command][0][:title]).to eq 'test_command'
     end
