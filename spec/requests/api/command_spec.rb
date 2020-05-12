@@ -24,13 +24,13 @@ RSpec.describe 'Command', type: :request do
     it 'own profile' do
       get api_command_index_path user.id
       expect(response).to have_http_status(200)
-      expect(result[:command][0][:title]).to eq 'test_command'
+      expect(result[:command][0][:title]).to eq command.title
     end
 
     it 'other user profile' do
       get api_command_index_path user2.id
       expect(response).to have_http_status(200)
-      expect(result[:command][0][:title]).to eq 'test_command'
+      expect(result[:command][0][:title]).to eq command2.title
     end
   end
 
@@ -49,7 +49,7 @@ RSpec.describe 'Command', type: :request do
       expect(response).to have_http_status(200)
       expect(result[:filename]).to eq command.command_file.filename
       expect(result[:filetree][:name]).to eq 'test'
-      expect(result[:command][:title]).to eq 'test_command'
+      expect(result[:command][:title]).to eq command.title
       expect(result[:filedatas].nil?).to eq false
     end
   end
