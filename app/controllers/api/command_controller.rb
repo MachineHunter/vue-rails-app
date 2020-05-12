@@ -39,7 +39,7 @@ module Api
     end
 
     def update
-      @command = Command.find(params[:id])
+      @command = current_user.command.find(params[:id])
       @command.update(command_update_params)
       response_bad_request unless @command.save
     end
