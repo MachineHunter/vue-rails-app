@@ -17,8 +17,10 @@ Rails.application.routes.draw do
       get 'index/:id', to: 'user_pages#index', as: 'user_pages_index'
     end
 
+    scope :avatar do
+      get 'index/:id', to: 'avatar#index', as: 'avatar_index'
+    end
     namespace :avatar do
-      get 'index'
       post 'update'
     end
 
