@@ -31,7 +31,7 @@ module Api
       @command.command_file.zipdata = params[:zipdata]
 
       if @command.save! && @command.command_file.save
-        redirect_to command_pages_index_path 0
+        redirect_to command_pages_index_path
       else
         response_bad_request
       end
