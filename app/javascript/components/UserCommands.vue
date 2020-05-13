@@ -1,5 +1,9 @@
 <template>
   <div id="user-commands" class="main-center-100">
+    <div>
+      <label>user id<input type="number" v-model.number="userId"></label>
+      <button type="button" @click="getCommands">change id</button>
+    </div>
     <h2>コマンド一覧</h2>
     <b-link href="/command_pages/new">新規コマンド投稿</b-link>
     
@@ -46,6 +50,7 @@
 </template>
 
 <script>
+import Axios from "axios"
 import Command from "./Command"
 
 export default {
@@ -53,9 +58,6 @@ export default {
     Command
   },
   props: {
-    commands: {
-      type: Array
-    },
     currentUserId: {
       type: Number,
       required: true
@@ -63,6 +65,8 @@ export default {
   },
   data: function() {
     return {
+      commands: null,
+      userId: 1,
       currentPage: 1,
       perPage: 5
     }
@@ -80,6 +84,24 @@ export default {
       if(!this.commands) return []
       const start = (this.currentPage - 1) * this.perPage
       return [...this.commands].splice(start, this.perPage)
+    }
+  },
+  created: function() {
+    this.getCommands()
+  },
+  methods: {
+    getCommands: function() {
+      Axios.get(`/api/command/index/${this.userId}`).then(res => {
+        const longCommand = {
+          id: -1,
+          title: "long title ".repeat(10),
+          description: "long description ".repeat(30),
+          user_id: 1, genre_id: 1, command_type_id: 1
+        }
+        this.commands = [longCommand, ...res.data.command];
+      }).catch(err => {
+        console.log(err);
+      })
     }
   }
 }
