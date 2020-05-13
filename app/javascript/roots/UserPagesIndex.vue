@@ -4,18 +4,18 @@
     activeTab="account"
     signedInOnly
   >
-    <user-profile/>
+    <main-user-profile/>
   </common-layout>
 </template>
 
 <script>
 import CommonLayout from "../components/CommonLayout"
-import UserProfile from "../components/UserProfile"
+import MainUserProfile from "../components/MainUserProfile"
 
 export default {
   components: {
     CommonLayout,
-    UserProfile
+    MainUserProfile
   },
   props: {
     currentUserId: {

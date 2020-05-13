@@ -4,18 +4,18 @@
     activeTab="account"
     signedInOnly
   >
-    <command-create/>
+    <main-command-create-form/>
   </common-layout>
 </template>
 
 <script>
 import CommonLayout from "../components/CommonLayout"
-import CommandCreate from "../components/CommandCreate"
+import MainCommandCreateForm from "../components/MainCommandCreateForm"
 
 export default {
   components: {
     CommonLayout,
-    CommandCreate
+    MainCommandCreateForm
   },
   props: {
     currentUserId: {

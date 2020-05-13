@@ -1,5 +1,5 @@
 <template>
-  <div id="user-profile" class="main-center">
+  <div id="main-user-profile" class="main-center">
     <div>
       <label>user id<input type="number" v-model.number="userId"></label>
       <button type="button" @click="getUserData();getAvatar();">change id</button>

@@ -1,5 +1,5 @@
 <template>
-  <div class="main-center">
+  <div id="main-command-create-form" class="main-center">
       <h2>新規コマンド投稿</h2>
 
       <b-form

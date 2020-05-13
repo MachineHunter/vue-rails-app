@@ -3,7 +3,7 @@
     :currentUserId="currentUserId"
     activeTab="account"
   >
-    <command-detail
+    <main-command-detail
       :commandId="commandId"
       :currentUserId="currentUserId"
     />
@@ -12,12 +12,12 @@
 
 <script>
 import CommonLayout from "../components/CommonLayout"
-import CommandDetail from "../components/CommandDetail"
+import MainCommandDetail from "../components/MainCommandDetail"
 
 export default {
   components: {
     CommonLayout,
-    CommandDetail
+    MainCommandDetail
   },
   props: {
     currentUserId: {
