@@ -1,43 +1,36 @@
 <template>
-    <div id="command-pages-show" class="root-component">
-    <common-header :signedIn="signedIn"></common-header>
+  <common-layout
+    :currentUserId="currentUserId"
+    activeTab="account"
+  >
     <command-detail
       :commandId="commandId"
       :currentUserId="currentUserId"
     />
-    <common-footer></common-footer>
-  </div>
+  </common-layout>
 </template>
 
 <script>
-import CommonHeader from "../components/CommonHeader"
-import CommonFooter from "../components/CommonFooter"
+import CommonLayout from "../components/CommonLayout"
 import CommandDetail from "../components/CommandDetail"
 
 export default {
   components: {
-    CommonHeader,
-    CommonFooter,
+    CommonLayout,
     CommandDetail
   },
   props: {
-    commandId: {
-      type: Number,
-      required: true
-    },
     currentUserId: {
       type: Number,
       required: true
-    }
-  },
-  computed: {
-    signedIn: function() {
-      return this.currentUserId !== -1
+    },
+    commandId: {
+      type: Number,
+      required: true
     }
   }
 }
 </script>
 
 <style scoped>
-
 </style>
