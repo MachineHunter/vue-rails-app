@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   get 'user_pages/index' 
   get 'command_pages/index'
   resources :command_pages, only: [:index, :new, :show] do
-    get 'download/:id', to: 'command_pages#download', on: :collection
+    get 'download/:id', to: 'command_pages#download', on: :collection, as: 'download'
   end
 
   root to: "user_pages#index"

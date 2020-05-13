@@ -1,17 +1,14 @@
 require 'rails_helper'
 
-Rspec.describe 'CommandPages', type: :request do
-  # let!(:command) { create(:command) }
-  # let(:user) { command.user }
-  # let(:download) { get command_pages_index_path command.id }
-  pending 'あとで書く'
+RSpec.describe 'CommandPages', type: :request do
+  let!(:command) { create(:command) }
+  let(:download) { get download_command_pages_path command.id }
 
-  # before do
-  # login user
-  # end
-
-  # describe 'download' do
-  # it do
-  # end
-  # end
+  describe 'download' do
+    it do
+      download
+      expect(response).to have_http_status(200)
+      expect(response.header['Content-Type']).to eq 'application/zip'
+    end
+  end
 end
