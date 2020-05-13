@@ -66,7 +66,7 @@ export default {
   data: function() {
     return {
       commands: null,
-      userId: 1,
+      userId: 0,
       currentPage: 1,
       perPage: 5
     }
