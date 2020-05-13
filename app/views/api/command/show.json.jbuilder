@@ -5,3 +5,6 @@ json.filetree do
 end
 json.set! :filedatas, @filedatas
 json.set! :index_url, @index_url
+json.owner do
+  json.extract! @user, :name, :id
+end

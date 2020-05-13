@@ -14,6 +14,7 @@ module Api
       @filetree = json_file_tree(@unzippeddata.first)
       @filedatas = json_file_data(@unzippeddata)
       @index_url = command_pages_index_path
+      @user = @command.user
     end
 
     def new
