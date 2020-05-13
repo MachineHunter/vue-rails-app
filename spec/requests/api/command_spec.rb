@@ -5,6 +5,7 @@ RSpec.describe 'Command', type: :request do
   let!(:command2) { create(:command) }
   let(:user) { command.user }
   let(:user2) { command2.user }
+  let(:send_index_request) { get api_command_index_path }
   let(:send_new_request) { get new_api_command_path }
   let(:send_show_request) { get api_command_path command.id }
   let(:send_destroy_request) { delete api_command_path command.id }
@@ -22,15 +23,9 @@ RSpec.describe 'Command', type: :request do
 
   describe 'index' do
     it 'own profile' do
-      get api_command_index_path user.id
+      send_index_request
       expect(response).to have_http_status(200)
       expect(result[:command][0][:title]).to eq command.title
-    end
-
-    it 'other user profile' do
-      get api_command_index_path user2.id
-      expect(response).to have_http_status(200)
-      expect(result[:command][0][:title]).to eq command2.title
     end
   end
 
