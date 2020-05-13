@@ -3,7 +3,11 @@ module Api
     require 'zip'
 
     def index
-      @user = User.find(params[:id])
+      @user = if params[:id].to_i.zero?
+                current_user
+              else
+                User.find(params[:id])
+              end
       @commands = @user.command.all
     end
 
@@ -32,7 +36,7 @@ module Api
       @command.command_file.zipdata = params[:zipdata]
 
       if @command.save! && @command.command_file.save
-        redirect_to command_pages_index_path
+        redirect_to command_pages_index_path 0
       else
         response_bad_request
       end
