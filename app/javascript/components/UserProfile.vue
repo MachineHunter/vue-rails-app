@@ -40,6 +40,7 @@
           v-for="command in popularCommands"
           :key="command.id"
           :command="command"
+          :currentUserId="-1"
           class="mb-2"
         />
       </div>

@@ -80,18 +80,6 @@ export default {
       perPage: 5
     }
   },
-  created: function() {
-    const cookiesString = document.cookie
-    const cookies = cookiesString.split(";").reduce((acc, cookie) => {
-      const [key, value] = cookie.split("=")
-      return {...acc, [key.trim()]: value.trim()}
-    }, {})
-    
-    if(cookies["keep_page"] && cookies["current_page"]) {
-      this.currentPage = Number(cookies["current_page"])
-    }
-    document.cookie = "keep_page=;max-age=0"
-  },
   computed: {
     noCommands() {
       if(!this.commands) return false
@@ -109,6 +97,7 @@ export default {
   },
   created: function() {
     this.getCommands()
+    this.getRememberedPage()
   },
   methods: {
     getCommands: function() {
@@ -123,6 +112,18 @@ export default {
       }).catch(err => {
         console.log(err);
       })
+    },
+    getRememberedPage() {
+      const cookiesString = document.cookie
+      const cookies = cookiesString.split(";").reduce((acc, cookie) => {
+        const [key, value] = cookie.split("=")
+        return {...acc, [key.trim()]: value.trim()}
+      }, {})
+      
+      if(cookies["keep_page"] && cookies["current_page"]) {
+        this.currentPage = Number(cookies["current_page"])
+      }
+      document.cookie = "keep_page=;max-age=0"
     }
   },
   watch: {
