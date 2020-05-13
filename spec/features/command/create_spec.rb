@@ -18,7 +18,7 @@ RSpec.feature 'Create Command', type: :feature do
     find(:css, '#command_type_id > div:nth-child(1) > label:nth-child(2)').click
     attach_file 'zipdata', "#{Rails.root}/spec/factories/testfiles/test.zip", make_visible: true
     click_button 'submit-command'
-    wait_url(command_pages_index_path)
+    wait_url(command_pages_index_path(0))
     expect(Command.last.title).to eq 'feature_title_command'
     expect(CommandFile.last.zipdata.nil?).to eq false
   end
