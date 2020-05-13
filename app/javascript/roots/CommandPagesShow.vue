@@ -1,7 +1,10 @@
 <template>
     <div id="command-pages-show" class="root-component">
-    <common-header :signedIn="true"></common-header>
-    <command-detail :commandId="commandId"></command-detail>
+    <common-header :signedIn="signedIn"></common-header>
+    <command-detail
+      :commandId="commandId"
+      :currentUserId="currentUserId"
+    />
     <common-footer></common-footer>
   </div>
 </template>
@@ -21,6 +24,15 @@ export default {
     commandId: {
       type: Number,
       required: true
+    },
+    currentUserId: {
+      type: Number,
+      required: true
+    }
+  },
+  computed: {
+    signedIn: function() {
+      return this.currentUserId !== -1
     }
   }
 }

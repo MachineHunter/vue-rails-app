@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :command do
-    title { 'test_command' }
-    description { 'this is a test command' }
+    title { Faker::Book.title }
+    description { Faker::Games::HeroesOfTheStorm.quote }
     association :user
     association :genre
     association :command_type

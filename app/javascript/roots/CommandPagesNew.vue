@@ -1,6 +1,6 @@
 <template>
   <div id="command-pages-new" class="root-component">
-    <common-header></common-header>
+    <common-header :signedIn="signedIn"></common-header>
     <div class="main-center">
       <h2>新規コマンド投稿</h2>
 
@@ -98,6 +98,12 @@ export default {
     CommonHeader,
     CommonFooter
   },
+  props: {
+    currentUserId: {
+      type: Number,
+      required: true
+    }
+  },
   data: function() {
     return {
       command: {
@@ -113,6 +119,9 @@ export default {
     }
   },
   computed: {
+    signedIn: function() {
+      return this.currentUserId !== -1
+    },
     genreOptions: function() {
       return this.genres.map(genre => (
         {

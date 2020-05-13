@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Command', type: :request do
   let!(:command) { create(:command) }
+  let!(:command2) { create(:command) }
   let(:user) { command.user }
-  let(:send_index_request) { get api_command_index_path }
+  let(:user2) { command2.user }
   let(:send_new_request) { get new_api_command_path }
   let(:send_show_request) { get api_command_path command.id }
   let(:send_destroy_request) { delete api_command_path command.id }
@@ -20,10 +21,16 @@ RSpec.describe 'Command', type: :request do
   end
 
   describe 'index' do
-    it do
-      send_index_request
+    it 'own profile' do
+      get api_command_index_path user.id
       expect(response).to have_http_status(200)
-      expect(result[:command][0][:title]).to eq 'test_command'
+      expect(result[:command][0][:title]).to eq command.title
+    end
+
+    it 'other user profile' do
+      get api_command_index_path user2.id
+      expect(response).to have_http_status(200)
+      expect(result[:command][0][:title]).to eq command2.title
     end
   end
 
@@ -42,7 +49,7 @@ RSpec.describe 'Command', type: :request do
       expect(response).to have_http_status(200)
       expect(result[:filename]).to eq command.command_file.filename
       expect(result[:filetree][:name]).to eq 'test'
-      expect(result[:command][:title]).to eq 'test_command'
+      expect(result[:command][:title]).to eq command.title
       expect(result[:filedatas].nil?).to eq false
     end
   end

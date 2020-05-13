@@ -1,8 +1,13 @@
 module Api
   class AvatarController < ApplicationController
     def index
-      image = current_user.avatar.image
-      filetype = current_user.avatar.filetype
+      @user = if params[:id].to_i.zero?
+                current_user
+              else
+                User.find(params[:id])
+              end
+      image = @user.avatar.image
+      filetype = @user.avatar.filetype
       send_data image, type: filetype, disposition: 'inline'
     end
 

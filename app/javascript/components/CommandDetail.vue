@@ -9,6 +9,7 @@
       <command-dropdown
         :commandId="commandId"
         :inDetail="true"
+        :isMine="isMine"
         :indexUrl="indexUrl"
         @open-update-form="$bvModal.show('modal-for-update')"
       />
@@ -25,6 +26,7 @@
     </b-card>
 
     <b-modal
+      v-if="isMine"
       id="modal-for-update"
       title="コマンドの編集"
       centered
@@ -56,6 +58,10 @@ export default {
     commandId: {
       type: Number,
       required: true
+    },
+    currentUserId: {
+      type: Number,
+      required: true
     }
   },
   data: function() {
@@ -68,6 +74,12 @@ export default {
   },
   created: function() {
     this.getCommandData()
+  },
+  computed: {
+    isMine() {
+      if(!this.command.user_id) return null
+      return this.command.user_id === this.currentUserId
+    }
   },
   methods: {
     getCommandData: function() {

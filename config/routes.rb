@@ -13,16 +13,20 @@ Rails.application.routes.draw do
       delete 'practice/destroy'
     end
 
-    namespace :user_pages do
-      get 'index'
+    scope :user_pages do
+      get 'index/:id', to: 'user_pages#index', as: 'user_pages_index'
     end
 
+    scope :avatar do
+      get 'index/:id', to: 'avatar#index', as: 'avatar_index'
+    end
     namespace :avatar do
-      get 'index'
       post 'update'
     end
 
-    resources :command
+    resources :command, except: [:index] do
+      get 'index/:id', to: 'command#index', on: :collection, as: ''
+    end
   end
 
   get 'practice/index'
