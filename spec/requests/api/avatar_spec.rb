@@ -22,7 +22,8 @@ RSpec.describe 'Avatar', type: :request do
     it 'other user avatar' do
       get api_avatar_index_path user2.id
       expect(response).to have_http_status(200)
-      expect(response.body).to eq avatar2.image
+      expect(response.body).not_to eq(avatar.image)
+      expect(response.body).not_to eq(nil)
     end
   end
 

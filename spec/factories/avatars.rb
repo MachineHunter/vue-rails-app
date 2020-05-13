@@ -6,9 +6,9 @@ FactoryBot.define do
     image { File.read("#{Rails.root}/spec/factories/images/white.jpeg") }
 
     trait :other do
-      filename { 'ninja.jpg' }
+      filename { 'white2.png' }
       filetype { 'image/png' }
-      image { File.read("#{Rails.root}/spec/factories/images/ninja.png") }
+      image { File.read("#{Rails.root}/spec/factories/images/white2.png") }
     end
   end
 end
