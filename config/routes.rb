@@ -24,9 +24,7 @@ Rails.application.routes.draw do
       post 'update'
     end
 
-    resources :command, except: [:index] do
-      get 'index/:id', to: 'command#index', on: :collection, as: ''
-    end
+    resources :command
   end
 
   get 'practice/index'
