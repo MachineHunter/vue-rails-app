@@ -91,16 +91,10 @@ export default {
   },
   methods: {
     getCommands: function() {
-      Axios.get(`/api/command/index/${this.userId}`).then(res => {
-        const longCommand = {
-          id: -1,
-          title: "long title ".repeat(10),
-          description: "long description ".repeat(30),
-          user_id: 1, genre_id: 1, command_type_id: 1
-        }
-        this.commands = [longCommand, ...res.data.command];
+      Axios.get("/api/command").then(res => {
+        this.commands = res.data.command
       }).catch(err => {
-        console.log(err);
+        console.log(err)
       })
     }
   }
