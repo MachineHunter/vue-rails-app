@@ -4,7 +4,7 @@
     activeTab="account"
     signedInOnly
   >
-    <main-user-profile/>
+    <main-user-profile :userId="userId"/>
   </common-layout>
 </template>
 
@@ -19,6 +19,10 @@ export default {
   },
   props: {
     currentUserId: {
+      type: Number,
+      required: true
+    },
+    userId: {
       type: Number,
       required: true
     }

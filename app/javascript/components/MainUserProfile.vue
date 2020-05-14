@@ -1,9 +1,5 @@
 <template>
   <div id="main-user-profile" class="main-center-100">
-    <div>
-      <label>user id<input type="number" v-model.number="userId"></label>
-      <button type="button" @click="getUserData();getAvatar();">change id</button>
-    </div>
       <b-media>
         <template v-slot:aside>
           <b-img
@@ -56,10 +52,13 @@ export default {
     Command
   },
     props: {
+      userId: {
+        type: Number,
+        required: true
+      }
     },
     data: function() {
       return {
-        userId: 0,
         user: {},
         avatar: null,
         popularCommands: []
@@ -72,7 +71,7 @@ export default {
     },
     methods: {
       getUserData: function() {
-        Axios.get(`/api/user_pages/index/${this.userId}`).then(res => {
+        Axios.get(`/api/user_pages/${this.userId}`).then(res => {
           this.user = res.data.user
         }).catch(err => {
           console.log(err)
@@ -94,7 +93,8 @@ export default {
             title: `dummy${i}`,
             description: `description${i} description${i}`,
             genre_id: 1,
-            command_type_id: 1
+            command_type_id: 1,
+            owner: {name: "Mr. dummy", id: -i}
           }
         ))
       }

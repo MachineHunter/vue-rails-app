@@ -19,7 +19,12 @@
               class="ml-1"
             />
           </div>
-
+        </div>
+        <div>
+          <span>作成者：</span>
+          <b-link :href="`/user_pages/${command.owner.id}`">
+            {{command.owner.name}}
+          </b-link>
         </div>
         <hr class="my-1">
         <p class="mb-0 command-description">

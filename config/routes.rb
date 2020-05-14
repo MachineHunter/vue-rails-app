@@ -13,9 +13,7 @@ Rails.application.routes.draw do
       delete 'practice/destroy'
     end
 
-    scope :user_pages do
-      get 'index/:id', to: 'user_pages#index', as: 'user_pages_index'
-    end
+    resources :user_pages, only: [:show]
 
     scope :avatar do
       get 'index/:id', to: 'avatar#index', as: 'avatar_index'
@@ -24,21 +22,20 @@ Rails.application.routes.draw do
       post 'update'
     end
 
-    resources :command, except: [:index] do
-      get 'index/:id', to: 'command#index', on: :collection, as: ''
-    end
+    resources :command
   end
 
   get 'practice/index'
   get 'practice/index2'
   get 'practice/index3'
 
-  get 'user_pages/index' 
+  resources :user_pages, only: [:show]
+
   get 'command_pages/index'
   resources :command_pages, only: [:index, :new, :show] do
-    get 'download/:id', to: 'command_pages#download', on: :collection
+    get 'download/:id', to: 'command_pages#download', on: :collection, as: 'download'
   end
 
-  root to: "user_pages#index"
+  root to: "command_pages#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

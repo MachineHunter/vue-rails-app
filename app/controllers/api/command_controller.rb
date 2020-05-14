@@ -3,12 +3,7 @@ module Api
     require 'zip'
 
     def index
-      @user = if params[:id].to_i.zero?
-                current_user
-              else
-                User.find(params[:id])
-              end
-      @commands = @user.command.all
+      @commands = Command.all
     end
 
     def show
@@ -19,6 +14,7 @@ module Api
       @filetree = json_file_tree(@unzippeddata.first)
       @filedatas = json_file_data(@unzippeddata)
       @index_url = command_pages_index_path
+      @user = @command.user
     end
 
     def new
@@ -36,7 +32,7 @@ module Api
       @command.command_file.zipdata = params[:zipdata]
 
       if @command.save! && @command.command_file.save
-        redirect_to command_pages_index_path 0
+        redirect_to command_pages_index_path
       else
         response_bad_request
       end

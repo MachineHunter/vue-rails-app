@@ -74,6 +74,7 @@ RSpec.configure do |config|
   config.include WaitAjax, type: :feature
 end
 
+# capybara settings
 Capybara.register_driver :selenium_chrome_headless do |app|
   chrome_options = ::Selenium::WebDriver::Chrome::Options.new
   chrome_options.args << '--headless'
