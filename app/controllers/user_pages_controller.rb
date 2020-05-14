@@ -1,3 +1,3 @@
 class UserPagesController < ApplicationController
-  def index; end
+  def show; end
 end

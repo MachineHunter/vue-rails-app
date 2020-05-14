@@ -1,9 +1,5 @@
 <template>
-  <div id="user-profile" class="main-center">
-    <div>
-      <label>user id<input type="number" v-model.number="userId"></label>
-      <button type="button" @click="getUserData();getAvatar();">change id</button>
-    </div>
+  <div id="main-user-profile" class="main-center-100">
       <b-media>
         <template v-slot:aside>
           <b-img
@@ -36,41 +32,46 @@
           <h5 class="d-inline">人気のコマンド</h5>
           <b-link href="/command_pages/index" class="align-top ml-2">もっと見る</b-link>
         </header>
-        <b-card-group deck>
-          <b-card
-            v-for="i in 3"
-            :key="`command${i}`"
-            :title="`command${i}`"
-          >
-            <b-card-text>
-              description here description here description here
-            </b-card-text>
-          </b-card>
-        </b-card-group>
+        <command
+          v-for="command in popularCommands"
+          :key="command.id"
+          :command="command"
+          :currentUserId="-1"
+          class="mb-2"
+        />
       </div>
     </div>
 </template>
 
 <script>
 import Axios from "axios"
+import Command from "./Command"
 
 export default {
+  components: {
+    Command
+  },
     props: {
+      userId: {
+        type: Number,
+        required: true
+      }
     },
     data: function() {
       return {
-        userId: 0,
         user: {},
-        avatar: null
+        avatar: null,
+        popularCommands: []
       }
     },
     created: function() {
       this.getUserData()
       this.getAvatar()
+      this.getPopularCommands()
     },
     methods: {
       getUserData: function() {
-        Axios.get(`/api/user_pages/index/${this.userId}`).then(res => {
+        Axios.get(`/api/user_pages/${this.userId}`).then(res => {
           this.user = res.data.user
         }).catch(err => {
           console.log(err)
@@ -84,6 +85,18 @@ export default {
         }).catch(err => {
           console.log(err)
         });
+      },
+      getPopularCommands() {
+        this.popularCommands = [1,2,3].map(i => (
+          {
+            id: -i,
+            title: `dummy${i}`,
+            description: `description${i} description${i}`,
+            genre_id: 1,
+            command_type_id: 1,
+            owner: {name: "Mr. dummy", id: -i}
+          }
+        ))
       }
     }
 }

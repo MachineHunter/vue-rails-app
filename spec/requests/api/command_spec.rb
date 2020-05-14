@@ -46,6 +46,7 @@ RSpec.describe 'Command', type: :request do
       expect(result[:filetree][:name]).to eq 'test'
       expect(result[:command][:title]).to eq command.title
       expect(result[:filedatas].nil?).to eq false
+      expect(result[:owner][:id]).to eq user.id
     end
   end
 

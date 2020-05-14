@@ -1,11 +1,16 @@
 <template>
-  <div id="user-commands" class="main-center-100">
-    <div>
-      <label>user id<input type="number" v-model.number="userId"></label>
-      <button type="button" @click="getCommands">change id</button>
+  <div id="main-command-list" class="main-center-100">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h2>コマンド一覧</h2>
+      <b-button
+        href="/command_pages/new"
+        variant="primary"
+        pill
+        class="mr-2 font-weight-bolder"
+      >
+        新規コマンド投稿
+      </b-button>
     </div>
-    <h2>コマンド一覧</h2>
-    <b-link href="/command_pages/new">新規コマンド投稿</b-link>
     
     <b-overlay :show="noCommands" rounded="sm">
       <div>
@@ -88,6 +93,7 @@ export default {
   },
   created: function() {
     this.getCommands()
+    this.getRememberedPage()
   },
   methods: {
     getCommands: function() {
@@ -96,6 +102,24 @@ export default {
       }).catch(err => {
         console.log(err)
       })
+    },
+    getRememberedPage() {
+      const cookiesString = document.cookie
+      const cookies = cookiesString.split(";").reduce((acc, cookie) => {
+        const [key, value] = cookie.split("=")
+        if(value === undefined) return acc
+        return {...acc, [key.trim()]: value.trim()}
+      }, {})
+      
+      if(cookies["keep_page"] && cookies["current_page"]) {
+        this.currentPage = Number(cookies["current_page"])
+      }
+      document.cookie = "keep_page=;max-age=0"
+    }
+  },
+  watch: {
+    currentPage: function(newValue, oldValue) {
+      document.cookie = `current_page=${newValue}`
     }
   }
 }
