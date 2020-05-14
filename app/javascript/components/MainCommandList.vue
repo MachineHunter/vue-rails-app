@@ -1,5 +1,5 @@
 <template>
-  <div id="user-commands" class="main-center-100">
+  <div id="main-command-list" class="main-center-100">
     <div>
       <label>user id<input type="number" v-model.number="userId"></label>
       <button type="button" @click="getCommands">change id</button>
