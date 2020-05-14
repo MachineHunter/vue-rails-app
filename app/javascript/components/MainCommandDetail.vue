@@ -1,6 +1,14 @@
 <template>
   <div id="main-command-detail" class="main-center-100">
-    <h2>{{command.title}}</h2>
+    <div class="d-flex justify-content-between">
+      <h2>{{command.title}}</h2>
+      <div>
+        <span>作成者：</span>
+        <b-link :href="`/user_pages/${owner.id}`">
+          {{owner.name}}
+        </b-link>
+      </div>
+    </div>
     <div class="d-flex justify-content-between flex-y-center mb-2">
       <div>
         <command-tag tagType="genre" :tagId="command.genre_id"/>
@@ -69,7 +77,8 @@ export default {
       command: {},
       fileTree: {},
       fileContents: {},
-      indexUrl: ""
+      indexUrl: "",
+      owner: {}
     }
   },
   created: function() {
@@ -88,6 +97,7 @@ export default {
         this.fileTree = res.data.filetree
         this.fileContents = res.data.filedatas
         this.indexUrl = res.data.index_url
+        this.owner = res.data.owner
       }).catch(err => {
         console.log(err);
       })

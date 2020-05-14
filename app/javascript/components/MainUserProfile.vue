@@ -94,7 +94,8 @@ export default {
             title: `dummy${i}`,
             description: `description${i} description${i}`,
             genre_id: 1,
-            command_type_id: 1
+            command_type_id: 1,
+            owner: {name: "Mr. dummy", id: -i}
           }
         ))
       }
