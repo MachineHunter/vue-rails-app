@@ -70,7 +70,7 @@ export default {
     },
     methods: {
       getUserData: function() {
-        Axios.get(`/api/user_pages/index/${this.userId}`).then(res => {
+        Axios.get(`/api/user_pages/${this.userId}`).then(res => {
           this.user = res.data.user
         }).catch(err => {
           console.log(err)
