@@ -1,6 +1,6 @@
 module Api
   class AvatarController < ApplicationController
-    def index
+    def show
       @user = if params[:id].to_i.zero?
                 current_user
               else
@@ -11,7 +11,7 @@ module Api
       send_data image, type: filetype, disposition: 'inline'
     end
 
-    def update
+    def create
       image = params[:avatar]
       return if image.nil?
 
