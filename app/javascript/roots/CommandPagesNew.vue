@@ -150,6 +150,7 @@ export default {
   },
   created: function() {
     this.getTagData()
+    document.cookie = "keep_page=true"
   },
   mounted: function() {
     const token = document.querySelector("meta[name=csrf-token]").getAttribute("content")
