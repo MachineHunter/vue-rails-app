@@ -22,6 +22,9 @@ export default {
       type: Number,
       required: true
     }
+  },
+  created: function() {
+    document.cookie = "keep_page=true"
   }
 }
 </script>
