@@ -111,6 +111,7 @@ export default {
       const cookiesString = document.cookie
       const cookies = cookiesString.split(";").reduce((acc, cookie) => {
         const [key, value] = cookie.split("=")
+        if(value === undefined) return acc
         return {...acc, [key.trim()]: value.trim()}
       }, {})
       
