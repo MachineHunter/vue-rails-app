@@ -1,9 +1,5 @@
 <template>
   <div id="main-command-list" class="main-center-100">
-    <div>
-      <label>user id<input type="number" v-model.number="userId"></label>
-      <button type="button" @click="getCommands">change id</button>
-    </div>
     <div class="d-flex justify-content-between align-items-center mb-2">
       <h2>コマンド一覧</h2>
       <b-button
