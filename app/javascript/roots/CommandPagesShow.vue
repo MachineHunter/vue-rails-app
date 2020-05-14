@@ -1,43 +1,39 @@
 <template>
-    <div id="command-pages-show" class="root-component">
-    <common-header :signedIn="signedIn"></common-header>
-    <command-detail
+  <common-layout
+    :currentUserId="currentUserId"
+    activeTab="account"
+  >
+    <main-command-detail
       :commandId="commandId"
       :currentUserId="currentUserId"
     />
-    <common-footer></common-footer>
-  </div>
+  </common-layout>
 </template>
 
 <script>
-import CommonHeader from "../components/CommonHeader"
-import CommonFooter from "../components/CommonFooter"
-import CommandDetail from "../components/CommandDetail"
+import CommonLayout from "../components/CommonLayout"
+import MainCommandDetail from "../components/MainCommandDetail"
 
 export default {
   components: {
-    CommonHeader,
-    CommonFooter,
-    CommandDetail
+    CommonLayout,
+    MainCommandDetail
   },
   props: {
-    commandId: {
-      type: Number,
-      required: true
-    },
     currentUserId: {
       type: Number,
       required: true
+    },
+    commandId: {
+      type: Number,
+      required: true
     }
   },
-  computed: {
-    signedIn: function() {
-      return this.currentUserId !== -1
-    }
+  created: function() {
+    document.cookie = "keep_page=true"
   }
 }
 </script>
 
 <style scoped>
-
 </style>

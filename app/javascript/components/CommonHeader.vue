@@ -20,6 +20,9 @@
           >
             ランキング
           </b-nav-item>
+          <b-nav-item href="/command_pages/index">
+            コマンド一覧
+          </b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item-dropdown

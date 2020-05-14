@@ -1,5 +1,5 @@
 <template>
-  <div id="command-detail" class="main-center-100">
+  <div id="main-command-detail" class="main-center-100">
     <h2>{{command.title}}</h2>
     <div class="d-flex justify-content-between flex-y-center mb-2">
       <div>
