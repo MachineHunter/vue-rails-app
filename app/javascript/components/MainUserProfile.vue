@@ -56,10 +56,13 @@ export default {
     Command
   },
     props: {
+      userId: {
+        type: Number,
+        required: true
+      }
     },
     data: function() {
       return {
-        userId: 0,
         user: {},
         avatar: null,
         popularCommands: []
