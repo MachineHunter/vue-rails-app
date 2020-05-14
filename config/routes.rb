@@ -19,7 +19,6 @@ Rails.application.routes.draw do
 
   resources :user_pages, only: [:show]
 
-  get 'command_pages/index'
   resources :command_pages, only: [:index, :new, :show] do
     get 'download/:id', to: 'command_pages#download', on: :collection, as: 'download'
   end
