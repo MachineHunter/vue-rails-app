@@ -107,7 +107,6 @@ module Api
 
     def json_file_data(unzippeddata)
       files, datas = unzippeddata
-      files.map! { |file| file.split('/').last }
       Hash[*[files, datas].transpose.flatten]
     end
   end
