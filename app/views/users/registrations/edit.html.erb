@@ -3,7 +3,7 @@
 <div class="main-center">
   <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-  <form action="/api/avatar/update" method="post" enctype="multipart/form-data" name="formforavatar" novalidate>
+  <form action="/api/avatar" method="post" enctype="multipart/form-data" name="formforavatar" novalidate>
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
     <div class="field form-group needs-validation">
       <label for="icon-input">プロフィール画像</label>

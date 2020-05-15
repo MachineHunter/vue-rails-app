@@ -20,7 +20,7 @@
           >
             ランキング
           </b-nav-item>
-          <b-nav-item href="/command_pages/index">
+          <b-nav-item href="/command_pages">
             コマンド一覧
           </b-nav-item>
         </b-navbar-nav>
