@@ -13,7 +13,7 @@ module Api
       @unzippeddata = unzip_file(@zipdata)
       @filetree = json_file_tree(@unzippeddata.first)
       @filedatas = json_file_data(@unzippeddata)
-      @index_url = command_pages_index_path
+      @index_url = command_pages_path
       @user = @command.user
     end
 
@@ -32,7 +32,7 @@ module Api
       @command.command_file.zipdata = params[:zipdata]
 
       if @command.save! && @command.command_file.save
-        redirect_to command_pages_index_path
+        redirect_to command_pages_path
       else
         response_bad_request
       end
