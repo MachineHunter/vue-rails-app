@@ -29,7 +29,6 @@
             v-for="command in commandsToDisplay"
             :key="command.id"
             :command="command"
-            :currentUserId="currentUserId"
             class="my-1"
           />
         </div>
@@ -61,12 +60,6 @@ import Command from "./Command"
 export default {
   components: {
     Command
-  },
-  props: {
-    currentUserId: {
-      type: Number,
-      required: true
-    }
   },
   data: function() {
     return {

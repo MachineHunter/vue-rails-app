@@ -48,16 +48,15 @@ export default {
     command: {
       type: Object,
       required: true
-    },
-    currentUserId: {
-      type: Number,
-      required: true
     }
   },
   computed: {
     isMine() {
       if(!this.command.user_id) return null
       return this.command.user_id === this.currentUserId
+    },
+    currentUserId() {
+      return this.$store.state.currentUserId
     }
   },
   methods: {

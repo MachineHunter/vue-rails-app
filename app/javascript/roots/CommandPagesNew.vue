@@ -1,6 +1,5 @@
 <template>
   <common-layout
-    :currentUserId="currentUserId"
     activeTab="account"
     signedInOnly
   >
@@ -16,12 +15,6 @@ export default {
   components: {
     CommonLayout,
     MainCommandCreateForm
-  },
-  props: {
-    currentUserId: {
-      type: Number,
-      required: true
-    }
   },
   created: function() {
     document.cookie = "keep_page=true"

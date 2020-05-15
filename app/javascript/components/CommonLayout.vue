@@ -9,7 +9,7 @@
       <b-link href="/users/sign_in">ログイン</b-link>
       <b-link href="/users/sign_up">ユーザー登録</b-link>
     </div>
-    <slot v-else :currentUserId="currentUserId"/>
+    <slot v-else/>
     <common-footer />
   </div>
 </template>
@@ -24,10 +24,6 @@ export default {
     CommonFooter
   },
   props: {
-    currentUserId: {
-      type: Number,
-      required: true
-    },
     activeTab: {
       type: String,
       validator: function(value) {
@@ -46,6 +42,9 @@ export default {
   computed: {
     signedIn() {
       return this.currentUserId !== -1
+    },
+    currentUserId() {
+      return this.$store.state.currentUserId
     }
   }
 }

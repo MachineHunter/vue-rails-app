@@ -62,16 +62,6 @@ export default {
     CommandDropdown,
     CommandUpdateForm
   },
-  props: {
-    commandId: {
-      type: Number,
-      required: true
-    },
-    currentUserId: {
-      type: Number,
-      required: true
-    }
-  },
   data: function() {
     return {
       command: {},
@@ -88,6 +78,12 @@ export default {
     isMine() {
       if(!this.command.user_id) return null
       return this.command.user_id === this.currentUserId
+    },
+    commandId() {
+      return this.$store.state.commandId
+    },
+    currentUserId() {
+      return this.$store.state.currentUserId
     }
   },
   methods: {
