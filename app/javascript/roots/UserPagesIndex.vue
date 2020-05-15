@@ -2,7 +2,6 @@
   <common-layout
     :currentUserId="currentUserId"
     activeTab="account"
-    signedInOnly
   >
     <main-user-profile :userId="userId"/>
   </common-layout>
