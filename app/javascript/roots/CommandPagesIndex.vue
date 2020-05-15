@@ -1,11 +1,8 @@
 <template>
   <common-layout
-    :currentUserId="currentUserId"
     activeTab="account"
   >
-    <main-command-list
-      :currentUserId="currentUserId"
-    />
+    <main-command-list/>
   </common-layout>
 </template>
 
@@ -17,12 +14,6 @@ export default {
   components: {
     CommonLayout,
     MainCommandList
-  },
-  props: {
-    currentUserId: {
-      type: Number,
-      required: true
-    }
   }
 }
 </script>

@@ -30,11 +30,12 @@ export default (rootComponent, dataHandler=(h)=>({}), storeSeed={}) => {
   const vueMountListener = () => {
     const vueHook = document.getElementById("vue-hook")
     if(vueHook){
-      const props = dataHandler(vueHook)
-      Object.assign(baseStoreSeed.state, props)
+      const data = dataHandler(vueHook)
+      Object.assign(baseStoreSeed.state, data)
       const store = new Vuex.Store(baseStoreSeed)
+
       const vm = new Vue({
-        render: h => h(rootComponent, {props}),
+        render: h => h(rootComponent),
         store
       }).$mount()
       // document.body.appendChild(vm.$el)

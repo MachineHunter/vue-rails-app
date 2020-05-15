@@ -1,12 +1,8 @@
 <template>
   <common-layout
-    :currentUserId="currentUserId"
     activeTab="account"
   >
-    <main-command-detail
-      :commandId="commandId"
-      :currentUserId="currentUserId"
-    />
+    <main-command-detail/>
   </common-layout>
 </template>
 
@@ -18,16 +14,6 @@ export default {
   components: {
     CommonLayout,
     MainCommandDetail
-  },
-  props: {
-    currentUserId: {
-      type: Number,
-      required: true
-    },
-    commandId: {
-      type: Number,
-      required: true
-    }
   },
   created: function() {
     document.cookie = "keep_page=true"

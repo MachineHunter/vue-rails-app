@@ -36,7 +36,6 @@
           v-for="command in popularCommands"
           :key="command.id"
           :command="command"
-          :currentUserId="-1"
           class="mb-2"
         />
       </div>
@@ -51,12 +50,6 @@ export default {
   components: {
     Command
   },
-    props: {
-      userId: {
-        type: Number,
-        required: true
-      }
-    },
     data: function() {
       return {
         user: {},
@@ -68,6 +61,11 @@ export default {
       this.getUserData()
       this.getAvatar()
       this.getPopularCommands()
+    },
+    computed: {
+      userId() {
+        return this.$store.state.userId
+      }
     },
     methods: {
       getUserData: function() {
