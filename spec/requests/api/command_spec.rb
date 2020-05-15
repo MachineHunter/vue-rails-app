@@ -51,11 +51,16 @@ RSpec.describe 'Command', type: :request do
   end
 
   describe 'update' do
-    it do
+    it 'check if data is updated' do
       expect do
         send_update_request
         command.reload
       end.to change { command.title }.to('after_update')
+    end
+
+    it 'check redirection is correct' do
+      send_update_request
+      expect(response).to have_http_status(204)
     end
   end
 
