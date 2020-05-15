@@ -45,6 +45,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rubocop', require: false
   gem 'faker'
+  gem 'dotenv-rails'
 end
 
 group :development do
@@ -87,3 +88,4 @@ gem 'redis-namespace'
 gem 'devise'
 gem 'rubyzip', '>= 1.0.0'
 gem 'zip-zip'
+gem 'slack-notifier'
