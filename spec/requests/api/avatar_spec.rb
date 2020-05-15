@@ -36,6 +36,7 @@ RSpec.describe 'Avatar', type: :request do
       expect(response).to have_http_status(302)
       expect(user.avatar.filename).to eq avatar.filename
       expect(user.avatar.image).not_to eq nil
+      expect(response).to redirect_to(user_page_path(0))
     end
 
     it 'wrong prefix' do

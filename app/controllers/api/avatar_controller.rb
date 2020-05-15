@@ -23,7 +23,7 @@ module Api
       @avatar.image    = image.tempfile.read
 
       if @avatar.save
-        redirect_to root_path
+        redirect_to user_page_path 0
       else
         response_bad_request
       end

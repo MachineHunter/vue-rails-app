@@ -33,9 +33,9 @@ module Users
     # end
 
     # PUT /resource
-    # def update
-    #   super
-    # end
+    def update
+      super
+    end
 
     # DELETE /resource
     def destroy
@@ -55,7 +55,11 @@ module Users
     #   super
     # end
 
-    # protected
+    protected
+
+    def after_update_path_for(_resource)
+      user_page_path(0)
+    end
 
     # If you have extra params to permit, append them to the sanitizer.
     # def configure_sign_up_params
