@@ -27,20 +27,25 @@
         <b-navbar-nav class="ml-auto">
           <b-nav-item-dropdown
             text="アカウント"
-            :disabled="!signedIn"
             right
             :class="{'text-white-important-parent': activeTab === 'account' && signedIn}"
           >
-            <b-dropdown-item href="/user_pages/0">プロフィール</b-dropdown-item>
-            <b-dropdown-item href="/users/edit">設定</b-dropdown-item>
-            <b-dropdown-item
-              href="/users/sign_out"
-              rel="nofollow"
-              data-method="delete"
-              link-class="text-danger"
-            >
-              ログアウト
-            </b-dropdown-item>
+            <template v-if="signedIn">
+              <b-dropdown-item href="/user_pages/0">プロフィール</b-dropdown-item>
+              <b-dropdown-item href="/users/edit">設定</b-dropdown-item>
+              <b-dropdown-item
+                href="/users/sign_out"
+                rel="nofollow"
+                data-method="delete"
+                link-class="text-danger"
+              >
+                ログアウト
+              </b-dropdown-item>
+            </template>
+            <template v-else>
+              <b-dropdown-item href="/users/sign_in">ログイン</b-dropdown-item>
+              <b-dropdown-item href="/users/sign_up">アカウント作成</b-dropdown-item>
+            </template>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
