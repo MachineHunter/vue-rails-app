@@ -22,6 +22,6 @@ namespace :metrics do
       ENV['WEBHOOK_URL'],
       channel: '#' + ENV['CHANNEL']
     )
-    notifier.ping 'test'
+    notifier.ping output
   end
 end
