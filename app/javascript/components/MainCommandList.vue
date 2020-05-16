@@ -114,6 +114,14 @@ export default {
       if(!this.commands) return false
       return this.commands.length === 0
     },
+    optionForFilterByUser() {
+      const userId = this.cookies["user_id"]
+      return userId ? [Number(userId)] : [-1] //[-1] means all
+    },
+    noUserFilter() {
+      if(!this.optionForFilterByUser) return false
+      return this.optionForFilterByUser[0] === -1
+    },
     genreOptions: function() {
       return this.genres.map(genre => (
         {
@@ -134,8 +142,8 @@ export default {
       if(!this.commands) return []
       const filteredCommands = this.commands.filter(command => {
         let result = true
-        result = (this.filterOptions.userIds[0] === -1) ?
-          result : (result && this.filterOptions.userIds.includes(command.owner.id))
+        result = this.noUserFilter ?
+          result : (result && this.optionForFilterByUser.includes(command.owner.id))
         return result &&
           this.filterOptions.genreIds.includes(command.genre_id) &&
           this.filterOptions.commandTypeIds.includes(command.command_type_id)
@@ -161,11 +169,13 @@ export default {
       if(!this.computedCommands) return []
       const start = (this.currentPage - 1) * this.perPage
       return [...this.computedCommands].splice(start, this.perPage)
+    },
+    cookies() {
+      return this.$store.state.cookies
     }
   },
   created: function() {
     this.getCommands()
-    this.getUserData()
     this.getTagData()
     this.getRememberedPage()
   },
@@ -176,16 +186,6 @@ export default {
       }).catch(err => {
         console.log(err)
       })
-    },
-    getUserData: function() {
-      const cookies = this.$store.state.cookies
-      
-      if(cookies["user_id"]) {
-        this.filterOptions.userIds = [Number(cookies["user_id"])]
-      }else{
-          this.filterOptions.userIds = [-1]
-      }
-      document.cookie = "user_id=;max-age=0;path=/"
     },
     getTagData() {
         Axios.get("/api/command/new").then(res => {
@@ -198,12 +198,12 @@ export default {
       })
     },
     getRememberedPage() {
-      const cookies = this.$store.state.cookies
+      const cookies = this.cookies
       
       if(cookies["keep_page"] && cookies["current_page"]) {
         this.currentPage = Number(cookies["current_page"])
       }
-      document.cookie = "keep_page=;max-age=0;path=/"
+      // document.cookie = "keep_page=;max-age=0;path=/"
     }
   },
   watch: {

@@ -71,6 +71,9 @@ export default {
     computed: {
       userId() {
         return this.$store.state.userId
+      },
+      currentUserId() {
+        return this.$store.state.currentUserId
       }
     },
     methods: {
@@ -103,7 +106,11 @@ export default {
         ))
       },
       clickSeeMore() {
-        document.cookie = `user_id=${this.userId};path=/`
+        if(this.userId === 0) {
+          document.cookie = `user_id=${this.currentUserId};path=/`
+        } else {
+          document.cookie = `user_id=${this.userId};path=/`
+        }
       }
     }
 }
