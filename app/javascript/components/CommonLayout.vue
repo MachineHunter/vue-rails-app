@@ -52,9 +52,11 @@ export default {
     }
   },
   created: function() {
-    this.cookiesToDelete.forEach(cookie => {
-      document.cookie = `${cookie}=;max-age=0;path=/`
-    })
+    window.addEventListener("beforeunload", () => {
+      this.cookiesToDelete.forEach(cookie => {
+        document.cookie = `${cookie}=;max-age=0;path=/`
+      })
+    }, false)
   }
 }
 </script>

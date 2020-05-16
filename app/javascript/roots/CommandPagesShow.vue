@@ -1,7 +1,6 @@
 <template>
   <common-layout
     activeTab="account"
-    :cookiesToDelete="['user_id']"
   >
     <main-command-detail/>
   </common-layout>

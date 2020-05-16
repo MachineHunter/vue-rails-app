@@ -2,7 +2,6 @@
   <common-layout
     activeTab="account"
     signedInOnly
-    :cookiesToDelete="['user_id']"
   >
     <main-command-create-form/>
   </common-layout>
