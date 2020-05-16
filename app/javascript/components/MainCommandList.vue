@@ -133,9 +133,12 @@ export default {
     computedCommands() {
       if(!this.commands) return []
       const filteredCommands = this.commands.filter(command => {
-        return this.filterOptions.userIds.includes(command.owner.id)
-          && this.filterOptions.genreIds.includes(command.genre_id)
-          && this.filterOptions.commandTypeIds.includes(command.command_type_id)
+        let result = true
+        result = (this.filterOptions.userIds[0] === -1) ?
+          result : (result && this.filterOptions.userIds.includes(command.owner.id))
+        return result &&
+          this.filterOptions.genreIds.includes(command.genre_id) &&
+          this.filterOptions.commandTypeIds.includes(command.command_type_id)
       })
       const sortedFilteredCommands = filteredCommands.sort((command1, command2) => {
         let result = 0
@@ -175,11 +178,19 @@ export default {
       })
     },
     getUserData: function() {
-      // if(there_is_id_in_cookie){
-      //   this.filterOptions.userIds = [id_from_cookie]
-      // }else{
-      //   this.filterOptions.userIds = res.data.users.map(user => user.id)
-      // }
+      const cookiesString = document.cookie
+      const cookies = cookiesString.split(";").reduce((acc, cookie) => {
+        const [key, value] = cookie.split("=")
+        if(value === undefined) return acc
+        return {...acc, [key.trim()]: value.trim()}
+      }, {})
+      
+      if(cookies["user_id"]) {
+        this.filterOptions.userIds = [Number(cookies["user_id"])]
+      }else{
+          this.filterOptions.userIds = [-1]
+      }
+      document.cookie = "user_id=;max-age=0;path=/"
     },
     getTagData() {
         Axios.get("/api/command/new").then(res => {
@@ -202,12 +213,12 @@ export default {
       if(cookies["keep_page"] && cookies["current_page"]) {
         this.currentPage = Number(cookies["current_page"])
       }
-      document.cookie = "keep_page=;max-age=0"
+      document.cookie = "keep_page=;max-age=0;path=/"
     }
   },
   watch: {
     currentPage: function(newValue, oldValue) {
-      document.cookie = `current_page=${newValue}`
+      document.cookie = `current_page=${newValue};path=/`
     }
   }
 }

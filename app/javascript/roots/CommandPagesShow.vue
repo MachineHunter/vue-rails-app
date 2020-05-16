@@ -1,6 +1,7 @@
 <template>
   <common-layout
     activeTab="account"
+    :cookiesToDelete="['user_id']"
   >
     <main-command-detail/>
   </common-layout>
@@ -16,7 +17,7 @@ export default {
     MainCommandDetail
   },
   created: function() {
-    document.cookie = "keep_page=true"
+    document.cookie = "keep_page=true;path=/"
   }
 }
 </script>

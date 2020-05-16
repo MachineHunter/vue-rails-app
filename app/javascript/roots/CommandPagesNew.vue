@@ -2,6 +2,7 @@
   <common-layout
     activeTab="account"
     signedInOnly
+    :cookiesToDelete="['user_id']"
   >
     <main-command-create-form/>
   </common-layout>
@@ -17,7 +18,7 @@ export default {
     MainCommandCreateForm
   },
   created: function() {
-    document.cookie = "keep_page=true"
+    document.cookie = "keep_page=true;path=/"
   }
 }
 </script>

@@ -1,6 +1,7 @@
 <template>
   <common-layout
     activeTab="account"
+    :cookiesToDelete="['keep_page']"
   >
     <main-user-profile/>
   </common-layout>
