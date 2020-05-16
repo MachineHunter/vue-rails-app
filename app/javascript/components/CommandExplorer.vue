@@ -22,7 +22,7 @@
       </div>
       <div class="file-content">
         {{filename}}
-        <pre><code>{{fileContents[filename]}}</code></pre>
+        <pre><code>{{fileContents[filepath]}}</code></pre>
       </div>
     </div>
   </div>
@@ -49,6 +49,7 @@ export default {
     return {
       hidden: false,
       filename: "",
+      filepath: "",
       mediaQueryList: null
     }
   },
@@ -58,7 +59,8 @@ export default {
   },
   methods: {
     clickFile(event) {
-      this.filename = event
+      this.filename = event.name
+      this.filepath = event.path
       if(this.mediaQueryList.matches) {
         this.hidden = true
       }
