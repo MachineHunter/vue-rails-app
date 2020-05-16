@@ -14,6 +14,9 @@ export default {
   components: {
     CommonLayout,
     MainCommandList
+  },
+  mounted: function() {
+    this.$store.commit("loadCookies")
   }
 }
 </script>

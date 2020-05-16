@@ -178,12 +178,7 @@ export default {
       })
     },
     getUserData: function() {
-      const cookiesString = document.cookie
-      const cookies = cookiesString.split(";").reduce((acc, cookie) => {
-        const [key, value] = cookie.split("=")
-        if(value === undefined) return acc
-        return {...acc, [key.trim()]: value.trim()}
-      }, {})
+      const cookies = this.$store.state.cookies
       
       if(cookies["user_id"]) {
         this.filterOptions.userIds = [Number(cookies["user_id"])]
@@ -203,12 +198,7 @@ export default {
       })
     },
     getRememberedPage() {
-      const cookiesString = document.cookie
-      const cookies = cookiesString.split(";").reduce((acc, cookie) => {
-        const [key, value] = cookie.split("=")
-        if(value === undefined) return acc
-        return {...acc, [key.trim()]: value.trim()}
-      }, {})
+      const cookies = this.$store.state.cookies
       
       if(cookies["keep_page"] && cookies["current_page"]) {
         this.currentPage = Number(cookies["current_page"])
