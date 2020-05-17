@@ -34,7 +34,7 @@ Metrics/BlockLength:
   Enabled: false
 
 Metrics/AbcSize:
-  Max: 25 
+  Max: 27 
  
 Lint/RaiseException:
   Enabled: true

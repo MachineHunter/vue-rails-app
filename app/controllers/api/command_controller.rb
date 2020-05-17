@@ -30,8 +30,9 @@ module Api
 
       @command.command_file.filename = params[:filename]
       @command.command_file.zipdata = params[:zipdata]
+      @command.command_file.filesize = @command.command_file.zipdata.size
 
-      if @command.save! && @command.command_file.save
+      if @command.save && @command.command_file.save
         redirect_to command_pages_path
       else
         response_bad_request
