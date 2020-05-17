@@ -30,7 +30,13 @@
       <div class="mt-3">
         <header class="mb-1">
           <h5 class="d-inline">人気のコマンド</h5>
-          <b-link href="/command_pages/index" class="align-top ml-2">もっと見る</b-link>
+          <b-link
+            href="/command_pages"
+            @click="clickSeeMore"
+            class="align-top ml-2"
+          >
+            もっと見る
+          </b-link>
         </header>
         <command
           v-for="command in popularCommands"
@@ -65,6 +71,9 @@ export default {
     computed: {
       userId() {
         return this.$store.state.userId
+      },
+      currentUserId() {
+        return this.$store.state.currentUserId
       }
     },
     methods: {
@@ -95,6 +104,13 @@ export default {
             owner: {name: "Mr. dummy", id: -i}
           }
         ))
+      },
+      clickSeeMore() {
+        if(this.userId === 0) {
+          document.cookie = `user_id=${this.currentUserId};path=/`
+        } else {
+          document.cookie = `user_id=${this.userId};path=/`
+        }
       }
     }
 }

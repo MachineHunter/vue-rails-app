@@ -1,6 +1,7 @@
 <template>
   <common-layout
     activeTab="account"
+    :cookiesToDelete="['user_id']"
   >
     <main-command-list/>
   </common-layout>
@@ -14,6 +15,9 @@ export default {
   components: {
     CommonLayout,
     MainCommandList
+  },
+  mounted: function() {
+    this.$store.commit("loadCookies")
   }
 }
 </script>

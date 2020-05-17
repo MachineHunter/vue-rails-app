@@ -37,6 +37,10 @@ export default {
     is100: {
       type: Boolean,
       default: false
+    },
+    cookiesToDelete: {
+      type: Array,
+      default: ()=>[]
     }
   },
   computed: {
@@ -46,6 +50,13 @@ export default {
     currentUserId() {
       return this.$store.state.currentUserId
     }
+  },
+  created: function() {
+    window.addEventListener("beforeunload", () => {
+      this.cookiesToDelete.forEach(cookie => {
+        document.cookie = `${cookie}=;max-age=0;path=/`
+      })
+    }, false)
   }
 }
 </script>

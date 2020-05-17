@@ -14,6 +14,35 @@
     
     <b-overlay :show="noCommands" rounded="sm">
       <div>
+        <h4>filter</h4>
+        <b-form-group label="genre">
+          <b-form-checkbox-group
+            v-model="filterOptions.genreIds"
+            :options="genreOptions"
+          />
+        </b-form-group>
+        
+        <b-form-group label="command type">
+          <b-form-checkbox-group
+            v-model="filterOptions.commandTypeIds"
+            :options="commandTypeOptions"
+          />
+        </b-form-group>
+        <h4>sort</h4>
+        <b-form-group>
+          <b-form-radio-group v-model="sortOptions.key">
+            <b-form-radio value="id">id</b-form-radio>
+            <b-form-radio value="title">title</b-form-radio>
+          </b-form-radio-group>
+        </b-form-group>
+        <b-form-group>
+          <b-form-radio-group v-model="sortOptions.ascending">
+            <b-form-radio :value="true">ascending</b-form-radio>
+            <b-form-radio :value="false">descending</b-form-radio>
+          </b-form-radio-group>
+        </b-form-group>
+      </div>
+      <div>
         <b-pagination
           v-model="currentPage"
           :total-rows="rows"
@@ -66,7 +95,17 @@ export default {
       commands: null,
       userId: 0,
       currentPage: 1,
-      perPage: 5
+      perPage: 5,
+      genres: [],
+      commandTypes: [],
+      filterOptions: {
+        genreIds: [],
+        commandTypeIds: []
+      },
+      sortOptions: {
+        key: "id", // "id" or "title"
+        ascending: true
+      }
     }
   },
   computed: {
@@ -74,18 +113,69 @@ export default {
       if(!this.commands) return false
       return this.commands.length === 0
     },
+    optionForFilterByUser() {
+      const userId = this.cookies["user_id"]
+      return userId ? [Number(userId)] : [-1] //[-1] means all
+    },
+    noUserFilter() {
+      if(!this.optionForFilterByUser) return false
+      return this.optionForFilterByUser[0] === -1
+    },
+    genreOptions: function() {
+      return this.genres.map(genre => (
+        {
+          text: genre.name,
+          value: genre.id
+        }
+      ))
+    },
+    commandTypeOptions: function() {
+      return this.commandTypes.map(type => (
+        {
+          text: type.name,
+          value: type.id
+        }
+      ))
+    },
+    computedCommands() {
+      if(!this.commands) return []
+      const filteredCommands = this.commands.filter(command => {
+        let result = true
+        result = this.noUserFilter ?
+          result : (result && this.optionForFilterByUser.includes(command.owner.id))
+        return result &&
+          this.filterOptions.genreIds.includes(command.genre_id) &&
+          this.filterOptions.commandTypeIds.includes(command.command_type_id)
+      })
+      const sortedFilteredCommands = filteredCommands.sort((command1, command2) => {
+        let result = 0
+        if(command1[this.sortOptions.key] < command2[this.sortOptions.key]) {
+          result = -1
+        } else if(command1[this.sortOptions.key] === command2[this.sortOptions.key]) {
+          result = 0
+        } else {
+          result = 1
+        }
+        return this.sortOptions.ascending ? result : (-result)
+      })
+      return sortedFilteredCommands
+    },
     rows() {
-      if(!this.commands) return 0
-      return this.commands.length
+      if(!this.computedCommands) return 0
+      return this.computedCommands.length
     },
     commandsToDisplay() {
-      if(!this.commands) return []
+      if(!this.computedCommands) return []
       const start = (this.currentPage - 1) * this.perPage
-      return [...this.commands].splice(start, this.perPage)
+      return [...this.computedCommands].splice(start, this.perPage)
+    },
+    cookies() {
+      return this.$store.state.cookies
     }
   },
   created: function() {
     this.getCommands()
+    this.getTagData()
     this.getRememberedPage()
   },
   methods: {
@@ -96,23 +186,28 @@ export default {
         console.log(err)
       })
     },
+    getTagData() {
+        Axios.get("/api/command/new").then(res => {
+        this.genres = res.data.genres
+        this.commandTypes = res.data.command_types
+        this.filterOptions.genreIds = res.data.genres.map(genre => genre.id)
+        this.filterOptions.commandTypeIds = res.data.command_types.map(commandType => commandType.id)
+      }).catch(err => {
+        console.log(err)
+      })
+    },
     getRememberedPage() {
-      const cookiesString = document.cookie
-      const cookies = cookiesString.split(";").reduce((acc, cookie) => {
-        const [key, value] = cookie.split("=")
-        if(value === undefined) return acc
-        return {...acc, [key.trim()]: value.trim()}
-      }, {})
+      const cookies = this.cookies
       
       if(cookies["keep_page"] && cookies["current_page"]) {
         this.currentPage = Number(cookies["current_page"])
       }
-      document.cookie = "keep_page=;max-age=0"
+      // document.cookie = "keep_page=;max-age=0;path=/"
     }
   },
   watch: {
     currentPage: function(newValue, oldValue) {
-      document.cookie = `current_page=${newValue}`
+      document.cookie = `current_page=${newValue};path=/`
     }
   }
 }

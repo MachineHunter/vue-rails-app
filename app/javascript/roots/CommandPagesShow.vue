@@ -16,7 +16,7 @@ export default {
     MainCommandDetail
   },
   created: function() {
-    document.cookie = "keep_page=true"
+    document.cookie = "keep_page=true;path=/"
   }
 }
 </script>
