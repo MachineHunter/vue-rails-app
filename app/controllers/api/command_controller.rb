@@ -109,6 +109,7 @@ module Api
     def json_file_data(unzippeddata)
       files, datas = unzippeddata
       files.map! { |path| '/' + path }
+      datas.map! { |data| data.force_encoding('ISO-8859-1').encode('UTF-8') }
       Hash[*[files, datas].transpose.flatten]
     end
   end
