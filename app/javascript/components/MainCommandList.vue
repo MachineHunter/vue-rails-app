@@ -84,6 +84,7 @@
 
 <script>
 import Axios from "axios"
+import {mapState} from "vuex"
 import Command from "./Command"
 
 export default {
@@ -96,8 +97,6 @@ export default {
       userId: 0,
       currentPage: 1,
       perPage: 5,
-      genres: [],
-      commandTypes: [],
       filterOptions: {
         genreIds: [],
         commandTypeIds: []
@@ -109,6 +108,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(["genres", "commandTypes"]),
     noCommands() {
       if(!this.commands) return false
       return this.commands.length === 0
@@ -175,23 +175,12 @@ export default {
   },
   created: function() {
     this.getCommands()
-    this.getTagData()
     this.getRememberedPage()
   },
   methods: {
     getCommands: function() {
       Axios.get("/api/command").then(res => {
         this.commands = res.data.command
-      }).catch(err => {
-        console.log(err)
-      })
-    },
-    getTagData() {
-        Axios.get("/api/command/new").then(res => {
-        this.genres = res.data.genres
-        this.commandTypes = res.data.command_types
-        this.filterOptions.genreIds = res.data.genres.map(genre => genre.id)
-        this.filterOptions.commandTypeIds = res.data.command_types.map(commandType => commandType.id)
       }).catch(err => {
         console.log(err)
       })
@@ -208,6 +197,12 @@ export default {
   watch: {
     currentPage: function(newValue, oldValue) {
       document.cookie = `current_page=${newValue};path=/`
+    },
+    genres: function(newValue, oldValue) {
+      this.filterOptions.genreIds = newValue.map(genre => genre.id)
+    },
+    commandTypes: function(newValue, oldValue) {
+      this.filterOptions.commandTypeIds = newValue.map(commandType => commandType.id)
     }
   }
 }

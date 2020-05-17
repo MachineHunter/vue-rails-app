@@ -11,9 +11,12 @@ import "./custom.scss"
 import TurbolinksAdapter from 'vue-turbolinks'
 Vue.use(TurbolinksAdapter)
 
+import Axios from "axios"
 const baseStoreSeed = {
   state: {
-    cookies: {}
+    cookies: {},
+    genres: [],
+    commandTypes: []
   },
   getters: {
   },
@@ -26,9 +29,23 @@ const baseStoreSeed = {
         return {...acc, [key.trim()]: value.trim()}
       }, {})
       state.cookies = cookies
+    },
+    setGenres(state, value) {
+      state.genres = value
+    },
+    setCommandTypes(state, value) {
+      state.commandTypes = value
     }
   },
   actions: {
+    requestTagData({commit}) {
+      Axios.get("/api/command/new").then(res => {
+        commit("setGenres", res.data.genres)
+        commit("setCommandTypes", res.data.command_types)
+      }).catch(err => {
+        console.log(err)
+      })
+    }
   }
 }
 

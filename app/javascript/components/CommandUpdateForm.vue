@@ -79,6 +79,7 @@
 
 <script>
 import Axios from "axios"
+import {mapState} from "vuex"
 
 export default {
   props: {
@@ -101,12 +102,11 @@ export default {
         command_type_id: null,
         // zipdata: null
       },
-      genres: [],
-      commandTypes: [],
       // validated: false
     }
   },
   computed: {
+    ...mapState(["genres", "commandTypes"]),
     genreOptions: function() {
       return this.genres.map(genre => (
         {
@@ -134,7 +134,6 @@ export default {
     // }
   },
   created: function() {
-    this.getTagData()
     this.command.title = this.prevCommand.title
     this.command.description = this.prevCommand.description
     this.command.genre_id = this.prevCommand.genre_id
@@ -146,14 +145,6 @@ export default {
     // Axios.defaults.headers["content-type"] = "multipart/form-data"
   },
   methods: {
-    getTagData() {
-        Axios.get("/api/command/new").then(res => {
-        this.genres = res.data.genres
-        this.commandTypes = res.data.command_types
-      }).catch(err => {
-        console.log(err);
-      })
-    },
     submitCommand() {
       // this.validated = true
       // const form = document.getElementsByTagName("form")[0]
