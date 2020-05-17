@@ -106,7 +106,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["commands", "genres", "commandTypes"]),
+    ...mapState(["commands", "genres", "commandTypes", "cookies"]),
     noCommands() {
       return this.commands.length === 0
     },
@@ -164,9 +164,6 @@ export default {
       if(!this.computedCommands) return []
       const start = (this.currentPage - 1) * this.perPage
       return [...this.computedCommands].splice(start, this.perPage)
-    },
-    cookies() {
-      return this.$store.state.cookies
     }
   },
   created: function() {

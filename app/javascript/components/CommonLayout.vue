@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import {mapState} from "vuex"
 import CommonHeader from "./CommonHeader"
 import CommonFooter from "./CommonFooter"
 
@@ -44,11 +45,9 @@ export default {
     }
   },
   computed: {
+    ...mapState(["currentUserId"]),
     signedIn() {
       return this.currentUserId !== -1
-    },
-    currentUserId() {
-      return this.$store.state.currentUserId
     }
   },
   created: function() {
