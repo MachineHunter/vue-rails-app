@@ -1,36 +1,36 @@
 <template>
   <div id="main-command-detail" class="main-center-100">
     <div class="d-flex justify-content-between">
-      <h2>{{command.title}}</h2>
+      <h2>{{commandData.command.title}}</h2>
       <div>
         <span>作成者：</span>
-        <b-link :href="`/user_pages/${owner.id}`">
-          {{owner.name}}
+        <b-link :href="`/user_pages/${commandData.owner.id}`">
+          {{commandData.owner.name}}
         </b-link>
       </div>
     </div>
     <div class="d-flex justify-content-between flex-y-center mb-2">
       <div>
-        <command-tag tagType="genre" :tagId="command.genre_id"/>
-        <command-tag tagType="commandType" :tagId="command.command_type_id"/>
+        <command-tag tagType="genre" :tagId="commandData.command.genre_id"/>
+        <command-tag tagType="commandType" :tagId="commandData.command.command_type_id"/>
       </div>
       <command-dropdown
         :commandId="commandId"
         :inDetail="true"
         :isMine="isMine"
-        :indexUrl="indexUrl"
+        :indexUrl="commandData.indexUrl"
         @open-update-form="$bvModal.show('modal-for-update')"
       />
     </div>
 
     <command-explorer
-      :fileTree="fileTree"
-      :fileContents="fileContents"
+      :fileTree="commandData.fileTree"
+      :fileContents="commandData.fileContents"
       class="mb-3"
     />
 
     <b-card title="description">
-      <p>{{command.description}}</p>
+      <p>{{commandData.command.description}}</p>
     </b-card>
 
     <b-modal
@@ -43,13 +43,13 @@
       hide-footer
       size="xl"
     >
-      <command-update-form :prevCommand="command"/>
+      <command-update-form :prevCommand="commandData.command"/>
     </b-modal>
   </div>
 </template>
 
 <script>
-import Axios from "axios"
+import {mapState} from "vuex"
 import CommandExplorer from "./CommandExplorer"
 import CommandTag from "./CommandTag"
 import CommandDropdown from "./CommandDropdown"
@@ -62,41 +62,10 @@ export default {
     CommandDropdown,
     CommandUpdateForm
   },
-  data: function() {
-    return {
-      command: {},
-      fileTree: {},
-      fileContents: {},
-      indexUrl: "",
-      owner: {}
-    }
-  },
-  created: function() {
-    this.getCommandData()
-  },
   computed: {
+    ...mapState(["commandId", "currentUserId", "commandData"]),
     isMine() {
-      if(!this.command.user_id) return null
-      return this.command.user_id === this.currentUserId
-    },
-    commandId() {
-      return this.$store.state.commandId
-    },
-    currentUserId() {
-      return this.$store.state.currentUserId
-    }
-  },
-  methods: {
-    getCommandData: function() {
-      Axios.get(`/api/command/${this.commandId}`).then(res => {
-        this.command = res.data.command
-        this.fileTree = res.data.filetree
-        this.fileContents = res.data.filedatas
-        this.indexUrl = res.data.index_url
-        this.owner = res.data.owner
-      }).catch(err => {
-        console.log(err);
-      })
+      return this.commandData.command.user_id === this.currentUserId
     }
   }
 }

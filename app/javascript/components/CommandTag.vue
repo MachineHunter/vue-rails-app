@@ -3,8 +3,7 @@
 </template>
 
 <script>
-import Axios from "axios"
-import tagDataManager from "../util/tagDataManager"
+import {mapState} from "vuex"
 
 export default {
   props: {
@@ -16,41 +15,18 @@ export default {
       }
     },
     tagId: {
-      type: Number,
-      // required: true //axiosでロードされる前はundefinedのため
+      type: Number
     }
-  },
-  data: function() {
-    return {
-      genres: [],
-      commandTypes: []
-    }
-  },
-  created: function() {
-    this.getTagData()
   },
   computed: {
+    ...mapState(["genres", "commandTypes"]),
     tagName: function() {
       if(this.genres.length === 0
          || this.commandTypes.length === 0
          || this.tagId === undefined
-      ) return null
-
-      if(this.tagType === "genre") {
-        return this.genres[this.tagId - 1].name
-      } else {
-        return this.commandTypes[this.tagId - 1].name
-      }
+      ) return " "
+      return this[`${this.tagType}s`][this.tagId - 1].name
     }
-  },
-  methods: {
-    getTagData() {
-      document.body.addEventListener("tagdataready", () => {
-        this.genres = tagDataManager.tagData.genres
-        this.commandTypes = tagDataManager.tagData.commandTypes
-      })
-      tagDataManager.loadtagData()
-    },
   }
 }
 </script>

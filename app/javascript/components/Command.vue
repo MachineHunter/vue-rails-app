@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import {mapState} from "vuex"
 import CommandTag from "./CommandTag"
 import CommandDropdown from "./CommandDropdown"
 
@@ -51,12 +52,10 @@ export default {
     }
   },
   computed: {
+    ...mapState(["currentUserId"]),
     isMine() {
       if(!this.command.user_id) return null
       return this.command.user_id === this.currentUserId
-    },
-    currentUserId() {
-      return this.$store.state.currentUserId
     }
   },
   methods: {

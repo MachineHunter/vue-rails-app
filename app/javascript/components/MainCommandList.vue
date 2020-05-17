@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import Axios from "axios"
+import {mapState} from "vuex"
 import Command from "./Command"
 
 export default {
@@ -92,12 +92,9 @@ export default {
   },
   data: function() {
     return {
-      commands: null,
       userId: 0,
       currentPage: 1,
       perPage: 5,
-      genres: [],
-      commandTypes: [],
       filterOptions: {
         genreIds: [],
         commandTypeIds: []
@@ -109,8 +106,8 @@ export default {
     }
   },
   computed: {
+    ...mapState(["commands", "genres", "commandTypes", "cookies"]),
     noCommands() {
-      if(!this.commands) return false
       return this.commands.length === 0
     },
     optionForFilterByUser() {
@@ -138,7 +135,6 @@ export default {
       ))
     },
     computedCommands() {
-      if(!this.commands) return []
       const filteredCommands = this.commands.filter(command => {
         let result = true
         result = this.noUserFilter ?
@@ -168,34 +164,12 @@ export default {
       if(!this.computedCommands) return []
       const start = (this.currentPage - 1) * this.perPage
       return [...this.computedCommands].splice(start, this.perPage)
-    },
-    cookies() {
-      return this.$store.state.cookies
     }
   },
   created: function() {
-    this.getCommands()
-    this.getTagData()
     this.getRememberedPage()
   },
   methods: {
-    getCommands: function() {
-      Axios.get("/api/command").then(res => {
-        this.commands = res.data.command
-      }).catch(err => {
-        console.log(err)
-      })
-    },
-    getTagData() {
-        Axios.get("/api/command/new").then(res => {
-        this.genres = res.data.genres
-        this.commandTypes = res.data.command_types
-        this.filterOptions.genreIds = res.data.genres.map(genre => genre.id)
-        this.filterOptions.commandTypeIds = res.data.command_types.map(commandType => commandType.id)
-      }).catch(err => {
-        console.log(err)
-      })
-    },
     getRememberedPage() {
       const cookies = this.cookies
       
@@ -208,6 +182,12 @@ export default {
   watch: {
     currentPage: function(newValue, oldValue) {
       document.cookie = `current_page=${newValue};path=/`
+    },
+    genres: function(newValue, oldValue) {
+      this.filterOptions.genreIds = newValue.map(genre => genre.id)
+    },
+    commandTypes: function(newValue, oldValue) {
+      this.filterOptions.commandTypeIds = newValue.map(commandType => commandType.id)
     }
   }
 }

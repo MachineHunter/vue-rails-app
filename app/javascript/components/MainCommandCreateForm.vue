@@ -86,6 +86,7 @@
 
 <script>
 import Axios from "axios"
+import {mapState} from "vuex"
 
 export default {
   data: function() {
@@ -97,12 +98,11 @@ export default {
         command_type_id: null,
         zipdata: null
       },
-      genres: [],
-      commandTypes: [],
       validated: false
     }
   },
   computed: {
+    ...mapState(["genres", "commandTypes"]),
     genreOptions: function() {
       return this.genres.map(genre => (
         {
@@ -129,23 +129,12 @@ export default {
       return this.command.zipdata.name
     }
   },
-  created: function() {
-    this.getTagData()
-  },
   mounted: function() {
     const token = document.querySelector("meta[name=csrf-token]").getAttribute("content")
     Axios.defaults.headers["X-CSRF-TOKEN"] = token
     Axios.defaults.headers["content-type"] = "multipart/form-data"
   },
   methods: {
-    getTagData() {
-        Axios.get("/api/command/new").then(res => {
-        this.genres = res.data.genres
-        this.commandTypes = res.data.command_types
-      }).catch(err => {
-        console.log(err)
-      })
-    },
     submitCommand() {
       this.validated = true
       const form = document.getElementsByTagName("form")[0]
