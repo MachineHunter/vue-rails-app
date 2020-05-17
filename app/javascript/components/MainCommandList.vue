@@ -99,7 +99,6 @@ export default {
       genres: [],
       commandTypes: [],
       filterOptions: {
-        userIds: [1, 2],
         genreIds: [],
         commandTypeIds: []
       },
