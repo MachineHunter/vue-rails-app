@@ -15,6 +15,8 @@ import Axios from "axios"
 const baseStoreSeed = {
   state: {
     cookies: {},
+    user: {},
+    avatar: null,
     commands: [],
     commandData: {
       command: {},
@@ -38,6 +40,12 @@ const baseStoreSeed = {
       }, {})
       state.cookies = cookies
     },
+    setUser(state, value) {
+      state.user = value
+    },
+    setAvatar(state, value) {
+      state.avatar = value
+    },
     setCommands(state, value) {
       state.commands = value
     },
@@ -56,6 +64,22 @@ const baseStoreSeed = {
     }
   },
   actions: {
+    requestUserData({commit}, userId) {
+      Axios.get(`/api/user_pages/${userId}`).then(res => {
+        commit("setUser", res.data.user)
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    //Axiosを使わず<img src="/api/user_pages/avatar">でも可だが、
+    //その場合読み込めたかった際の処理がうまくいかなかった
+    requestAvatar({commit}, userId){
+      Axios.get(`/api/avatar/${userId}`, {responseType: "blob"}).then(res => {
+        commit("setAvatar", window.URL.createObjectURL(res.data))
+      }).catch(err => {
+        console.log(err)
+      });
+    },
     requestCommands({commit}) {
       Axios.get("/api/command").then(res => {
         commit("setCommands", res.data.command)

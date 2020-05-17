@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import Axios from "axios"
+import {mapState} from "vuex"
 import Command from "./Command"
 
 export default {
@@ -58,41 +58,16 @@ export default {
   },
     data: function() {
       return {
-        user: {},
-        avatar: null,
         popularCommands: []
       }
     },
     created: function() {
-      this.getUserData()
-      this.getAvatar()
       this.getPopularCommands()
     },
     computed: {
-      userId() {
-        return this.$store.state.userId
-      },
-      currentUserId() {
-        return this.$store.state.currentUserId
-      }
+      ...mapState(["userId", "currentUserId", "user", "avatar"])
     },
     methods: {
-      getUserData: function() {
-        Axios.get(`/api/user_pages/${this.userId}`).then(res => {
-          this.user = res.data.user
-        }).catch(err => {
-          console.log(err)
-        })
-      },
-      //Axiosを使わず<img src="/api/user_pages/avatar">でも可だが、
-      //その場合読み込めたかった際の処理がうまくいかなかった
-      getAvatar: function(){
-        Axios.get(`/api/avatar/${this.userId}`, {responseType: "blob"}).then(res => {
-          this.avatar = window.URL.createObjectURL(res.data)
-        }).catch(err => {
-          console.log(err)
-        });
-      },
       getPopularCommands() {
         this.popularCommands = [1,2,3].map(i => (
           {

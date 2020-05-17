@@ -14,6 +14,10 @@ export default {
   components: {
     CommonLayout,
     MainUserProfile
+  },
+  created: function() {
+    this.$store.dispatch("requestUserData", this.$store.state.userId)
+    this.$store.dispatch("requestAvatar", this.$store.state.userId)
   }
 }
 </script>
