@@ -21,6 +21,7 @@ module Api
       @avatar.filename = image.original_filename
       @avatar.filetype = image.content_type
       @avatar.image    = image.tempfile.read
+      @avatar.filesize = image.tempfile.size
 
       if @avatar.save
         redirect_to user_page_path 0
