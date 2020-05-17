@@ -18,6 +18,7 @@ export default {
   created: function() {
     document.cookie = "keep_page=true;path=/"
     this.$store.dispatch("requestTagData")
+    this.$store.dispatch("requestCommandData", this.$store.state.commandId)
   }
 }
 </script>

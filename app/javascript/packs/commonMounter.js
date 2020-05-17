@@ -16,6 +16,13 @@ const baseStoreSeed = {
   state: {
     cookies: {},
     commands: [],
+    commandData: {
+      command: {},
+      fileTree: {},
+      fileContents: {},
+      indexUrl: "",
+      owner: {}
+    },
     genres: [],
     commandTypes: []
   },
@@ -34,6 +41,13 @@ const baseStoreSeed = {
     setCommands(state, value) {
       state.commands = value
     },
+    setCommandData(state, value) {
+      state.commandData.command = value.command
+      state.commandData.fileTree = value.filetree
+      state.commandData.fileContents = value.filedatas
+      state.commandData.indexUrl = value.index_url
+      state.commandData.owner = value.owner
+    },
     setGenres(state, value) {
       state.genres = value
     },
@@ -45,6 +59,13 @@ const baseStoreSeed = {
     requestCommands({commit}) {
       Axios.get("/api/command").then(res => {
         commit("setCommands", res.data.command)
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    requestCommandData({commit}, commandId) {
+      Axios.get(`/api/command/${commandId}`).then(res => {
+        commit("setCommandData", res.data)
       }).catch(err => {
         console.log(err)
       })
