@@ -83,7 +83,6 @@
 </template>
 
 <script>
-import Axios from "axios"
 import {mapState} from "vuex"
 import Command from "./Command"
 
@@ -93,7 +92,6 @@ export default {
   },
   data: function() {
     return {
-      commands: null,
       userId: 0,
       currentPage: 1,
       perPage: 5,
@@ -108,9 +106,8 @@ export default {
     }
   },
   computed: {
-    ...mapState(["genres", "commandTypes"]),
+    ...mapState(["commands", "genres", "commandTypes"]),
     noCommands() {
-      if(!this.commands) return false
       return this.commands.length === 0
     },
     optionForFilterByUser() {
@@ -138,7 +135,6 @@ export default {
       ))
     },
     computedCommands() {
-      if(!this.commands) return []
       const filteredCommands = this.commands.filter(command => {
         let result = true
         result = this.noUserFilter ?
@@ -174,17 +170,9 @@ export default {
     }
   },
   created: function() {
-    this.getCommands()
     this.getRememberedPage()
   },
   methods: {
-    getCommands: function() {
-      Axios.get("/api/command").then(res => {
-        this.commands = res.data.command
-      }).catch(err => {
-        console.log(err)
-      })
-    },
     getRememberedPage() {
       const cookies = this.cookies
       

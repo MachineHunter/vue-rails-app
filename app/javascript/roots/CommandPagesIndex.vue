@@ -19,6 +19,7 @@ export default {
   mounted: function() {
     this.$store.commit("loadCookies")
     this.$store.dispatch("requestTagData")
+    this.$store.dispatch("requestCommands")
   }
 }
 </script>

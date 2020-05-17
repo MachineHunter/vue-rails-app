@@ -15,6 +15,7 @@ import Axios from "axios"
 const baseStoreSeed = {
   state: {
     cookies: {},
+    commands: [],
     genres: [],
     commandTypes: []
   },
@@ -30,6 +31,9 @@ const baseStoreSeed = {
       }, {})
       state.cookies = cookies
     },
+    setCommands(state, value) {
+      state.commands = value
+    },
     setGenres(state, value) {
       state.genres = value
     },
@@ -38,6 +42,13 @@ const baseStoreSeed = {
     }
   },
   actions: {
+    requestCommands({commit}) {
+      Axios.get("/api/command").then(res => {
+        commit("setCommands", res.data.command)
+      }).catch(err => {
+        console.log(err)
+      })
+    },
     requestTagData({commit}) {
       Axios.get("/api/command/new").then(res => {
         commit("setGenres", res.data.genres)
