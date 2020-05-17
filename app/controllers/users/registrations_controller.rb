@@ -20,6 +20,7 @@ module Users
       @user.avatar.filename = 'default-avatar.png'
       @user.avatar.filetype = 'image/png'
       @user.avatar.image = File.read("#{Rails.root}/app/assets/images/avatars/default-avatar.png")
+      @user.avatar.filesize = @user.avatar.image.size
 
       response_bad_request && return unless @user.save
 

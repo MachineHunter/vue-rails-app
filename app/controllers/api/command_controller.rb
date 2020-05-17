@@ -30,8 +30,9 @@ module Api
 
       @command.command_file.filename = params[:filename]
       @command.command_file.zipdata = params[:zipdata]
+      @command.command_file.filesize = @command.command_file.zipdata.size
 
-      if @command.save! && @command.command_file.save
+      if @command.save && @command.command_file.save
         redirect_to command_pages_path
       else
         response_bad_request
@@ -108,6 +109,7 @@ module Api
     def json_file_data(unzippeddata)
       files, datas = unzippeddata
       files.map! { |path| '/' + path }
+      datas.map! { |data| data.force_encoding('ISO-8859-1').encode('UTF-8') }
       Hash[*[files, datas].transpose.flatten]
     end
   end
