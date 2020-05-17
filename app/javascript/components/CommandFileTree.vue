@@ -16,26 +16,13 @@
         
         <b-collapse
           v-if="!child.isfile"
-          :id="`children-${child.name}`"
+          :id="`children-${child.path}`"
         >
           <command-file-tree
             :children="child.children"
             @clickFile="$emit('clickFile', $event)"
           />
         </b-collapse>
-        <b-modal
-          v-else
-          centered
-          hide-backdrop
-          content-class="shadow"
-          size="xl"
-          :id="`detail-${child.name}`"
-          :title="child.name"
-        >
-          <template v-slot:modal-footer="{close}">
-            <b-button @click="close()">閉じる</b-button>
-          </template>
-        </b-modal>
       </li>
     </ul>
   </div>
@@ -57,9 +44,9 @@ export default {
   methods: {
     onClickFile(file) {
       if(file.isfile) {
-        this.$emit('clickFile', file.name)
+        this.$emit('clickFile', {path: file.path, name: file.name})
       } else {
-        this.$root.$emit('bv::toggle::collapse', `children-${file.name}`)
+        this.$root.$emit('bv::toggle::collapse', `children-${file.path}`)
       }
     }
   }
