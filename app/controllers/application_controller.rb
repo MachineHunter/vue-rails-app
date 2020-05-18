@@ -10,8 +10,8 @@ class ApplicationController < ActionController::Base
   end
 
   # 400 Bad Request
-  def response_bad_request
-    render status: 400, json: { status: 400, message: 'Bad Request' }
+  def response_bad_request(instance)
+    render status: 400, json: { status: 400, message: "(Bad Request) #{instance.errors.full_messages}" }
   end
 
   # 401 Unauthorized

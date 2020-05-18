@@ -22,7 +22,7 @@ module Users
       @user.avatar.image = File.read("#{Rails.root}/app/assets/images/avatars/default-avatar.png")
       @user.avatar.filesize = @user.avatar.image.size
 
-      response_bad_request && return unless @user.save
+      response_bad_request(@user) && return unless @user.save
 
       sign_in(@user)
       redirect_to root_path
