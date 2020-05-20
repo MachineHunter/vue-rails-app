@@ -15,7 +15,7 @@ module Api
       image = params[:avatar]
       return if image.nil?
 
-      response_bad_request && return unless check_format(image)
+      response_bad_request_with_message('image is not selected') && return unless check_format(image)
 
       @avatar = current_user.avatar
       @avatar.filename = image.original_filename

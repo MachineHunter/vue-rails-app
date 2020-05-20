@@ -16,7 +16,6 @@ RSpec.feature 'Sign Up', type: :feature do
     expect(page).to have_content '無効な形式です'
   end
 
-
   feature 'name validation' do
     scenario 'length over' do
       sign_up('aaaaaaaaaa aaaaaaaaaaaaaaaaaaaa', 'test@gmail.com', 'testtest', 'testtest')
@@ -48,7 +47,6 @@ RSpec.feature 'Sign Up', type: :feature do
       expect(page).to have_content 'Bad Request'
     end
   end
-
 
   feature 'email validation' do
     scenario 'same email' do
