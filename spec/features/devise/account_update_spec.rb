@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature 'Account Update', type: :feature do
   given!(:user) { create(:user) }
 
-  before do
+  background do
     Capybara.current_driver = :selenium_chrome_headless
     sign_in_with_factory user
   end

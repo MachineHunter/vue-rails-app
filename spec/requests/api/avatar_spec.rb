@@ -55,7 +55,7 @@ RSpec.describe 'Avatar', type: :request do
       }
       post api_avatar_index_path, params: params, headers: { 'Content-Type': 'multipart/form-data' }
       expect(response).to have_http_status(400)
-      expect(JSON.parse(response.body, { symbolize_names: true })[:message]).to eq('Bad Request')
+      expect(JSON.parse(response.body, { symbolize_names: true })[:message]).to eq('(Bad Request) image is not selected')
     end
   end
 end

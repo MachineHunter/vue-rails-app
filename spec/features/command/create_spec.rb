@@ -42,4 +42,17 @@ RSpec.feature 'Create Command', type: :feature do
     click_button 'submit-command'
     expect(page).to have_content '投稿するファイルを選択してください'
   end
+
+  feature 'validation' do
+    pending 'なにかエラーの旨を'
+    # scenario 'title length' do
+    # visit new_command_page_path
+    # fill_in 'title', with: 'feature_title_commandaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    # fill_in 'description', with: 'inputed from feature spec'
+    # find(:css, '#genre_id > div:nth-child(1) > label:nth-child(2)').click
+    # find(:css, '#command_type_id > div:nth-child(1) > label:nth-child(2)').click
+    # attach_file 'zipdata', "#{Rails.root}/spec/factories/testfiles/test.zip", make_visible: true
+    # click_button 'submit-command'
+    # end
+  end
 end
