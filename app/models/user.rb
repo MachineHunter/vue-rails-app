@@ -9,6 +9,8 @@ class User < ApplicationRecord
   attr_accessor :current_password
   attr_accessor :image
 
-  validates :name, length: { maximum: 20, minimum: 2, too_long: '最大20文字までです', too_short: '2文字以上にしてください' }
-  validates :email, email: true
+  validates :name,
+            length: { maximum: 30, minimum: 2, too_long: '最大30文字までです', too_short: '2文字以上にしてください' },
+            format: { with: /\A(?:\p{Hiragana}|\p{Katakana}|[ー＿－]|[一-龠々]|[a-zA-Z0-9_])+\z/ }
+  validates :email, email: true, uniqueness: true
 end
