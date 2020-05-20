@@ -35,19 +35,19 @@ module Api
       if @command.save && @command.command_file.save
         redirect_to command_pages_path
       else
-        response_bad_request
+        response_bad_request(@command)
       end
     end
 
     def update
       @command = current_user.command.find(params[:id])
       @command.update(command_update_params)
-      response_bad_request unless @command.save
+      response_bad_request(@command) unless @command.save
     end
 
     def destroy
       @command = current_user.command.find(params[:id])
-      response_bad_request unless @command.destroy
+      response_bad_request(@command) unless @command.destroy
     end
 
     private

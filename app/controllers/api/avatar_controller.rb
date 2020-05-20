@@ -26,7 +26,7 @@ module Api
       if @avatar.save
         redirect_to user_page_path 0
       else
-        response_bad_request
+        response_bad_request(@avatar)
       end
     end
 
