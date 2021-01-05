@@ -13,7 +13,7 @@
     "vuex": "^3.4.0"
   },
   "devDependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "hard-source-webpack-plugin": "^0.13.1",
     "webpack-dev-server": "^3.10.3"
   }
